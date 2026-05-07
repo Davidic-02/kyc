@@ -1,0 +1,3 @@
+class SharedPrefsService {
+  const SharedPrefsService();
+}

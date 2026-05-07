@@ -1,0 +1,3 @@
+class KycService {
+  const KycService();
+}

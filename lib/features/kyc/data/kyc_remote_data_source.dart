@@ -1,0 +1,3 @@
+class KycRemoteDataSource {
+  const KycRemoteDataSource();
+}

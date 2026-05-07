@@ -1,0 +1,3 @@
+class AppInterceptors {
+  const AppInterceptors();
+}

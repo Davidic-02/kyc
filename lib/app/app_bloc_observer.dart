@@ -1,0 +1,3 @@
+class AppBlocObserver {
+  const AppBlocObserver();
+}

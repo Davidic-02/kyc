@@ -1,0 +1,3 @@
+class WalletRemoteDataSource {
+  const WalletRemoteDataSource();
+}

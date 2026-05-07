@@ -1,0 +1,3 @@
+class KycEntity {
+  const KycEntity();
+}
