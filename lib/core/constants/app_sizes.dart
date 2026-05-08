@@ -1,11 +1,15 @@
 class AppSizes {
   const AppSizes._();
 
-  static const double paddingXS = 4;
-  static const double paddingS = 8;
-  static const double paddingM = 16;
-  static const double paddingL = 24;
-  static const double paddingXL = 32;
+  // spacing
+  static const double xs = 4;
+  static const double sm = 8;
+  static const double md = 16;
+  static const double lg = 24;
+  static const double xl = 32;
+  static const double xxl = 40;
+
+  // radius
   static const double radiusS = 8;
   static const double radiusM = 12;
   static const double radiusL = 16;

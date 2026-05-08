@@ -30,10 +30,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
+  bloc: ^9.2.0
+  equatable: ^2.0.7
+  firebase_core: ^4.7.0
+  firebase_auth: ^6.4.0
+  cloud_firestore: ^6.3.0
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.11.0
+  dio: ^5.7.0
+
+  # 🎨 UI HELPERS
+  flutter_svg: ^2.0.10+1
+
+  # 🧭 ROUTING (clean architecture friendly)
+  go_router: ^17.2.3
+
+  # 💾 STORAGE
+  shared_preferences: ^2.3.2
+  flutter_secure_storage: ^10.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  get_it: ^9.2.1
+  injectable: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +66,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  build_runner: ^2.15.0
+  freezed: ^3.2.5
+  json_serializable: ^6.13.2
+  injectable_generator: ^3.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
