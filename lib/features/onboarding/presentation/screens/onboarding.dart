@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kyc/core/constants/app_colors.dart';
 import 'package:kyc/core/constants/app_sizes.dart';
 import 'package:kyc/core/widgets/custom_button.dart';
@@ -98,7 +99,13 @@ class OnboardingScreen extends StatelessWidget {
 
                 const Spacer(),
 
-                const Button("Get Started", pill: true),
+                Button(
+                  "Get Started",
+                  pill: true,
+                  onPressed: () {
+                    context.goNamed('/auth');
+                  },
+                ),
 
                 const SizedBox(height: AppSizes.md),
 

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:kyc/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:kyc/features/auth/presentation/auth_page.dart';
-import 'package:kyc/features/auth/presentation/phone_input_screen.dart';
-import 'package:kyc/features/auth/presentation/phone_otp_screen.dart';
-import 'package:kyc/features/home/presentation/home_screen.dart';
+import 'package:kyc/features/auth/presentation/screens/phone_input_screen.dart';
+import 'package:kyc/features/auth/presentation/screens/phone_otp_screen.dart';
+import 'package:kyc/features/onboarding/presentation/screens/onboarding.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/onboarding',
@@ -43,14 +41,16 @@ final GoRouter router = GoRouter(
         ),
       ],
     ),
+  ],
+);
 
     // ─────────────────────────────────────────────
     // HOME (after login)
     // ─────────────────────────────────────────────
-    GoRoute(
-      path: '/home',
-      name: 'home',
-      builder: (context, state) => const HomeScreen(),
-    ),
-  ],
-);
+//    GoRoute(
+ //     path: '/home',
+     // name: 'home',
+     // builder: (context, state) => const HomeScreen(),
+ //   ),
+ // ],
+//);
