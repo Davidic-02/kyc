@@ -12,7 +12,7 @@ class KycEvent with _$KycEvent {
   // =========================
   const factory KycEvent.nextStep() = _NextStep;
   const factory KycEvent.previousStep() = _PreviousStep;
-  const factory KycEvent.navigateToStep(KycStep step) = _NavigateToStep;
+  const factory KycEvent.navigateToStep(KycSteps step) = _NavigateToStep;
 
   // =========================
   // STEP 1: BASIC INFO

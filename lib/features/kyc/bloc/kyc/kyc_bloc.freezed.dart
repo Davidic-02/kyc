@@ -717,12 +717,12 @@ $KycStateCopyWith<KycState> get copyWith => _$KycStateCopyWithImpl<KycState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycState&&const DeepCollectionEquality().equals(other.currentStep, currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(currentStep),const DeepCollectionEquality().hash(completedSteps),basicInfo,twoFactorAuth,documentVerification,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,errorMessage);
+int get hashCode => Object.hash(runtimeType,currentStep,const DeepCollectionEquality().hash(completedSteps),basicInfo,twoFactorAuth,documentVerification,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,errorMessage);
 
 @override
 String toString() {
@@ -754,9 +754,9 @@ class _$KycStateCopyWithImpl<$Res>
 
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currentStep = freezed,Object? completedSteps = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currentStep = null,Object? completedSteps = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
-currentStep: freezed == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
+currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
 as List<KycSteps>,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
@@ -987,12 +987,12 @@ _$KycStateCopyWith<_KycState> get copyWith => __$KycStateCopyWithImpl<_KycState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycState&&const DeepCollectionEquality().equals(other.currentStep, currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(currentStep),const DeepCollectionEquality().hash(_completedSteps),basicInfo,twoFactorAuth,documentVerification,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,errorMessage);
+int get hashCode => Object.hash(runtimeType,currentStep,const DeepCollectionEquality().hash(_completedSteps),basicInfo,twoFactorAuth,documentVerification,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,errorMessage);
 
 @override
 String toString() {
@@ -1024,9 +1024,9 @@ class __$KycStateCopyWithImpl<$Res>
 
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currentStep = freezed,Object? completedSteps = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? currentStep = null,Object? completedSteps = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? errorMessage = null,}) {
   return _then(_KycState(
-currentStep: freezed == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
+currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
 as List<KycSteps>,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable

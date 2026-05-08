@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kyc/features/kyc/data/list/kyc_list.dart';
+import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 import 'package:kyc/features/kyc/data/models/kyc_model.dart';
 import 'package:kyc/features/kyc/data/repository/kyc_repository.dart';
 
@@ -26,6 +27,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     on<_Submitted>(_onSubmitted);
   }
 
+  // ─── Simple TOTP stub — replace with real TOTP lib in prod ───
   bool _verifyTotpCode(String secret, String code) {
     return code.length == 6 && int.tryParse(code) != null;
   }
@@ -36,7 +38,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   ) async {
     try {
       final progress = await _repository.getKycProgress(_uid);
-
       if (progress != null) {
         emit(
           state.copyWith(
@@ -44,9 +45,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
             basicInfo: progress.basicInfo,
             twoFactorAuth: progress.twoFactorAuth,
             documentVerification: progress.documentVerification,
-
-            // 👇 IMPORTANT CHANGE
-            // Do NOT auto-advance
+            // Restore saved step — BlocListener on intro screen
+            // will navigate if currentStep changed from intro
             currentStep: progress.currentStep,
           ),
         );
@@ -61,48 +61,30 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     Emitter<KycState> emit,
   ) async {
     final targetStep = event.step;
-
-    // allow only backward navigation OR valid forward progression
     final allowed =
-        state.canGoToStep(targetStep) &&
-            state.completedSteps.contains(targetStep) ||
+        state.canGoToStep(targetStep) ||
         targetStep.index <= state.currentStep.index;
 
     if (!allowed) {
-      emit(
-        state.copyWith(
-          errorMessage: 'Step locked. Complete previous steps first.',
-        ),
-      );
+      emit(state.copyWith(errorMessage: 'Complete previous steps first.'));
       return;
     }
-
     emit(state.copyWith(currentStep: targetStep, errorMessage: ''));
   }
 
   Future<void> _onNextStep(_NextStep event, Emitter<KycState> emit) async {
-    final nextStep = state.getNextStepFromProgress();
-
-    // Prevent going beyond final step
-    if (state.currentStep == KycStep.completed) {
-      emit(state.copyWith(errorMessage: 'KYC already completed.'));
-      return;
-    }
-
-    emit(state.copyWith(currentStep: nextStep, errorMessage: ''));
+    if (state.currentStep == KycSteps.completed) return;
+    final next = state.getNextStepFromProgress();
+    emit(state.copyWith(currentStep: next, errorMessage: ''));
   }
 
   Future<void> _onPreviousStep(
     _PreviousStep event,
     Emitter<KycState> emit,
   ) async {
-    final currentIndex = kycFlow.indexOf(state.currentStep);
-
-    if (currentIndex <= 0) return;
-
-    final prevStep = kycFlow[currentIndex - 1];
-
-    emit(state.copyWith(currentStep: prevStep, errorMessage: ''));
+    final idx = kycFlow.indexOf(state.currentStep);
+    if (idx <= 0) return;
+    emit(state.copyWith(currentStep: kycFlow[idx - 1], errorMessage: ''));
   }
 
   Future<void> _onBasicInfoSaved(
@@ -123,8 +105,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
       await _repository.saveBasicInfo(_uid, model);
 
       final completed = [...state.completedSteps];
-      if (!completed.contains(KycStep.basicInfo)) {
-        completed.add(KycStep.basicInfo);
+      if (!completed.contains(KycSteps.basicInfo)) {
+        completed.add(KycSteps.basicInfo);
       }
 
       emit(
@@ -132,11 +114,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           basicInfo: model,
           completedSteps: completed,
           basicInfoStatus: KycStepStatus.success,
+          // ✅ Advance currentStep — BlocListener fires navigation
+          currentStep: KycSteps.twoFactorSetup,
           errorMessage: '',
         ),
       );
-
-      // ❌ NO navigation here anymore
     } catch (e) {
       emit(
         state.copyWith(
@@ -165,8 +147,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
       await _repository.saveTwoFactorAuth(_uid, model);
 
       final completed = [...state.completedSteps];
-      if (!completed.contains(KycStep.twoFactorSetup)) {
-        completed.add(KycStep.twoFactorSetup);
+      if (!completed.contains(KycSteps.twoFactorSetup)) {
+        completed.add(KycSteps.twoFactorSetup);
       }
 
       emit(
@@ -174,11 +156,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           twoFactorAuth: model,
           completedSteps: completed,
           twoFactorSetupStatus: KycStepStatus.success,
+          // ✅ Advance currentStep
+          currentStep: KycSteps.twoFactorVerify,
           errorMessage: '',
         ),
       );
-
-      // ❌ NO auto jump
     } catch (e) {
       emit(
         state.copyWith(
@@ -201,7 +183,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
       emit(
         state.copyWith(
           twoFactorVerifyStatus: KycStepStatus.failure,
-          errorMessage: '2FA setup not complete. Go back and setup 2FA.',
+          errorMessage: '2FA setup not complete. Go back and set up 2FA first.',
         ),
       );
       return;
@@ -232,8 +214,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
       await _repository.saveTwoFactorAuth(_uid, updated);
 
       final completed = [...state.completedSteps];
-      if (!completed.contains(KycStep.twoFactorVerify)) {
-        completed.add(KycStep.twoFactorVerify);
+      if (!completed.contains(KycSteps.twoFactorVerify)) {
+        completed.add(KycSteps.twoFactorVerify);
       }
 
       emit(
@@ -241,11 +223,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           twoFactorAuth: updated,
           completedSteps: completed,
           twoFactorVerifyStatus: KycStepStatus.success,
+          // ✅ Advance currentStep
+          currentStep: KycSteps.documents,
           errorMessage: '',
         ),
       );
-
-      // ❌ NO auto navigation here
     } catch (e) {
       emit(
         state.copyWith(
@@ -260,8 +242,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     _DocumentSaved event,
     Emitter<KycState> emit,
   ) async {
-    // ✅ Validate flow
-    if (!state.completedSteps.contains(KycStep.twoFactorVerify)) {
+    if (!state.completedSteps.contains(KycSteps.twoFactorVerify)) {
       emit(
         state.copyWith(
           documentStatus: KycStepStatus.failure,
@@ -283,8 +264,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
       await _repository.saveDocumentVerification(_uid, model);
 
       final completed = [...state.completedSteps];
-      if (!completed.contains(KycStep.documents)) {
-        completed.add(KycStep.documents);
+      if (!completed.contains(KycSteps.documents)) {
+        completed.add(KycSteps.documents);
       }
 
       emit(
@@ -292,11 +273,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           documentVerification: model,
           completedSteps: completed,
           documentStatus: KycStepStatus.success,
+          // ✅ Advance currentStep
+          currentStep: KycSteps.completed,
           errorMessage: '',
         ),
       );
-
-      // ❌ NO auto navigation here
     } catch (e) {
       emit(
         state.copyWith(
@@ -308,7 +289,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   }
 
   Future<void> _onSubmitted(_Submitted event, Emitter<KycState> emit) async {
-    // ✅ BLOC validates: all steps required
     if (!state.isReadyToSubmit) {
       emit(
         state.copyWith(
@@ -323,7 +303,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
 
     try {
       await _repository.submitKyc(_uid);
-
       emit(
         state.copyWith(submitStatus: KycStepStatus.success, errorMessage: ''),
       );
@@ -335,25 +314,5 @@ class KycBloc extends Bloc<KycEvent, KycState> {
         ),
       );
     }
-  }
-
-  KycStep _determineNextStep(List<KycStep> completed) {
-    if (!completed.contains(KycStep.basicInfo)) {
-      return KycStep.basicInfo;
-    }
-
-    if (!completed.contains(KycStep.twoFactorSetup)) {
-      return KycStep.twoFactorSetup;
-    }
-
-    if (!completed.contains(KycStep.twoFactorVerify)) {
-      return KycStep.twoFactorVerify;
-    }
-
-    if (!completed.contains(KycStep.documents)) {
-      return KycStep.documents;
-    }
-
-    return KycStep.completed;
   }
 }
