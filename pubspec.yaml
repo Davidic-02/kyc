@@ -39,6 +39,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.11.0
   dio: ^5.7.0
+  flutter_hooks: ^0.21.3+1
 
   # 🎨 UI HELPERS
   flutter_svg: ^2.0.10+1
