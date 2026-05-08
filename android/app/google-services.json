@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91959307539",
+    "project_id": "kyc-flow-f595f",
+    "storage_bucket": "kyc-flow-f595f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91959307539:android:9ef1ed4f7f6cbe26d1fee6",
+        "android_client_info": {
+          "package_name": "com.example.kyc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4wnz9jyHbL2OkdKHumDbOFKwJs5lGGHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

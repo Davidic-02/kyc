@@ -103,7 +103,7 @@ class OnboardingScreen extends StatelessWidget {
                   "Get Started",
                   pill: true,
                   onPressed: () {
-                    context.goNamed('/auth');
+                    context.go('/phone_input');
                   },
                 ),
 

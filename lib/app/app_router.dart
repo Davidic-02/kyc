@@ -1,23 +1,44 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kyc/features/auth/presentation/auth_page.dart';
+import 'package:kyc/features/auth/presentation/screens/phone_input_screen.dart';
+import 'package:kyc/features/auth/presentation/screens/phone_otp_screen.dart';
+import 'package:kyc/features/onboarding/presentation/screens/onboarding.dart';
 
-import '../core/router/route_names.dart';
-import '../features/dashboard/presentation/dashboard_page.dart';
+final GoRouter router = GoRouter(
+  initialLocation: '/onboarding',
+  routes: [
+    // ─────────────────────────────────────────────
+    // ONBOARDING
+    // ─────────────────────────────────────────────
+    GoRoute(
+      path: '/onboarding',
+      name: 'onboarding',
+      builder: (context, state) => const OnboardingScreen(),
+    ),
+    // ─────────────────────────────────────────────
+    // AUTH SHELL
+    // ─────────────────────────────────────────────
+    GoRoute(
+      path: '/phone_input',
+      name: 'phone_input',
+      builder: (context, state) => const PhoneInputScreen(),
+    ),
 
-class AppRouter {
-  const AppRouter._();
+    GoRoute(
+      path: '/phone_otp',
+      name: 'phone_otp',
+      builder: (context, state) => const PhoneOtpScreen(),
+    ),
+  ],
+);
 
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case RouteNames.home:
-        return MaterialPageRoute<void>(
-          builder: (_) => const DashboardPage(),
-          settings: settings,
-        );
-      default:
-        return MaterialPageRoute<void>(
-          builder: (_) => const DashboardPage(),
-          settings: settings,
-        );
-    }
-  }
-}
+    // ─────────────────────────────────────────────
+    // HOME (after login)
+    // ─────────────────────────────────────────────
+//    GoRoute(
+ //     path: '/home',
+     // name: 'home',
+     // builder: (context, state) => const HomeScreen(),
+ //   ),
+ // ],
+//);

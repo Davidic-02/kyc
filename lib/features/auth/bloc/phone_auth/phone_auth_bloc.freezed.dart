@@ -581,12 +581,12 @@ $PhoneAuthStateCopyWith<PhoneAuthState> get copyWith => _$PhoneAuthStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PhoneAuthState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.verificationId, verificationId) || other.verificationId == verificationId)&&const DeepCollectionEquality().equals(other.sendOtpStatus, sendOtpStatus)&&const DeepCollectionEquality().equals(other.verifyOtpStatus, verifyOtpStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.otpTimerSeconds, otpTimerSeconds) || other.otpTimerSeconds == otpTimerSeconds)&&(identical(other.canResendOtp, canResendOtp) || other.canResendOtp == canResendOtp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PhoneAuthState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.verificationId, verificationId) || other.verificationId == verificationId)&&(identical(other.sendOtpStatus, sendOtpStatus) || other.sendOtpStatus == sendOtpStatus)&&(identical(other.verifyOtpStatus, verifyOtpStatus) || other.verifyOtpStatus == verifyOtpStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.otpTimerSeconds, otpTimerSeconds) || other.otpTimerSeconds == otpTimerSeconds)&&(identical(other.canResendOtp, canResendOtp) || other.canResendOtp == canResendOtp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phoneNumber,otp,verificationId,const DeepCollectionEquality().hash(sendOtpStatus),const DeepCollectionEquality().hash(verifyOtpStatus),errorMessage,successMessage,otpTimerSeconds,canResendOtp);
+int get hashCode => Object.hash(runtimeType,phoneNumber,otp,verificationId,sendOtpStatus,verifyOtpStatus,errorMessage,successMessage,otpTimerSeconds,canResendOtp);
 
 @override
 String toString() {
@@ -618,13 +618,13 @@ class _$PhoneAuthStateCopyWithImpl<$Res>
 
 /// Create a copy of PhoneAuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? otp = null,Object? verificationId = null,Object? sendOtpStatus = freezed,Object? verifyOtpStatus = freezed,Object? errorMessage = null,Object? successMessage = null,Object? otpTimerSeconds = null,Object? canResendOtp = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? otp = null,Object? verificationId = null,Object? sendOtpStatus = null,Object? verifyOtpStatus = null,Object? errorMessage = null,Object? successMessage = null,Object? otpTimerSeconds = null,Object? canResendOtp = null,}) {
   return _then(_self.copyWith(
 phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as PhoneFormz,otp: null == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
 as OtpFormz,verificationId: null == verificationId ? _self.verificationId : verificationId // ignore: cast_nullable_to_non_nullable
-as String,sendOtpStatus: freezed == sendOtpStatus ? _self.sendOtpStatus : sendOtpStatus // ignore: cast_nullable_to_non_nullable
-as FormzSubmissionStatus,verifyOtpStatus: freezed == verifyOtpStatus ? _self.verifyOtpStatus : verifyOtpStatus // ignore: cast_nullable_to_non_nullable
+as String,sendOtpStatus: null == sendOtpStatus ? _self.sendOtpStatus : sendOtpStatus // ignore: cast_nullable_to_non_nullable
+as FormzSubmissionStatus,verifyOtpStatus: null == verifyOtpStatus ? _self.verifyOtpStatus : verifyOtpStatus // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,successMessage: null == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String,otpTimerSeconds: null == otpTimerSeconds ? _self.otpTimerSeconds : otpTimerSeconds // ignore: cast_nullable_to_non_nullable
@@ -793,12 +793,12 @@ _$PhoneAuthStateCopyWith<_PhoneAuthState> get copyWith => __$PhoneAuthStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PhoneAuthState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.verificationId, verificationId) || other.verificationId == verificationId)&&const DeepCollectionEquality().equals(other.sendOtpStatus, sendOtpStatus)&&const DeepCollectionEquality().equals(other.verifyOtpStatus, verifyOtpStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.otpTimerSeconds, otpTimerSeconds) || other.otpTimerSeconds == otpTimerSeconds)&&(identical(other.canResendOtp, canResendOtp) || other.canResendOtp == canResendOtp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PhoneAuthState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.verificationId, verificationId) || other.verificationId == verificationId)&&(identical(other.sendOtpStatus, sendOtpStatus) || other.sendOtpStatus == sendOtpStatus)&&(identical(other.verifyOtpStatus, verifyOtpStatus) || other.verifyOtpStatus == verifyOtpStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.otpTimerSeconds, otpTimerSeconds) || other.otpTimerSeconds == otpTimerSeconds)&&(identical(other.canResendOtp, canResendOtp) || other.canResendOtp == canResendOtp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phoneNumber,otp,verificationId,const DeepCollectionEquality().hash(sendOtpStatus),const DeepCollectionEquality().hash(verifyOtpStatus),errorMessage,successMessage,otpTimerSeconds,canResendOtp);
+int get hashCode => Object.hash(runtimeType,phoneNumber,otp,verificationId,sendOtpStatus,verifyOtpStatus,errorMessage,successMessage,otpTimerSeconds,canResendOtp);
 
 @override
 String toString() {
@@ -830,13 +830,13 @@ class __$PhoneAuthStateCopyWithImpl<$Res>
 
 /// Create a copy of PhoneAuthState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? otp = null,Object? verificationId = null,Object? sendOtpStatus = freezed,Object? verifyOtpStatus = freezed,Object? errorMessage = null,Object? successMessage = null,Object? otpTimerSeconds = null,Object? canResendOtp = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? otp = null,Object? verificationId = null,Object? sendOtpStatus = null,Object? verifyOtpStatus = null,Object? errorMessage = null,Object? successMessage = null,Object? otpTimerSeconds = null,Object? canResendOtp = null,}) {
   return _then(_PhoneAuthState(
 phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as PhoneFormz,otp: null == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
 as OtpFormz,verificationId: null == verificationId ? _self.verificationId : verificationId // ignore: cast_nullable_to_non_nullable
-as String,sendOtpStatus: freezed == sendOtpStatus ? _self.sendOtpStatus : sendOtpStatus // ignore: cast_nullable_to_non_nullable
-as FormzSubmissionStatus,verifyOtpStatus: freezed == verifyOtpStatus ? _self.verifyOtpStatus : verifyOtpStatus // ignore: cast_nullable_to_non_nullable
+as String,sendOtpStatus: null == sendOtpStatus ? _self.sendOtpStatus : sendOtpStatus // ignore: cast_nullable_to_non_nullable
+as FormzSubmissionStatus,verifyOtpStatus: null == verifyOtpStatus ? _self.verifyOtpStatus : verifyOtpStatus // ignore: cast_nullable_to_non_nullable
 as FormzSubmissionStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,successMessage: null == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String,otpTimerSeconds: null == otpTimerSeconds ? _self.otpTimerSeconds : otpTimerSeconds // ignore: cast_nullable_to_non_nullable

@@ -7,7 +7,6 @@ import 'package:kyc/core/constants/app_colors.dart';
 import 'package:kyc/core/constants/app_sizes.dart';
 import 'package:kyc/core/widgets/custom_button.dart';
 import 'package:kyc/features/auth/bloc/phone_auth/phone_auth_bloc.dart';
-import 'phone_otp_screen.dart';
 
 class PhoneInputScreen extends HookWidget {
   const PhoneInputScreen({super.key});

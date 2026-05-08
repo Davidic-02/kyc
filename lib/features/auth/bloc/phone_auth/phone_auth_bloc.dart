@@ -2,9 +2,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../data/models/phone_auth_model.dart';
+import 'package:kyc/core/utils/validators.dart';
 import '../../data/repositories/phone_auth_repository.dart';
-import 'package:formz/formz.dart';
 
 part 'phone_auth_event.dart';
 part 'phone_auth_state.dart';
