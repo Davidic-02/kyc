@@ -290,10 +290,7 @@ as String,
 /// @nodoc
 mixin _$TwoFactorAuthModel {
 
- String get secretKey; String get qrData; bool get isSetupComplete;// QR scanned / saved
- bool get isVerified;// user entered OTP correctly
- bool get isEnabled;// fully active
- DateTime? get enabledAt;
+ String get secretKey; String get qrData; bool get isSetupComplete; bool get isVerified; bool get isEnabled; DateTime? get enabledAt;
 /// Create a copy of TwoFactorAuthModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -498,11 +495,8 @@ class _TwoFactorAuthModel implements TwoFactorAuthModel {
 @override final  String secretKey;
 @override final  String qrData;
 @override@JsonKey() final  bool isSetupComplete;
-// QR scanned / saved
 @override@JsonKey() final  bool isVerified;
-// user entered OTP correctly
 @override@JsonKey() final  bool isEnabled;
-// fully active
 @override final  DateTime? enabledAt;
 
 /// Create a copy of TwoFactorAuthModel
@@ -846,7 +840,7 @@ as bool,
 /// @nodoc
 mixin _$KycProgressModel {
 
- String get uid; BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification; int get currentStep; List<int> get completedSteps; String get status; DateTime? get createdAt; DateTime? get completedAt;
+ String get uid; BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification;@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> get completedSteps;@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps get currentStep; String get status; DateTime? get createdAt; DateTime? get completedAt;
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -859,16 +853,16 @@ $KycProgressModelCopyWith<KycProgressModel> get copyWith => _$KycProgressModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,currentStep,const DeepCollectionEquality().hash(completedSteps),status,createdAt,completedAt);
+int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,const DeepCollectionEquality().hash(completedSteps),currentStep,status,createdAt,completedAt);
 
 @override
 String toString() {
-  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, currentStep: $currentStep, completedSteps: $completedSteps, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
+  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, completedSteps: $completedSteps, currentStep: $currentStep, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
 }
 
 
@@ -879,7 +873,7 @@ abstract mixin class $KycProgressModelCopyWith<$Res>  {
   factory $KycProgressModelCopyWith(KycProgressModel value, $Res Function(KycProgressModel) _then) = _$KycProgressModelCopyWithImpl;
 @useResult
 $Res call({
- String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, int currentStep, List<int> completedSteps, String status, DateTime? createdAt, DateTime? completedAt
+ String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification,@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> completedSteps,@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps currentStep, String status, DateTime? createdAt, DateTime? completedAt
 });
 
 
@@ -896,15 +890,15 @@ class _$KycProgressModelCopyWithImpl<$Res>
 
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? currentStep = null,Object? completedSteps = null,Object? status = null,Object? createdAt = freezed,Object? completedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? completedSteps = null,Object? currentStep = null,Object? status = null,Object? createdAt = freezed,Object? completedAt = freezed,}) {
   return _then(_self.copyWith(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
-as DocumentVerificationModel?,currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
-as int,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
-as List<int>,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as DocumentVerificationModel?,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
+as List<KycSteps>,currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
+as KycSteps,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
@@ -1028,10 +1022,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  int currentStep,  List<int> completedSteps,  String status,  DateTime? createdAt,  DateTime? completedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? completedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _KycProgressModel() when $default != null:
-return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.currentStep,_that.completedSteps,_that.status,_that.createdAt,_that.completedAt);case _:
+return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.completedAt);case _:
   return orElse();
 
 }
@@ -1049,10 +1043,10 @@ return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVeri
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  int currentStep,  List<int> completedSteps,  String status,  DateTime? createdAt,  DateTime? completedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? completedAt)  $default,) {final _that = this;
 switch (_that) {
 case _KycProgressModel():
-return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.currentStep,_that.completedSteps,_that.status,_that.createdAt,_that.completedAt);case _:
+return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.completedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1069,10 +1063,10 @@ return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVeri
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  int currentStep,  List<int> completedSteps,  String status,  DateTime? createdAt,  DateTime? completedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? completedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _KycProgressModel() when $default != null:
-return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.currentStep,_that.completedSteps,_that.status,_that.createdAt,_that.completedAt);case _:
+return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.completedAt);case _:
   return null;
 
 }
@@ -1084,21 +1078,21 @@ return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVeri
 @JsonSerializable()
 
 class _KycProgressModel implements KycProgressModel {
-  const _KycProgressModel({required this.uid, this.basicInfo, this.twoFactorAuth, this.documentVerification, this.currentStep = 0, final  List<int> completedSteps = const [], this.status = 'in_progress', this.createdAt, this.completedAt}): _completedSteps = completedSteps;
+  const _KycProgressModel({required this.uid, this.basicInfo, this.twoFactorAuth, this.documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) final  List<KycSteps> completedSteps = const [], @JsonKey(fromJson: stepFromInt, toJson: stepToInt) this.currentStep = KycSteps.intro, this.status = 'in_progress', this.createdAt, this.completedAt}): _completedSteps = completedSteps;
   factory _KycProgressModel.fromJson(Map<String, dynamic> json) => _$KycProgressModelFromJson(json);
 
 @override final  String uid;
 @override final  BasicInfoModel? basicInfo;
 @override final  TwoFactorAuthModel? twoFactorAuth;
 @override final  DocumentVerificationModel? documentVerification;
-@override@JsonKey() final  int currentStep;
- final  List<int> _completedSteps;
-@override@JsonKey() List<int> get completedSteps {
+ final  List<KycSteps> _completedSteps;
+@override@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> get completedSteps {
   if (_completedSteps is EqualUnmodifiableListView) return _completedSteps;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_completedSteps);
 }
 
+@override@JsonKey(fromJson: stepFromInt, toJson: stepToInt) final  KycSteps currentStep;
 @override@JsonKey() final  String status;
 @override final  DateTime? createdAt;
 @override final  DateTime? completedAt;
@@ -1116,16 +1110,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,currentStep,const DeepCollectionEquality().hash(_completedSteps),status,createdAt,completedAt);
+int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,const DeepCollectionEquality().hash(_completedSteps),currentStep,status,createdAt,completedAt);
 
 @override
 String toString() {
-  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, currentStep: $currentStep, completedSteps: $completedSteps, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
+  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, completedSteps: $completedSteps, currentStep: $currentStep, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
 }
 
 
@@ -1136,7 +1130,7 @@ abstract mixin class _$KycProgressModelCopyWith<$Res> implements $KycProgressMod
   factory _$KycProgressModelCopyWith(_KycProgressModel value, $Res Function(_KycProgressModel) _then) = __$KycProgressModelCopyWithImpl;
 @override @useResult
 $Res call({
- String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, int currentStep, List<int> completedSteps, String status, DateTime? createdAt, DateTime? completedAt
+ String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification,@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> completedSteps,@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps currentStep, String status, DateTime? createdAt, DateTime? completedAt
 });
 
 
@@ -1153,15 +1147,15 @@ class __$KycProgressModelCopyWithImpl<$Res>
 
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? currentStep = null,Object? completedSteps = null,Object? status = null,Object? createdAt = freezed,Object? completedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? completedSteps = null,Object? currentStep = null,Object? status = null,Object? createdAt = freezed,Object? completedAt = freezed,}) {
   return _then(_KycProgressModel(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
-as DocumentVerificationModel?,currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
-as int,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
-as List<int>,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as DocumentVerificationModel?,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
+as List<KycSteps>,currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
+as KycSteps,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,

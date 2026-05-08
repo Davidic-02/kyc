@@ -80,12 +80,12 @@ _KycProgressModel _$KycProgressModelFromJson(Map<String, dynamic> json) =>
           : DocumentVerificationModel.fromJson(
               json['documentVerification'] as Map<String, dynamic>,
             ),
-      currentStep: (json['currentStep'] as num?)?.toInt() ?? 0,
-      completedSteps:
-          (json['completedSteps'] as List<dynamic>?)
-              ?.map((e) => (e as num).toInt())
-              .toList() ??
-          const [],
+      completedSteps: json['completedSteps'] == null
+          ? const []
+          : _stepsFromJson(json['completedSteps'] as List),
+      currentStep: json['currentStep'] == null
+          ? KycSteps.intro
+          : stepFromInt((json['currentStep'] as num).toInt()),
       status: json['status'] as String? ?? 'in_progress',
       createdAt: json['createdAt'] == null
           ? null
@@ -101,8 +101,8 @@ Map<String, dynamic> _$KycProgressModelToJson(_KycProgressModel instance) =>
       'basicInfo': instance.basicInfo,
       'twoFactorAuth': instance.twoFactorAuth,
       'documentVerification': instance.documentVerification,
-      'currentStep': instance.currentStep,
-      'completedSteps': instance.completedSteps,
+      'completedSteps': _stepsToJson(instance.completedSteps),
+      'currentStep': stepToInt(instance.currentStep),
       'status': instance.status,
       'createdAt': instance.createdAt?.toIso8601String(),
       'completedAt': instance.completedAt?.toIso8601String(),
