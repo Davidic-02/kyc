@@ -19,16 +19,12 @@ class _KycIntroScreenState extends State<KycIntroScreen> {
   @override
   void initState() {
     super.initState();
-    // Load any saved progress when screen first mounts.
-    // If the user already completed step 1, the BlocListener
-    // below will navigate them past the intro automatically.
     context.read<KycBloc>().add(const KycEvent.loadExistingProgress());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<KycBloc, KycState>(
-      // Only react when currentStep actually changes
       listenWhen: (prev, curr) => prev.currentStep != curr.currentStep,
       listener: (context, state) {
         switch (state.currentStep) {

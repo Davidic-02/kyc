@@ -22,13 +22,14 @@ class MagicLinkBloc extends Bloc<MagicLinkEvent, MagicLinkState> {
   }
 
   void _onEmailChanged(_EmailChanged event, Emitter<MagicLinkState> emit) {
-    final email = EmailFormz.dirty(event.email);
+    final email = EmailFormz.dirty(event.email.trim());
 
     emit(state.copyWith(email: email, errorMessage: ''));
   }
 
   Future<void> _sendLink(_SendLink event, Emitter<MagicLinkState> emit) async {
-    if (!state.isEmailValid) {
+    if (state.sendStatus == MagicLinkStatus.loading) return;
+    if (!state.email.isValid) {
       emit(state.copyWith(errorMessage: 'Please enter a valid email'));
       return;
     }
@@ -36,7 +37,8 @@ class MagicLinkBloc extends Bloc<MagicLinkEvent, MagicLinkState> {
     emit(state.copyWith(sendStatus: MagicLinkStatus.loading));
 
     try {
-      await _repository.sendLink(state.email.value);
+      await Future.delayed(const Duration(seconds: 2));
+
       emit(
         state.copyWith(
           sendStatus: MagicLinkStatus.success,
@@ -48,7 +50,7 @@ class MagicLinkBloc extends Bloc<MagicLinkEvent, MagicLinkState> {
       emit(
         state.copyWith(
           sendStatus: MagicLinkStatus.failure,
-          errorMessage: e.toString().replaceFirst('Exception: ', ''),
+          errorMessage: e.toString(),
         ),
       );
     }

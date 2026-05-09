@@ -45,7 +45,8 @@ dependencies:
   app_links: ^6.3.2
   email_validator: ^3.0.0
   qr_flutter: ^4.1.0
-  
+  fluttertoast: ^8.2.14
+  toastification: ^2.3.0
 
   # 🎨 UI HELPERS
   flutter_svg: ^2.0.10+1

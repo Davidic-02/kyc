@@ -143,7 +143,7 @@ return submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadExistingProgress,TResult Function()?  nextStep,TResult Function()?  previousStep,TResult Function( KycStep step)?  navigateToStep,TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)?  basicInfoSaved,TResult Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult Function( String verificationCode)?  twoFactorVerificationRequested,TResult Function( String documentType,  String documentNumber,  String documentUrl)?  documentSaved,TResult Function()?  submitted,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadExistingProgress,TResult Function()?  nextStep,TResult Function()?  previousStep,TResult Function( KycSteps step)?  navigateToStep,TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)?  basicInfoSaved,TResult Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult Function( String verificationCode)?  twoFactorVerificationRequested,TResult Function( String documentType,  String documentNumber,  String documentUrl)?  documentSaved,TResult Function()?  submitted,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress();case _NextStep() when nextStep != null:
@@ -172,7 +172,7 @@ return submitted();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadExistingProgress,required TResult Function()  nextStep,required TResult Function()  previousStep,required TResult Function( KycStep step)  navigateToStep,required TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)  basicInfoSaved,required TResult Function( String secretKey,  String qrData)  twoFactorSetupCompleted,required TResult Function( String verificationCode)  twoFactorVerificationRequested,required TResult Function( String documentType,  String documentNumber,  String documentUrl)  documentSaved,required TResult Function()  submitted,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadExistingProgress,required TResult Function()  nextStep,required TResult Function()  previousStep,required TResult Function( KycSteps step)  navigateToStep,required TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)  basicInfoSaved,required TResult Function( String secretKey,  String qrData)  twoFactorSetupCompleted,required TResult Function( String verificationCode)  twoFactorVerificationRequested,required TResult Function( String documentType,  String documentNumber,  String documentUrl)  documentSaved,required TResult Function()  submitted,}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress():
 return loadExistingProgress();case _NextStep():
@@ -200,7 +200,7 @@ return submitted();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadExistingProgress,TResult? Function()?  nextStep,TResult? Function()?  previousStep,TResult? Function( KycStep step)?  navigateToStep,TResult? Function( String firstName,  String lastName,  String gender,  String age,  String country)?  basicInfoSaved,TResult? Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult? Function( String verificationCode)?  twoFactorVerificationRequested,TResult? Function( String documentType,  String documentNumber,  String documentUrl)?  documentSaved,TResult? Function()?  submitted,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadExistingProgress,TResult? Function()?  nextStep,TResult? Function()?  previousStep,TResult? Function( KycSteps step)?  navigateToStep,TResult? Function( String firstName,  String lastName,  String gender,  String age,  String country)?  basicInfoSaved,TResult? Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult? Function( String verificationCode)?  twoFactorVerificationRequested,TResult? Function( String documentType,  String documentNumber,  String documentUrl)?  documentSaved,TResult? Function()?  submitted,}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress();case _NextStep() when nextStep != null:
@@ -322,7 +322,7 @@ class _NavigateToStep implements KycEvent {
   const _NavigateToStep(this.step);
   
 
- final  KycStep step;
+ final  KycSteps step;
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -334,12 +334,12 @@ _$NavigateToStepCopyWith<_NavigateToStep> get copyWith => __$NavigateToStepCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NavigateToStep&&const DeepCollectionEquality().equals(other.step, step));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NavigateToStep&&(identical(other.step, step) || other.step == step));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(step));
+int get hashCode => Object.hash(runtimeType,step);
 
 @override
 String toString() {
@@ -354,7 +354,7 @@ abstract mixin class _$NavigateToStepCopyWith<$Res> implements $KycEventCopyWith
   factory _$NavigateToStepCopyWith(_NavigateToStep value, $Res Function(_NavigateToStep) _then) = __$NavigateToStepCopyWithImpl;
 @useResult
 $Res call({
- KycStep step
+ KycSteps step
 });
 
 
@@ -371,10 +371,10 @@ class __$NavigateToStepCopyWithImpl<$Res>
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? step = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? step = null,}) {
   return _then(_NavigateToStep(
-freezed == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
-as KycStep,
+null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
+as KycSteps,
   ));
 }
 

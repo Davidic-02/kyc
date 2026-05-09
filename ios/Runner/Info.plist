@@ -30,13 +30,14 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 
-	<key>CFBundleSignature</key>
-	<string>????</string>
-
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+
+	<!-- Enables Flutter deep linking -->
+	<key>FlutterDeepLinkingEnabled</key>
 	<true/>
 
 	<key>UIApplicationSceneManifest</key>
@@ -88,10 +89,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-
-	<!-- ✅ ADD THIS -->
-	<key>FlutterDeepLinkingEnabled</key>
-	<true/>
 
 </dict>
 </plist>

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:go_router/go_router.dart';
@@ -10,26 +10,33 @@ import 'package:kyc/core/constants/app_sizes.dart';
 import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 
 import 'package:kyc/core/widgets/custom_button.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
-class KycStep2SetupScreen extends StatelessWidget {
-  const KycStep2SetupScreen({super.key});
+class KycStep3Screen extends StatefulWidget {
+  const KycStep3Screen({super.key});
+
+  @override
+  State<KycStep3Screen> createState() => _KycStep3ScreenState();
+}
+
+class _KycStep3ScreenState extends State<KycStep3Screen> {
+  String? _selectedDocType = 'NIN';
+  final _docNumberController = TextEditingController();
+
+  final _docTypes = ['NIN', 'Passport', "Driver's Licence", "Voter's Card"];
+
+  @override
+  void dispose() {
+    _docNumberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // In production, fetch secret + qrData from your backend.
-    // The mock values here match the X/ODOs screenshots.
-    final secret =
-        context.read<KycBloc>().state.twoFactorAuth?.secretKey ??
-        'FRQVIT2VGM4WMZLJJJBXIPRDHRBT6WCQPNTD67KWJFLHIWTWGNKA';
-    final qrData =
-        'otpauth://totp/ODOs:user@example.com?secret=$secret&issuer=ODOs';
-
     return BlocListener<KycBloc, KycState>(
       listenWhen: (prev, curr) => prev.currentStep != curr.currentStep,
       listener: (context, state) {
-        if (state.currentStep == KycSteps.twoFactorVerify) {
-          context.goNamed('kyc_step2_verify');
+        if (state.currentStep == KycSteps.completed) {
+          context.goNamed('kyc_completion');
         }
       },
       child: Scaffold(
@@ -55,7 +62,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'Setup 2FA',
+                      'Document Verification',
                       style: Theme.of(context).textTheme.headlineSmall
                           ?.copyWith(color: AppColors.textPrimary),
                     ),
@@ -67,7 +74,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: const LinearProgressIndicator(
-                    value: 0.5,
+                    value: 0.75,
                     minHeight: 4,
                     backgroundColor: AppColors.surface,
                     color: AppColors.primary,
@@ -76,43 +83,8 @@ class KycStep2SetupScreen extends StatelessWidget {
 
                 const SizedBox(height: 32),
 
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                    ),
-                    child: QrImageView(
-                      data: qrData,
-                      version: QrVersions.auto,
-                      size: 220,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
                 Text(
-                  'Scan with authenticator app',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Use Google Authenticator, Microsoft Authenticator, or Authy',
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 12,
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                Text(
-                  "Can't scan? Enter manually:",
+                  'Select document type',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w600,
@@ -120,41 +92,63 @@ class KycStep2SetupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _docTypes.map((type) {
+                    final isSelected = _selectedDocType == type;
+                    return GestureDetector(
+                      onTap: () => setState(() => _selectedDocType = type),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColors.primary
+                              : AppColors.surface,
+                          borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                        ),
                         child: Text(
-                          secret,
-                          style: const TextStyle(
-                            color: AppColors.textPrimary,
-                            fontFamily: 'Courier',
-                            fontSize: 12,
+                          type,
+                          style: TextStyle(
+                            color: isSelected
+                                ? Colors.white
+                                : AppColors.textSecondary,
+                            fontWeight: isSelected
+                                ? FontWeight.w600
+                                : FontWeight.normal,
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Clipboard.setData(ClipboardData(text: secret));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Copied to clipboard'),
-                            ),
-                          );
-                        },
-                        child: const Icon(
-                          Icons.copy,
-                          color: AppColors.textSecondary,
-                          size: 18,
-                        ),
-                      ),
-                    ],
+                    );
+                  }).toList(),
+                ),
+
+                const SizedBox(height: 24),
+
+                Text(
+                  'Document number',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                TextField(
+                  controller: _docNumberController,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  onChanged: (_) => setState(() {}),
+                  decoration: InputDecoration(
+                    hintText: 'Enter your document number',
+                    hintStyle: const TextStyle(color: AppColors.textSecondary),
+                    filled: true,
+                    fillColor: AppColors.surface,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
 
@@ -162,23 +156,28 @@ class KycStep2SetupScreen extends StatelessWidget {
 
                 BlocBuilder<KycBloc, KycState>(
                   buildWhen: (prev, curr) =>
-                      prev.twoFactorSetupStatus != curr.twoFactorSetupStatus ||
+                      prev.documentStatus != curr.documentStatus ||
                       prev.errorMessage != curr.errorMessage,
                   builder: (context, state) {
                     final isBusy =
-                        state.twoFactorSetupStatus == KycStepStatus.loading;
+                        state.documentStatus == KycStepStatus.loading;
+                    final isValid =
+                        _docNumberController.text.trim().isNotEmpty &&
+                        _selectedDocType != null;
 
                     return Column(
                       children: [
                         Button(
-                          isBusy ? 'Setting up...' : 'Continue to Verification',
+                          isBusy ? 'Saving...' : 'Continue',
                           busy: isBusy,
-                          onPressed: isBusy
+                          onPressed: isBusy || !isValid
                               ? null
                               : () => context.read<KycBloc>().add(
-                                  KycEvent.twoFactorSetupCompleted(
-                                    secretKey: secret,
-                                    qrData: qrData,
+                                  KycEvent.documentSaved(
+                                    documentType: _selectedDocType!,
+                                    documentNumber: _docNumberController.text
+                                        .trim(),
+                                    documentUrl: '',
                                   ),
                                 ),
                         ),

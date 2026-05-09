@@ -10,26 +10,41 @@ import 'package:kyc/core/constants/app_sizes.dart';
 import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 
 import 'package:kyc/core/widgets/custom_button.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
-class KycStep2SetupScreen extends StatelessWidget {
-  const KycStep2SetupScreen({super.key});
+class KycStep2VerifyScreen extends StatefulWidget {
+  const KycStep2VerifyScreen({super.key});
+
+  @override
+  State<KycStep2VerifyScreen> createState() => _KycStep2VerifyScreenState();
+}
+
+class _KycStep2VerifyScreenState extends State<KycStep2VerifyScreen> {
+  late final List<FocusNode> _focusNodes;
+  late final List<TextEditingController> _controllers;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNodes = List.generate(6, (_) => FocusNode());
+    _controllers = List.generate(6, (_) => TextEditingController());
+  }
+
+  @override
+  void dispose() {
+    for (final n in _focusNodes) n.dispose();
+    for (final c in _controllers) c.dispose();
+    super.dispose();
+  }
+
+  String get _code => _controllers.map((c) => c.text).join();
 
   @override
   Widget build(BuildContext context) {
-    // In production, fetch secret + qrData from your backend.
-    // The mock values here match the X/ODOs screenshots.
-    final secret =
-        context.read<KycBloc>().state.twoFactorAuth?.secretKey ??
-        'FRQVIT2VGM4WMZLJJJBXIPRDHRBT6WCQPNTD67KWJFLHIWTWGNKA';
-    final qrData =
-        'otpauth://totp/ODOs:user@example.com?secret=$secret&issuer=ODOs';
-
     return BlocListener<KycBloc, KycState>(
       listenWhen: (prev, curr) => prev.currentStep != curr.currentStep,
       listener: (context, state) {
-        if (state.currentStep == KycSteps.twoFactorVerify) {
-          context.goNamed('kyc_step2_verify');
+        if (state.currentStep == KycSteps.documents) {
+          context.goNamed('kyc_progress');
         }
       },
       child: Scaffold(
@@ -55,7 +70,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'Setup 2FA',
+                      'Verify 2FA',
                       style: Theme.of(context).textTheme.headlineSmall
                           ?.copyWith(color: AppColors.textPrimary),
                     ),
@@ -67,7 +82,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: const LinearProgressIndicator(
-                    value: 0.5,
+                    value: 0.67,
                     minHeight: 4,
                     backgroundColor: AppColors.surface,
                     color: AppColors.primary,
@@ -76,25 +91,8 @@ class KycStep2SetupScreen extends StatelessWidget {
 
                 const SizedBox(height: 32),
 
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                    ),
-                    child: QrImageView(
-                      data: qrData,
-                      version: QrVersions.auto,
-                      size: 220,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
                 Text(
-                  'Scan with authenticator app',
+                  'Enter verification code',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w600,
@@ -102,7 +100,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Use Google Authenticator, Microsoft Authenticator, or Authy',
+                  'Enter the 6-digit code from your authenticator app',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 12,
@@ -111,74 +109,74 @@ class KycStep2SetupScreen extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                Text(
-                  "Can't scan? Enter manually:",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          secret,
-                          style: const TextStyle(
-                            color: AppColors.textPrimary,
-                            fontFamily: 'Courier',
-                            fontSize: 12,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Clipboard.setData(ClipboardData(text: secret));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Copied to clipboard'),
+                // 6-digit OTP boxes
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(6, (i) {
+                    return SizedBox(
+                      width: 48,
+                      height: 56,
+                      child: TextField(
+                        controller: _controllers[i],
+                        focusNode: _focusNodes[i],
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        maxLength: 1,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        decoration: InputDecoration(
+                          counterText: '',
+                          filled: true,
+                          fillColor: AppColors.surface,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              AppSizes.radiusM,
                             ),
-                          );
-                        },
-                        child: const Icon(
-                          Icons.copy,
-                          color: AppColors.textSecondary,
-                          size: 18,
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: EdgeInsets.zero,
                         ),
+                        style: const TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        onChanged: (value) {
+                          if (value.isNotEmpty && i < 5) {
+                            _focusNodes[i + 1].requestFocus();
+                          } else if (value.isEmpty && i > 0) {
+                            _focusNodes[i - 1].requestFocus();
+                          }
+                          setState(() {}); // rebuild to re-evaluate isValid
+                        },
                       ),
-                    ],
-                  ),
+                    );
+                  }),
                 ),
 
                 const SizedBox(height: 40),
 
                 BlocBuilder<KycBloc, KycState>(
                   buildWhen: (prev, curr) =>
-                      prev.twoFactorSetupStatus != curr.twoFactorSetupStatus ||
+                      prev.twoFactorVerifyStatus !=
+                          curr.twoFactorVerifyStatus ||
                       prev.errorMessage != curr.errorMessage,
                   builder: (context, state) {
                     final isBusy =
-                        state.twoFactorSetupStatus == KycStepStatus.loading;
+                        state.twoFactorVerifyStatus == KycStepStatus.loading;
+                    final isValid = _code.length == 6;
 
                     return Column(
                       children: [
                         Button(
-                          isBusy ? 'Setting up...' : 'Continue to Verification',
+                          isBusy ? 'Verifying...' : 'Verify Code',
                           busy: isBusy,
-                          onPressed: isBusy
+                          onPressed: isBusy || !isValid
                               ? null
                               : () => context.read<KycBloc>().add(
-                                  KycEvent.twoFactorSetupCompleted(
-                                    secretKey: secret,
-                                    qrData: qrData,
+                                  KycEvent.twoFactorVerificationRequested(
+                                    verificationCode: _code,
                                   ),
                                 ),
                         ),

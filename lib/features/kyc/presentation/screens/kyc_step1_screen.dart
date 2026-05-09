@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:kyc/core/constants/app_colors.dart';
+import 'package:kyc/core/services/toast_services.dart';
 import 'package:kyc/features/kyc/bloc/kyc/kyc_bloc.dart';
 
 import 'package:kyc/core/constants/app_sizes.dart';
-import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 
 import 'package:kyc/core/widgets/custom_button.dart';
+import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 
 class KycStep1Screen extends HookWidget {
   const KycStep1Screen({super.key});
@@ -21,7 +23,6 @@ class KycStep1Screen extends HookWidget {
     final selectedGender = useState<String?>(null);
     final selectedCountry = useState<String?>(null);
 
-    // Pre-fill if the user already completed this step
     useEffect(() {
       final info = context.read<KycBloc>().state.basicInfo;
       if (info != null) {
@@ -35,13 +36,25 @@ class KycStep1Screen extends HookWidget {
     }, const []);
 
     return BlocListener<KycBloc, KycState>(
-      // ✅ Only navigate when currentStep changes
-      listenWhen: (prev, curr) => prev.currentStep != curr.currentStep,
+      listenWhen: (prev, curr) =>
+          prev.errorMessage != curr.errorMessage ||
+          prev.basicInfoStatus != curr.basicInfoStatus ||
+          prev.currentStep != curr.currentStep, // 👈 add this
+
       listener: (context, state) {
+        if (state.errorMessage.isNotEmpty) {
+          ToastService.toast(state.errorMessage, ToastType.error);
+        }
+
+        if (state.basicInfoStatus == KycStepStatus.success) {
+          ToastService.toast("Basic info saved", ToastType.success);
+        }
+
         if (state.currentStep == KycSteps.twoFactorSetup) {
-          context.goNamed('kyc_step2_setup');
+          context.goNamed('kyc_progress');
         }
       },
+
       child: Scaffold(
         backgroundColor: AppColors.background,
         body: SafeArea(

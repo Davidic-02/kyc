@@ -13,7 +13,7 @@ part 'kyc_bloc.freezed.dart';
 class KycBloc extends Bloc<KycEvent, KycState> {
   final KycRepository _repository;
 
-  String get _uid => FirebaseAuth.instance.currentUser?.uid ?? '';
+  String get _uid => '2nufpLkmwyXpBvsI0KHqM1HvRyQ2';
 
   KycBloc(this._repository) : super(const KycState()) {
     on<_LoadExistingProgress>(_onLoadExistingProgress);
@@ -109,6 +109,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
         completed.add(KycSteps.basicInfo);
       }
 
+      print("STEP SAVED");
+      print("Completed steps BEFORE emit: $completed");
       emit(
         state.copyWith(
           basicInfo: model,
