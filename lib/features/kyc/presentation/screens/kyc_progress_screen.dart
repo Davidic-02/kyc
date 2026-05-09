@@ -92,14 +92,44 @@ class KycProgressScreen extends StatelessWidget {
                       switch (nextStep) {
                         case KycSteps.basicInfo:
                           context.goNamed('kyc_step1');
+                          break;
+
                         case KycSteps.twoFactorSetup:
                           context.goNamed('kyc_step2_setup');
+                          break;
+
                         case KycSteps.twoFactorVerify:
                           context.goNamed('kyc_step2_verify');
+                          break;
+
                         case KycSteps.documents:
                           context.goNamed('kyc_step3');
+                          break;
+
+                        // ─────────────────────────────
+                        // TIER 2
+                        // ─────────────────────────────
+
+                        case KycSteps.selfieCapture:
+                          context.goNamed('kyc_selfie');
+                          break;
+
+                        case KycSteps.locationVerify:
+                          context.goNamed('kyc_location');
+                          break;
+
+                        case KycSteps.proofOfAddress:
+                          context.goNamed('kyc_proof_of_address');
+                          break;
+
                         case KycSteps.completed:
                           context.goNamed('kyc_completion');
+                          break;
+
+                        case KycSteps.tier2Completed:
+                          context.goNamed('kyc_tier2_completion');
+                          break;
+
                         case KycSteps.intro:
                           break;
                       }

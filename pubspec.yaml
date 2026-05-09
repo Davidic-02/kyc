@@ -48,6 +48,28 @@ dependencies:
   fluttertoast: ^8.2.14
   toastification: ^2.3.0
   lottie: ^3.1.2
+  # Selfie capture
+  camera: ^0.12.0+1
+
+  # Proof of address upload
+  image_picker: ^1.2.2
+
+  # GPS coordinates
+  geolocator: ^14.0.2
+
+  # Reverse geocode lat/lng → country name
+  geocoding: ^4.0.0
+
+  # Runtime permissions
+  permission_handler: ^12.0.1
+
+# ── Future Tier 2 API integrations (not yet installed) ──────────────────────
+
+# Onfido liveness + identity verification
+# onfido_sdk: ^5.0.0
+
+# AWS facial comparison
+# aws_rekognition_api: ^2.0.0
   
   
 

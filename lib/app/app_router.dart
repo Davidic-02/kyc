@@ -2,13 +2,17 @@ import 'package:go_router/go_router.dart';
 import 'package:kyc/features/auth/presentation/screens/phone_input_screen.dart';
 import 'package:kyc/features/auth/presentation/screens/phone_otp_screen.dart';
 import 'package:kyc/features/auth_1/presentation/screens/magic_link_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/home.dart';
 import 'package:kyc/features/kyc/presentation/screens/kyc_completion_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/kyc_intro_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/kyc_progress_screen.dart';
-import 'package:kyc/features/kyc/presentation/screens/kyc_step1_screen.dart';
-import 'package:kyc/features/kyc/presentation/screens/kyc_step2_setup_screen.dart';
-import 'package:kyc/features/kyc/presentation/screens/kyc_step2_verify_screen.dart';
-import 'package:kyc/features/kyc/presentation/screens/kyc_step3_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_1/kyc_step1_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_1/kyc_step2_setup_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_1/kyc_step2_verify_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_1/kyc_step3_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_location_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_proof_of_address.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_selfie_screen.dart';
 import 'package:kyc/features/onboarding/presentation/screens/onboarding.dart';
 
 final GoRouter router = GoRouter(
@@ -70,6 +74,32 @@ final GoRouter router = GoRouter(
       path: '/kyc/completion',
       name: 'kyc_completion',
       builder: (context, state) => const KycCompletionScreen(),
+    ),
+
+    GoRoute(
+      name: 'kyc_selfie',
+      path: '/kyc/selfie',
+      builder: (_, __) => const KycSelfieScreen(),
+    ),
+    GoRoute(
+      name: 'kyc_location',
+      path: '/kyc/location',
+      builder: (_, __) => const KycLocationScreen(),
+    ),
+    GoRoute(
+      name: 'kyc_proof_of_address',
+      path: '/kyc/proof-of-address',
+      builder: (_, __) => const KycProofOfAddressScreen(),
+    ),
+    GoRoute(
+      name: 'kyc_tier2_completion',
+      path: '/kyc/tier2-completion',
+      builder: (_, __) => const KycTier2CompletionScreen(),
+    ),
+    GoRoute(
+      path: '/home',
+      name: 'home',
+      builder: (context, state) => const HomeScreen(),
     ),
   ],
 );

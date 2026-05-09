@@ -1,13 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../models/kyc_model.dart';
 
 abstract class KycRepository {
-  // =========================
-  // TIER 1
-  // =========================
-
   Future<void> saveBasicInfo(String uid, BasicInfoModel model);
+  Future<void> saveSelfie(String uid, String selfieUrl);
+  Future<void> saveLocation(
+    String uid, {
+    required double lat,
+    required double lng,
+    required String country,
+    required bool isVpnSuspected,
+  });
+  Future<void> saveProofOfAddress(
+    String uid,
+    String documentUrl,
+    String docType,
+  );
+  Future<void> submitTier2(String uid, Tier2Model model);
 
   Future<void> saveTwoFactorAuth(String uid, TwoFactorAuthModel model);
 
@@ -16,31 +25,9 @@ abstract class KycRepository {
     DocumentVerificationModel model,
   );
 
-  Future<void> submitKyc(String uid);
-
-  // =========================
-  // TIER 2
-  // =========================
-
-  Future<void> saveSelfie(String uid, String selfieUrl);
-
-  Future<void> saveLocation(
-    String uid,
-    double lat,
-    double lng,
-    String country,
-    bool isVpnSuspected,
-  );
-
-  Future<void> saveProofOfAddress(String uid, String documentUrl);
-
-  Future<void> submitTier2(String uid);
-
-  // =========================
-  // GENERAL
-  // =========================
-
   Future<KycProgressModel?> getKycProgress(String uid);
+
+  Future<void> submitKyc(String uid);
 }
 
 class KycRepositoryImpl implements KycRepository {
@@ -51,7 +38,6 @@ class KycRepositoryImpl implements KycRepository {
   // =========================
   // Helper
   // =========================
-
   DocumentReference<Map<String, dynamic>> _doc(String uid) {
     return _firestore.collection('kyc').doc(uid);
   }
@@ -59,7 +45,6 @@ class KycRepositoryImpl implements KycRepository {
   // =========================
   // BASIC INFO
   // =========================
-
   @override
   Future<void> saveBasicInfo(String uid, BasicInfoModel model) async {
     try {
@@ -74,7 +59,6 @@ class KycRepositoryImpl implements KycRepository {
   // =========================
   // 2FA
   // =========================
-
   @override
   Future<void> saveTwoFactorAuth(String uid, TwoFactorAuthModel model) async {
     try {
@@ -87,9 +71,8 @@ class KycRepositoryImpl implements KycRepository {
   }
 
   // =========================
-  // DOCUMENT VERIFICATION
+  // DOCUMENTS
   // =========================
-
   @override
   Future<void> saveDocumentVerification(
     String uid,
@@ -100,82 +83,19 @@ class KycRepositoryImpl implements KycRepository {
         uid,
       ).set({'documentVerification': model.toJson()}, SetOptions(merge: true));
     } catch (e) {
-      throw Exception('Failed to save document verification: $e');
-    }
-  }
-
-  // =========================
-  // SELFIE / LIVENESS
-  // =========================
-
-  @override
-  Future<void> saveSelfie(String uid, String selfieUrl) async {
-    try {
-      await _doc(uid).set({
-        'tier2': {'selfieUrl': selfieUrl},
-      }, SetOptions(merge: true));
-    } catch (e) {
-      throw Exception('Failed to save selfie: $e');
-    }
-  }
-
-  // =========================
-  // LOCATION
-  // =========================
-
-  @override
-  Future<void> saveLocation(
-    String uid,
-    double lat,
-    double lng,
-    String country,
-    bool isVpnSuspected,
-  ) async {
-    try {
-      await _doc(uid).set({
-        'tier2': {
-          'location': {
-            'latitude': lat,
-            'longitude': lng,
-            'country': country,
-            'isVpnSuspected': isVpnSuspected,
-          },
-        },
-      }, SetOptions(merge: true));
-    } catch (e) {
-      throw Exception('Failed to save location: $e');
-    }
-  }
-
-  // =========================
-  // PROOF OF ADDRESS
-  // =========================
-
-  @override
-  Future<void> saveProofOfAddress(String uid, String documentUrl) async {
-    try {
-      await _doc(uid).set({
-        'tier2': {
-          'proofOfAddress': {'documentUrl': documentUrl},
-        },
-      }, SetOptions(merge: true));
-    } catch (e) {
-      throw Exception('Failed to save proof of address: $e');
+      throw Exception('Failed to save document: $e');
     }
   }
 
   // =========================
   // GET PROGRESS
   // =========================
-
   @override
   Future<KycProgressModel?> getKycProgress(String uid) async {
     try {
       final doc = await _doc(uid).get();
 
-      if (!doc.exists || doc.data() == null) {
-        return null;
-      }
+      if (!doc.exists || doc.data() == null) return null;
 
       return KycProgressModel.fromJson(doc.data()!);
     } catch (e) {
@@ -184,34 +104,82 @@ class KycRepositoryImpl implements KycRepository {
   }
 
   // =========================
-  // TIER 1 SUBMIT
+  // SUBMIT
   // =========================
-
   @override
   Future<void> submitKyc(String uid) async {
     try {
       await _doc(uid).set({
-        'status': 'tier1_submitted',
-        'tier1CompletedAt': FieldValue.serverTimestamp(),
+        'status': 'submitted',
+        'completedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
     } catch (e) {
-      throw Exception('Failed to submit Tier 1 KYC: $e');
+      throw Exception('Failed to submit KYC: $e');
     }
   }
 
-  // =========================
-  // TIER 2 SUBMIT
-  // =========================
-
   @override
-  Future<void> submitTier2(String uid) async {
+  Future<void> saveSelfie(String uid, String selfieUrl) async {
     try {
       await _doc(uid).set({
-        'status': 'tier2_submitted',
-        'tier2CompletedAt': FieldValue.serverTimestamp(),
+        'tier2.selfieUrl': selfieUrl,
+        'tier2.selfieUploadedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
     } catch (e) {
-      throw Exception('Failed to submit Tier 2 KYC: $e');
+      throw Exception('Failed to save selfie: $e');
+    }
+  }
+
+  @override
+  Future<void> saveLocation(
+    String uid, {
+    required double lat,
+    required double lng,
+    required String country,
+    required bool isVpnSuspected,
+  }) async {
+    try {
+      await _doc(uid).set({
+        'tier2.location.latitude': lat,
+        'tier2.location.longitude': lng,
+        'tier2.location.detectedCountry': country,
+        'tier2.location.isVpnSuspected': isVpnSuspected,
+        'tier2.location.capturedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      throw Exception('Failed to save location: $e');
+    }
+  }
+
+  @override
+  Future<void> saveProofOfAddress(
+    String uid,
+    String documentUrl,
+    String docType,
+  ) async {
+    try {
+      await _doc(uid).set({
+        'tier2.proofOfAddress.documentUrl': documentUrl,
+        'tier2.proofOfAddress.documentType': docType,
+        'tier2.proofOfAddress.uploadedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      throw Exception('Failed to save proof of address: $e');
+    }
+  }
+
+  @override
+  Future<void> submitTier2(String uid, Tier2Model model) async {
+    try {
+      await _doc(uid).set({
+        'tier2.status': 'pending_review',
+        'tier2.submittedAt': FieldValue.serverTimestamp(),
+
+        'status': 'tier2_pending_review',
+        'tier2SubmittedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      throw Exception('Failed to submit Tier 2: $e');
     }
   }
 }
