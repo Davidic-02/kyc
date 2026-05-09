@@ -838,9 +838,335 @@ as bool,
 
 
 /// @nodoc
+mixin _$Tier2Model {
+
+// Step 4 — Selfie
+ String get selfieUrl; bool get selfieReviewed;// set to true by admin/backend
+ bool get selfieApproved;// Step 5 — Location
+ double get latitude; double get longitude; String get detectedCountry; bool get isVpnSuspected;// Step 6 — Proof of address
+ String get proofOfAddressDocType; String get proofOfAddressUrl; bool get proofReviewed; bool get proofApproved;// Overall
+ String get status;// status values:
+//   'pending_review'   — submitted, awaiting manual check
+//   'approved'         — all checks passed
+//   'rejected'         — failed verification
+//   'needs_resubmit'   — one or more docs need resubmission
+ DateTime? get submittedAt; DateTime? get reviewedAt;
+/// Create a copy of Tier2Model
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$Tier2ModelCopyWith<Tier2Model> get copyWith => _$Tier2ModelCopyWithImpl<Tier2Model>(this as Tier2Model, _$identity);
+
+  /// Serializes this Tier2Model to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Tier2Model&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.selfieReviewed, selfieReviewed) || other.selfieReviewed == selfieReviewed)&&(identical(other.selfieApproved, selfieApproved) || other.selfieApproved == selfieApproved)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.proofReviewed, proofReviewed) || other.proofReviewed == proofReviewed)&&(identical(other.proofApproved, proofApproved) || other.proofApproved == proofApproved)&&(identical(other.status, status) || other.status == status)&&(identical(other.submittedAt, submittedAt) || other.submittedAt == submittedAt)&&(identical(other.reviewedAt, reviewedAt) || other.reviewedAt == reviewedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,selfieUrl,selfieReviewed,selfieApproved,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,proofReviewed,proofApproved,status,submittedAt,reviewedAt);
+
+@override
+String toString() {
+  return 'Tier2Model(selfieUrl: $selfieUrl, selfieReviewed: $selfieReviewed, selfieApproved: $selfieApproved, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, proofReviewed: $proofReviewed, proofApproved: $proofApproved, status: $status, submittedAt: $submittedAt, reviewedAt: $reviewedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $Tier2ModelCopyWith<$Res>  {
+  factory $Tier2ModelCopyWith(Tier2Model value, $Res Function(Tier2Model) _then) = _$Tier2ModelCopyWithImpl;
+@useResult
+$Res call({
+ String selfieUrl, bool selfieReviewed, bool selfieApproved, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, bool proofReviewed, bool proofApproved, String status, DateTime? submittedAt, DateTime? reviewedAt
+});
+
+
+
+
+}
+/// @nodoc
+class _$Tier2ModelCopyWithImpl<$Res>
+    implements $Tier2ModelCopyWith<$Res> {
+  _$Tier2ModelCopyWithImpl(this._self, this._then);
+
+  final Tier2Model _self;
+  final $Res Function(Tier2Model) _then;
+
+/// Create a copy of Tier2Model
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? selfieUrl = null,Object? selfieReviewed = null,Object? selfieApproved = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? proofReviewed = null,Object? proofApproved = null,Object? status = null,Object? submittedAt = freezed,Object? reviewedAt = freezed,}) {
+  return _then(_self.copyWith(
+selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
+as String,selfieReviewed: null == selfieReviewed ? _self.selfieReviewed : selfieReviewed // ignore: cast_nullable_to_non_nullable
+as bool,selfieApproved: null == selfieApproved ? _self.selfieApproved : selfieApproved // ignore: cast_nullable_to_non_nullable
+as bool,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
+as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
+as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,proofReviewed: null == proofReviewed ? _self.proofReviewed : proofReviewed // ignore: cast_nullable_to_non_nullable
+as bool,proofApproved: null == proofApproved ? _self.proofApproved : proofApproved // ignore: cast_nullable_to_non_nullable
+as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,submittedAt: freezed == submittedAt ? _self.submittedAt : submittedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,reviewedAt: freezed == reviewedAt ? _self.reviewedAt : reviewedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Tier2Model].
+extension Tier2ModelPatterns on Tier2Model {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Tier2Model value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Tier2Model() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Tier2Model value)  $default,){
+final _that = this;
+switch (_that) {
+case _Tier2Model():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Tier2Model value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Tier2Model() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Tier2Model() when $default != null:
+return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)  $default,) {final _that = this;
+switch (_that) {
+case _Tier2Model():
+return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)?  $default,) {final _that = this;
+switch (_that) {
+case _Tier2Model() when $default != null:
+return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _Tier2Model implements Tier2Model {
+  const _Tier2Model({required this.selfieUrl, this.selfieReviewed = false, this.selfieApproved = false, required this.latitude, required this.longitude, required this.detectedCountry, this.isVpnSuspected = false, required this.proofOfAddressDocType, required this.proofOfAddressUrl, this.proofReviewed = false, this.proofApproved = false, this.status = 'pending_review', this.submittedAt, this.reviewedAt});
+  factory _Tier2Model.fromJson(Map<String, dynamic> json) => _$Tier2ModelFromJson(json);
+
+// Step 4 — Selfie
+@override final  String selfieUrl;
+@override@JsonKey() final  bool selfieReviewed;
+// set to true by admin/backend
+@override@JsonKey() final  bool selfieApproved;
+// Step 5 — Location
+@override final  double latitude;
+@override final  double longitude;
+@override final  String detectedCountry;
+@override@JsonKey() final  bool isVpnSuspected;
+// Step 6 — Proof of address
+@override final  String proofOfAddressDocType;
+@override final  String proofOfAddressUrl;
+@override@JsonKey() final  bool proofReviewed;
+@override@JsonKey() final  bool proofApproved;
+// Overall
+@override@JsonKey() final  String status;
+// status values:
+//   'pending_review'   — submitted, awaiting manual check
+//   'approved'         — all checks passed
+//   'rejected'         — failed verification
+//   'needs_resubmit'   — one or more docs need resubmission
+@override final  DateTime? submittedAt;
+@override final  DateTime? reviewedAt;
+
+/// Create a copy of Tier2Model
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$Tier2ModelCopyWith<_Tier2Model> get copyWith => __$Tier2ModelCopyWithImpl<_Tier2Model>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$Tier2ModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Tier2Model&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.selfieReviewed, selfieReviewed) || other.selfieReviewed == selfieReviewed)&&(identical(other.selfieApproved, selfieApproved) || other.selfieApproved == selfieApproved)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.proofReviewed, proofReviewed) || other.proofReviewed == proofReviewed)&&(identical(other.proofApproved, proofApproved) || other.proofApproved == proofApproved)&&(identical(other.status, status) || other.status == status)&&(identical(other.submittedAt, submittedAt) || other.submittedAt == submittedAt)&&(identical(other.reviewedAt, reviewedAt) || other.reviewedAt == reviewedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,selfieUrl,selfieReviewed,selfieApproved,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,proofReviewed,proofApproved,status,submittedAt,reviewedAt);
+
+@override
+String toString() {
+  return 'Tier2Model(selfieUrl: $selfieUrl, selfieReviewed: $selfieReviewed, selfieApproved: $selfieApproved, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, proofReviewed: $proofReviewed, proofApproved: $proofApproved, status: $status, submittedAt: $submittedAt, reviewedAt: $reviewedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$Tier2ModelCopyWith<$Res> implements $Tier2ModelCopyWith<$Res> {
+  factory _$Tier2ModelCopyWith(_Tier2Model value, $Res Function(_Tier2Model) _then) = __$Tier2ModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String selfieUrl, bool selfieReviewed, bool selfieApproved, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, bool proofReviewed, bool proofApproved, String status, DateTime? submittedAt, DateTime? reviewedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$Tier2ModelCopyWithImpl<$Res>
+    implements _$Tier2ModelCopyWith<$Res> {
+  __$Tier2ModelCopyWithImpl(this._self, this._then);
+
+  final _Tier2Model _self;
+  final $Res Function(_Tier2Model) _then;
+
+/// Create a copy of Tier2Model
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? selfieUrl = null,Object? selfieReviewed = null,Object? selfieApproved = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? proofReviewed = null,Object? proofApproved = null,Object? status = null,Object? submittedAt = freezed,Object? reviewedAt = freezed,}) {
+  return _then(_Tier2Model(
+selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
+as String,selfieReviewed: null == selfieReviewed ? _self.selfieReviewed : selfieReviewed // ignore: cast_nullable_to_non_nullable
+as bool,selfieApproved: null == selfieApproved ? _self.selfieApproved : selfieApproved // ignore: cast_nullable_to_non_nullable
+as bool,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
+as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
+as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,proofReviewed: null == proofReviewed ? _self.proofReviewed : proofReviewed // ignore: cast_nullable_to_non_nullable
+as bool,proofApproved: null == proofApproved ? _self.proofApproved : proofApproved // ignore: cast_nullable_to_non_nullable
+as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,submittedAt: freezed == submittedAt ? _self.submittedAt : submittedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,reviewedAt: freezed == reviewedAt ? _self.reviewedAt : reviewedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$KycProgressModel {
 
- String get uid; BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification;@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> get completedSteps;@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps get currentStep; String get status; DateTime? get createdAt; DateTime? get completedAt;
+ String get uid;// Tier 1
+ BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification;// Tier 2
+ Tier2Model? get tier2;@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> get completedSteps;@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps get currentStep;// 'in_progress' | 'tier1_submitted' | 'tier1_verified'
+// | 'tier2_pending_review' | 'tier2_approved' | 'tier2_rejected'
+ String get status; DateTime? get createdAt; DateTime? get tier1CompletedAt; DateTime? get tier2SubmittedAt;
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -853,16 +1179,16 @@ $KycProgressModelCopyWith<KycProgressModel> get copyWith => _$KycProgressModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.tier2, tier2) || other.tier2 == tier2)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.tier1CompletedAt, tier1CompletedAt) || other.tier1CompletedAt == tier1CompletedAt)&&(identical(other.tier2SubmittedAt, tier2SubmittedAt) || other.tier2SubmittedAt == tier2SubmittedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,const DeepCollectionEquality().hash(completedSteps),currentStep,status,createdAt,completedAt);
+int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,tier2,const DeepCollectionEquality().hash(completedSteps),currentStep,status,createdAt,tier1CompletedAt,tier2SubmittedAt);
 
 @override
 String toString() {
-  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, completedSteps: $completedSteps, currentStep: $currentStep, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
+  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, tier2: $tier2, completedSteps: $completedSteps, currentStep: $currentStep, status: $status, createdAt: $createdAt, tier1CompletedAt: $tier1CompletedAt, tier2SubmittedAt: $tier2SubmittedAt)';
 }
 
 
@@ -873,11 +1199,11 @@ abstract mixin class $KycProgressModelCopyWith<$Res>  {
   factory $KycProgressModelCopyWith(KycProgressModel value, $Res Function(KycProgressModel) _then) = _$KycProgressModelCopyWithImpl;
 @useResult
 $Res call({
- String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification,@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> completedSteps,@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps currentStep, String status, DateTime? createdAt, DateTime? completedAt
+ String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, Tier2Model? tier2,@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> completedSteps,@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps currentStep, String status, DateTime? createdAt, DateTime? tier1CompletedAt, DateTime? tier2SubmittedAt
 });
 
 
-$BasicInfoModelCopyWith<$Res>? get basicInfo;$TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;$DocumentVerificationModelCopyWith<$Res>? get documentVerification;
+$BasicInfoModelCopyWith<$Res>? get basicInfo;$TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;$DocumentVerificationModelCopyWith<$Res>? get documentVerification;$Tier2ModelCopyWith<$Res>? get tier2;
 
 }
 /// @nodoc
@@ -890,17 +1216,19 @@ class _$KycProgressModelCopyWithImpl<$Res>
 
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? completedSteps = null,Object? currentStep = null,Object? status = null,Object? createdAt = freezed,Object? completedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? tier2 = freezed,Object? completedSteps = null,Object? currentStep = null,Object? status = null,Object? createdAt = freezed,Object? tier1CompletedAt = freezed,Object? tier2SubmittedAt = freezed,}) {
   return _then(_self.copyWith(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
-as DocumentVerificationModel?,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
+as DocumentVerificationModel?,tier2: freezed == tier2 ? _self.tier2 : tier2 // ignore: cast_nullable_to_non_nullable
+as Tier2Model?,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
 as List<KycSteps>,currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,tier1CompletedAt: freezed == tier1CompletedAt ? _self.tier1CompletedAt : tier1CompletedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,tier2SubmittedAt: freezed == tier2SubmittedAt ? _self.tier2SubmittedAt : tier2SubmittedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
@@ -939,6 +1267,18 @@ $DocumentVerificationModelCopyWith<$Res>? get documentVerification {
 
   return $DocumentVerificationModelCopyWith<$Res>(_self.documentVerification!, (value) {
     return _then(_self.copyWith(documentVerification: value));
+  });
+}/// Create a copy of KycProgressModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$Tier2ModelCopyWith<$Res>? get tier2 {
+    if (_self.tier2 == null) {
+    return null;
+  }
+
+  return $Tier2ModelCopyWith<$Res>(_self.tier2!, (value) {
+    return _then(_self.copyWith(tier2: value));
   });
 }
 }
@@ -1022,10 +1362,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? completedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  Tier2Model? tier2, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? tier1CompletedAt,  DateTime? tier2SubmittedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _KycProgressModel() when $default != null:
-return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.completedAt);case _:
+return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.tier2,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.tier1CompletedAt,_that.tier2SubmittedAt);case _:
   return orElse();
 
 }
@@ -1043,10 +1383,10 @@ return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVeri
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? completedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  Tier2Model? tier2, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? tier1CompletedAt,  DateTime? tier2SubmittedAt)  $default,) {final _that = this;
 switch (_that) {
 case _KycProgressModel():
-return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.completedAt);case _:
+return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.tier2,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.tier1CompletedAt,_that.tier2SubmittedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1063,10 +1403,10 @@ return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVeri
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? completedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  Tier2Model? tier2, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)  List<KycSteps> completedSteps, @JsonKey(fromJson: stepFromInt, toJson: stepToInt)  KycSteps currentStep,  String status,  DateTime? createdAt,  DateTime? tier1CompletedAt,  DateTime? tier2SubmittedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _KycProgressModel() when $default != null:
-return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.completedAt);case _:
+return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.tier2,_that.completedSteps,_that.currentStep,_that.status,_that.createdAt,_that.tier1CompletedAt,_that.tier2SubmittedAt);case _:
   return null;
 
 }
@@ -1078,13 +1418,16 @@ return $default(_that.uid,_that.basicInfo,_that.twoFactorAuth,_that.documentVeri
 @JsonSerializable()
 
 class _KycProgressModel implements KycProgressModel {
-  const _KycProgressModel({required this.uid, this.basicInfo, this.twoFactorAuth, this.documentVerification, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) final  List<KycSteps> completedSteps = const [], @JsonKey(fromJson: stepFromInt, toJson: stepToInt) this.currentStep = KycSteps.intro, this.status = 'in_progress', this.createdAt, this.completedAt}): _completedSteps = completedSteps;
+  const _KycProgressModel({required this.uid, this.basicInfo, this.twoFactorAuth, this.documentVerification, this.tier2, @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) final  List<KycSteps> completedSteps = const [], @JsonKey(fromJson: stepFromInt, toJson: stepToInt) this.currentStep = KycSteps.intro, this.status = 'in_progress', this.createdAt, this.tier1CompletedAt, this.tier2SubmittedAt}): _completedSteps = completedSteps;
   factory _KycProgressModel.fromJson(Map<String, dynamic> json) => _$KycProgressModelFromJson(json);
 
 @override final  String uid;
+// Tier 1
 @override final  BasicInfoModel? basicInfo;
 @override final  TwoFactorAuthModel? twoFactorAuth;
 @override final  DocumentVerificationModel? documentVerification;
+// Tier 2
+@override final  Tier2Model? tier2;
  final  List<KycSteps> _completedSteps;
 @override@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> get completedSteps {
   if (_completedSteps is EqualUnmodifiableListView) return _completedSteps;
@@ -1093,9 +1436,12 @@ class _KycProgressModel implements KycProgressModel {
 }
 
 @override@JsonKey(fromJson: stepFromInt, toJson: stepToInt) final  KycSteps currentStep;
+// 'in_progress' | 'tier1_submitted' | 'tier1_verified'
+// | 'tier2_pending_review' | 'tier2_approved' | 'tier2_rejected'
 @override@JsonKey() final  String status;
 @override final  DateTime? createdAt;
-@override final  DateTime? completedAt;
+@override final  DateTime? tier1CompletedAt;
+@override final  DateTime? tier2SubmittedAt;
 
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
@@ -1110,16 +1456,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycProgressModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.tier2, tier2) || other.tier2 == tier2)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.tier1CompletedAt, tier1CompletedAt) || other.tier1CompletedAt == tier1CompletedAt)&&(identical(other.tier2SubmittedAt, tier2SubmittedAt) || other.tier2SubmittedAt == tier2SubmittedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,const DeepCollectionEquality().hash(_completedSteps),currentStep,status,createdAt,completedAt);
+int get hashCode => Object.hash(runtimeType,uid,basicInfo,twoFactorAuth,documentVerification,tier2,const DeepCollectionEquality().hash(_completedSteps),currentStep,status,createdAt,tier1CompletedAt,tier2SubmittedAt);
 
 @override
 String toString() {
-  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, completedSteps: $completedSteps, currentStep: $currentStep, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
+  return 'KycProgressModel(uid: $uid, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, tier2: $tier2, completedSteps: $completedSteps, currentStep: $currentStep, status: $status, createdAt: $createdAt, tier1CompletedAt: $tier1CompletedAt, tier2SubmittedAt: $tier2SubmittedAt)';
 }
 
 
@@ -1130,11 +1476,11 @@ abstract mixin class _$KycProgressModelCopyWith<$Res> implements $KycProgressMod
   factory _$KycProgressModelCopyWith(_KycProgressModel value, $Res Function(_KycProgressModel) _then) = __$KycProgressModelCopyWithImpl;
 @override @useResult
 $Res call({
- String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification,@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> completedSteps,@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps currentStep, String status, DateTime? createdAt, DateTime? completedAt
+ String uid, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, Tier2Model? tier2,@JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson) List<KycSteps> completedSteps,@JsonKey(fromJson: stepFromInt, toJson: stepToInt) KycSteps currentStep, String status, DateTime? createdAt, DateTime? tier1CompletedAt, DateTime? tier2SubmittedAt
 });
 
 
-@override $BasicInfoModelCopyWith<$Res>? get basicInfo;@override $TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;@override $DocumentVerificationModelCopyWith<$Res>? get documentVerification;
+@override $BasicInfoModelCopyWith<$Res>? get basicInfo;@override $TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;@override $DocumentVerificationModelCopyWith<$Res>? get documentVerification;@override $Tier2ModelCopyWith<$Res>? get tier2;
 
 }
 /// @nodoc
@@ -1147,17 +1493,19 @@ class __$KycProgressModelCopyWithImpl<$Res>
 
 /// Create a copy of KycProgressModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? completedSteps = null,Object? currentStep = null,Object? status = null,Object? createdAt = freezed,Object? completedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? tier2 = freezed,Object? completedSteps = null,Object? currentStep = null,Object? status = null,Object? createdAt = freezed,Object? tier1CompletedAt = freezed,Object? tier2SubmittedAt = freezed,}) {
   return _then(_KycProgressModel(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
-as DocumentVerificationModel?,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
+as DocumentVerificationModel?,tier2: freezed == tier2 ? _self.tier2 : tier2 // ignore: cast_nullable_to_non_nullable
+as Tier2Model?,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
 as List<KycSteps>,currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,tier1CompletedAt: freezed == tier1CompletedAt ? _self.tier1CompletedAt : tier1CompletedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,tier2SubmittedAt: freezed == tier2SubmittedAt ? _self.tier2SubmittedAt : tier2SubmittedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
@@ -1197,6 +1545,18 @@ $DocumentVerificationModelCopyWith<$Res>? get documentVerification {
 
   return $DocumentVerificationModelCopyWith<$Res>(_self.documentVerification!, (value) {
     return _then(_self.copyWith(documentVerification: value));
+  });
+}/// Create a copy of KycProgressModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$Tier2ModelCopyWith<$Res>? get tier2 {
+    if (_self.tier2 == null) {
+    return null;
+  }
+
+  return $Tier2ModelCopyWith<$Res>(_self.tier2!, (value) {
+    return _then(_self.copyWith(tier2: value));
   });
 }
 }

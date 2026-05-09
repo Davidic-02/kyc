@@ -55,19 +55,34 @@ extension KycEventPatterns on KycEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadExistingProgress value)?  loadExistingProgress,TResult Function( _NextStep value)?  nextStep,TResult Function( _PreviousStep value)?  previousStep,TResult Function( _NavigateToStep value)?  navigateToStep,TResult Function( _BasicInfoSaved value)?  basicInfoSaved,TResult Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult Function( _DocumentSaved value)?  documentSaved,TResult Function( _Submitted value)?  submitted,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadExistingProgress value)?  loadExistingProgress,TResult Function( _NextStep value)?  nextStep,TResult Function( _PreviousStep value)?  previousStep,TResult Function( _NavigateToStep value)?  navigateToStep,TResult Function( _FirstNameChanged value)?  firstNameChanged,TResult Function( _LastNameChanged value)?  lastNameChanged,TResult Function( _AgeChanged value)?  ageChanged,TResult Function( _GenderChanged value)?  genderChanged,TResult Function( _CountryChanged value)?  countryChanged,TResult Function( _BasicInfoSaved value)?  basicInfoSaved,TResult Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult Function( _OtpDigitChanged value)?  otpDigitChanged,TResult Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult Function( _DocTypeChanged value)?  docTypeChanged,TResult Function( _DocNumberChanged value)?  docNumberChanged,TResult Function( _DocumentSaved value)?  documentSaved,TResult Function( _Submitted value)?  submitted,TResult Function( _StartTier2 value)?  startTier2,TResult Function( _SkipTier2 value)?  skipTier2,TResult Function( _SelfieCaptureDone value)?  selfieCaptureDone,TResult Function( _LocationCaptured value)?  locationCaptured,TResult Function( _ProofOfAddressDocTypeChanged value)?  proofOfAddressDocTypeChanged,TResult Function( _ProofOfAddressUploaded value)?  proofOfAddressUploaded,TResult Function( _Tier2Submitted value)?  tier2Submitted,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress(_that);case _NextStep() when nextStep != null:
 return nextStep(_that);case _PreviousStep() when previousStep != null:
 return previousStep(_that);case _NavigateToStep() when navigateToStep != null:
-return navigateToStep(_that);case _BasicInfoSaved() when basicInfoSaved != null:
+return navigateToStep(_that);case _FirstNameChanged() when firstNameChanged != null:
+return firstNameChanged(_that);case _LastNameChanged() when lastNameChanged != null:
+return lastNameChanged(_that);case _AgeChanged() when ageChanged != null:
+return ageChanged(_that);case _GenderChanged() when genderChanged != null:
+return genderChanged(_that);case _CountryChanged() when countryChanged != null:
+return countryChanged(_that);case _BasicInfoSaved() when basicInfoSaved != null:
 return basicInfoSaved(_that);case _TwoFactorSetupCompleted() when twoFactorSetupCompleted != null:
-return twoFactorSetupCompleted(_that);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
-return twoFactorVerificationRequested(_that);case _DocumentSaved() when documentSaved != null:
+return twoFactorSetupCompleted(_that);case _OtpDigitChanged() when otpDigitChanged != null:
+return otpDigitChanged(_that);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
+return twoFactorVerificationRequested(_that);case _DocTypeChanged() when docTypeChanged != null:
+return docTypeChanged(_that);case _DocNumberChanged() when docNumberChanged != null:
+return docNumberChanged(_that);case _DocumentSaved() when documentSaved != null:
 return documentSaved(_that);case _Submitted() when submitted != null:
-return submitted(_that);case _:
+return submitted(_that);case _StartTier2() when startTier2 != null:
+return startTier2(_that);case _SkipTier2() when skipTier2 != null:
+return skipTier2(_that);case _SelfieCaptureDone() when selfieCaptureDone != null:
+return selfieCaptureDone(_that);case _LocationCaptured() when locationCaptured != null:
+return locationCaptured(_that);case _ProofOfAddressDocTypeChanged() when proofOfAddressDocTypeChanged != null:
+return proofOfAddressDocTypeChanged(_that);case _ProofOfAddressUploaded() when proofOfAddressUploaded != null:
+return proofOfAddressUploaded(_that);case _Tier2Submitted() when tier2Submitted != null:
+return tier2Submitted(_that);case _:
   return orElse();
 
 }
@@ -85,19 +100,34 @@ return submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadExistingProgress value)  loadExistingProgress,required TResult Function( _NextStep value)  nextStep,required TResult Function( _PreviousStep value)  previousStep,required TResult Function( _NavigateToStep value)  navigateToStep,required TResult Function( _BasicInfoSaved value)  basicInfoSaved,required TResult Function( _TwoFactorSetupCompleted value)  twoFactorSetupCompleted,required TResult Function( _TwoFactorVerificationRequested value)  twoFactorVerificationRequested,required TResult Function( _DocumentSaved value)  documentSaved,required TResult Function( _Submitted value)  submitted,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadExistingProgress value)  loadExistingProgress,required TResult Function( _NextStep value)  nextStep,required TResult Function( _PreviousStep value)  previousStep,required TResult Function( _NavigateToStep value)  navigateToStep,required TResult Function( _FirstNameChanged value)  firstNameChanged,required TResult Function( _LastNameChanged value)  lastNameChanged,required TResult Function( _AgeChanged value)  ageChanged,required TResult Function( _GenderChanged value)  genderChanged,required TResult Function( _CountryChanged value)  countryChanged,required TResult Function( _BasicInfoSaved value)  basicInfoSaved,required TResult Function( _TwoFactorSetupCompleted value)  twoFactorSetupCompleted,required TResult Function( _OtpDigitChanged value)  otpDigitChanged,required TResult Function( _TwoFactorVerificationRequested value)  twoFactorVerificationRequested,required TResult Function( _DocTypeChanged value)  docTypeChanged,required TResult Function( _DocNumberChanged value)  docNumberChanged,required TResult Function( _DocumentSaved value)  documentSaved,required TResult Function( _Submitted value)  submitted,required TResult Function( _StartTier2 value)  startTier2,required TResult Function( _SkipTier2 value)  skipTier2,required TResult Function( _SelfieCaptureDone value)  selfieCaptureDone,required TResult Function( _LocationCaptured value)  locationCaptured,required TResult Function( _ProofOfAddressDocTypeChanged value)  proofOfAddressDocTypeChanged,required TResult Function( _ProofOfAddressUploaded value)  proofOfAddressUploaded,required TResult Function( _Tier2Submitted value)  tier2Submitted,}){
 final _that = this;
 switch (_that) {
 case _LoadExistingProgress():
 return loadExistingProgress(_that);case _NextStep():
 return nextStep(_that);case _PreviousStep():
 return previousStep(_that);case _NavigateToStep():
-return navigateToStep(_that);case _BasicInfoSaved():
+return navigateToStep(_that);case _FirstNameChanged():
+return firstNameChanged(_that);case _LastNameChanged():
+return lastNameChanged(_that);case _AgeChanged():
+return ageChanged(_that);case _GenderChanged():
+return genderChanged(_that);case _CountryChanged():
+return countryChanged(_that);case _BasicInfoSaved():
 return basicInfoSaved(_that);case _TwoFactorSetupCompleted():
-return twoFactorSetupCompleted(_that);case _TwoFactorVerificationRequested():
-return twoFactorVerificationRequested(_that);case _DocumentSaved():
+return twoFactorSetupCompleted(_that);case _OtpDigitChanged():
+return otpDigitChanged(_that);case _TwoFactorVerificationRequested():
+return twoFactorVerificationRequested(_that);case _DocTypeChanged():
+return docTypeChanged(_that);case _DocNumberChanged():
+return docNumberChanged(_that);case _DocumentSaved():
 return documentSaved(_that);case _Submitted():
-return submitted(_that);case _:
+return submitted(_that);case _StartTier2():
+return startTier2(_that);case _SkipTier2():
+return skipTier2(_that);case _SelfieCaptureDone():
+return selfieCaptureDone(_that);case _LocationCaptured():
+return locationCaptured(_that);case _ProofOfAddressDocTypeChanged():
+return proofOfAddressDocTypeChanged(_that);case _ProofOfAddressUploaded():
+return proofOfAddressUploaded(_that);case _Tier2Submitted():
+return tier2Submitted(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -114,19 +144,34 @@ return submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadExistingProgress value)?  loadExistingProgress,TResult? Function( _NextStep value)?  nextStep,TResult? Function( _PreviousStep value)?  previousStep,TResult? Function( _NavigateToStep value)?  navigateToStep,TResult? Function( _BasicInfoSaved value)?  basicInfoSaved,TResult? Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult? Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult? Function( _DocumentSaved value)?  documentSaved,TResult? Function( _Submitted value)?  submitted,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadExistingProgress value)?  loadExistingProgress,TResult? Function( _NextStep value)?  nextStep,TResult? Function( _PreviousStep value)?  previousStep,TResult? Function( _NavigateToStep value)?  navigateToStep,TResult? Function( _FirstNameChanged value)?  firstNameChanged,TResult? Function( _LastNameChanged value)?  lastNameChanged,TResult? Function( _AgeChanged value)?  ageChanged,TResult? Function( _GenderChanged value)?  genderChanged,TResult? Function( _CountryChanged value)?  countryChanged,TResult? Function( _BasicInfoSaved value)?  basicInfoSaved,TResult? Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult? Function( _OtpDigitChanged value)?  otpDigitChanged,TResult? Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult? Function( _DocTypeChanged value)?  docTypeChanged,TResult? Function( _DocNumberChanged value)?  docNumberChanged,TResult? Function( _DocumentSaved value)?  documentSaved,TResult? Function( _Submitted value)?  submitted,TResult? Function( _StartTier2 value)?  startTier2,TResult? Function( _SkipTier2 value)?  skipTier2,TResult? Function( _SelfieCaptureDone value)?  selfieCaptureDone,TResult? Function( _LocationCaptured value)?  locationCaptured,TResult? Function( _ProofOfAddressDocTypeChanged value)?  proofOfAddressDocTypeChanged,TResult? Function( _ProofOfAddressUploaded value)?  proofOfAddressUploaded,TResult? Function( _Tier2Submitted value)?  tier2Submitted,}){
 final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress(_that);case _NextStep() when nextStep != null:
 return nextStep(_that);case _PreviousStep() when previousStep != null:
 return previousStep(_that);case _NavigateToStep() when navigateToStep != null:
-return navigateToStep(_that);case _BasicInfoSaved() when basicInfoSaved != null:
+return navigateToStep(_that);case _FirstNameChanged() when firstNameChanged != null:
+return firstNameChanged(_that);case _LastNameChanged() when lastNameChanged != null:
+return lastNameChanged(_that);case _AgeChanged() when ageChanged != null:
+return ageChanged(_that);case _GenderChanged() when genderChanged != null:
+return genderChanged(_that);case _CountryChanged() when countryChanged != null:
+return countryChanged(_that);case _BasicInfoSaved() when basicInfoSaved != null:
 return basicInfoSaved(_that);case _TwoFactorSetupCompleted() when twoFactorSetupCompleted != null:
-return twoFactorSetupCompleted(_that);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
-return twoFactorVerificationRequested(_that);case _DocumentSaved() when documentSaved != null:
+return twoFactorSetupCompleted(_that);case _OtpDigitChanged() when otpDigitChanged != null:
+return otpDigitChanged(_that);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
+return twoFactorVerificationRequested(_that);case _DocTypeChanged() when docTypeChanged != null:
+return docTypeChanged(_that);case _DocNumberChanged() when docNumberChanged != null:
+return docNumberChanged(_that);case _DocumentSaved() when documentSaved != null:
 return documentSaved(_that);case _Submitted() when submitted != null:
-return submitted(_that);case _:
+return submitted(_that);case _StartTier2() when startTier2 != null:
+return startTier2(_that);case _SkipTier2() when skipTier2 != null:
+return skipTier2(_that);case _SelfieCaptureDone() when selfieCaptureDone != null:
+return selfieCaptureDone(_that);case _LocationCaptured() when locationCaptured != null:
+return locationCaptured(_that);case _ProofOfAddressDocTypeChanged() when proofOfAddressDocTypeChanged != null:
+return proofOfAddressDocTypeChanged(_that);case _ProofOfAddressUploaded() when proofOfAddressUploaded != null:
+return proofOfAddressUploaded(_that);case _Tier2Submitted() when tier2Submitted != null:
+return tier2Submitted(_that);case _:
   return null;
 
 }
@@ -143,18 +188,33 @@ return submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadExistingProgress,TResult Function()?  nextStep,TResult Function()?  previousStep,TResult Function( KycSteps step)?  navigateToStep,TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)?  basicInfoSaved,TResult Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult Function( String verificationCode)?  twoFactorVerificationRequested,TResult Function( String documentType,  String documentNumber,  String documentUrl)?  documentSaved,TResult Function()?  submitted,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadExistingProgress,TResult Function()?  nextStep,TResult Function()?  previousStep,TResult Function( KycSteps step)?  navigateToStep,TResult Function( String value)?  firstNameChanged,TResult Function( String value)?  lastNameChanged,TResult Function( String value)?  ageChanged,TResult Function( String value)?  genderChanged,TResult Function( String value)?  countryChanged,TResult Function()?  basicInfoSaved,TResult Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult Function( int index,  String digit)?  otpDigitChanged,TResult Function()?  twoFactorVerificationRequested,TResult Function( String value)?  docTypeChanged,TResult Function( String value)?  docNumberChanged,TResult Function()?  documentSaved,TResult Function()?  submitted,TResult Function()?  startTier2,TResult Function()?  skipTier2,TResult Function( String selfieUrl)?  selfieCaptureDone,TResult Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)?  locationCaptured,TResult Function( String value)?  proofOfAddressDocTypeChanged,TResult Function( String documentUrl)?  proofOfAddressUploaded,TResult Function()?  tier2Submitted,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress();case _NextStep() when nextStep != null:
 return nextStep();case _PreviousStep() when previousStep != null:
 return previousStep();case _NavigateToStep() when navigateToStep != null:
-return navigateToStep(_that.step);case _BasicInfoSaved() when basicInfoSaved != null:
-return basicInfoSaved(_that.firstName,_that.lastName,_that.gender,_that.age,_that.country);case _TwoFactorSetupCompleted() when twoFactorSetupCompleted != null:
-return twoFactorSetupCompleted(_that.secretKey,_that.qrData);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
-return twoFactorVerificationRequested(_that.verificationCode);case _DocumentSaved() when documentSaved != null:
-return documentSaved(_that.documentType,_that.documentNumber,_that.documentUrl);case _Submitted() when submitted != null:
-return submitted();case _:
+return navigateToStep(_that.step);case _FirstNameChanged() when firstNameChanged != null:
+return firstNameChanged(_that.value);case _LastNameChanged() when lastNameChanged != null:
+return lastNameChanged(_that.value);case _AgeChanged() when ageChanged != null:
+return ageChanged(_that.value);case _GenderChanged() when genderChanged != null:
+return genderChanged(_that.value);case _CountryChanged() when countryChanged != null:
+return countryChanged(_that.value);case _BasicInfoSaved() when basicInfoSaved != null:
+return basicInfoSaved();case _TwoFactorSetupCompleted() when twoFactorSetupCompleted != null:
+return twoFactorSetupCompleted(_that.secretKey,_that.qrData);case _OtpDigitChanged() when otpDigitChanged != null:
+return otpDigitChanged(_that.index,_that.digit);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
+return twoFactorVerificationRequested();case _DocTypeChanged() when docTypeChanged != null:
+return docTypeChanged(_that.value);case _DocNumberChanged() when docNumberChanged != null:
+return docNumberChanged(_that.value);case _DocumentSaved() when documentSaved != null:
+return documentSaved();case _Submitted() when submitted != null:
+return submitted();case _StartTier2() when startTier2 != null:
+return startTier2();case _SkipTier2() when skipTier2 != null:
+return skipTier2();case _SelfieCaptureDone() when selfieCaptureDone != null:
+return selfieCaptureDone(_that.selfieUrl);case _LocationCaptured() when locationCaptured != null:
+return locationCaptured(_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected);case _ProofOfAddressDocTypeChanged() when proofOfAddressDocTypeChanged != null:
+return proofOfAddressDocTypeChanged(_that.value);case _ProofOfAddressUploaded() when proofOfAddressUploaded != null:
+return proofOfAddressUploaded(_that.documentUrl);case _Tier2Submitted() when tier2Submitted != null:
+return tier2Submitted();case _:
   return orElse();
 
 }
@@ -172,18 +232,33 @@ return submitted();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadExistingProgress,required TResult Function()  nextStep,required TResult Function()  previousStep,required TResult Function( KycSteps step)  navigateToStep,required TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)  basicInfoSaved,required TResult Function( String secretKey,  String qrData)  twoFactorSetupCompleted,required TResult Function( String verificationCode)  twoFactorVerificationRequested,required TResult Function( String documentType,  String documentNumber,  String documentUrl)  documentSaved,required TResult Function()  submitted,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadExistingProgress,required TResult Function()  nextStep,required TResult Function()  previousStep,required TResult Function( KycSteps step)  navigateToStep,required TResult Function( String value)  firstNameChanged,required TResult Function( String value)  lastNameChanged,required TResult Function( String value)  ageChanged,required TResult Function( String value)  genderChanged,required TResult Function( String value)  countryChanged,required TResult Function()  basicInfoSaved,required TResult Function( String secretKey,  String qrData)  twoFactorSetupCompleted,required TResult Function( int index,  String digit)  otpDigitChanged,required TResult Function()  twoFactorVerificationRequested,required TResult Function( String value)  docTypeChanged,required TResult Function( String value)  docNumberChanged,required TResult Function()  documentSaved,required TResult Function()  submitted,required TResult Function()  startTier2,required TResult Function()  skipTier2,required TResult Function( String selfieUrl)  selfieCaptureDone,required TResult Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)  locationCaptured,required TResult Function( String value)  proofOfAddressDocTypeChanged,required TResult Function( String documentUrl)  proofOfAddressUploaded,required TResult Function()  tier2Submitted,}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress():
 return loadExistingProgress();case _NextStep():
 return nextStep();case _PreviousStep():
 return previousStep();case _NavigateToStep():
-return navigateToStep(_that.step);case _BasicInfoSaved():
-return basicInfoSaved(_that.firstName,_that.lastName,_that.gender,_that.age,_that.country);case _TwoFactorSetupCompleted():
-return twoFactorSetupCompleted(_that.secretKey,_that.qrData);case _TwoFactorVerificationRequested():
-return twoFactorVerificationRequested(_that.verificationCode);case _DocumentSaved():
-return documentSaved(_that.documentType,_that.documentNumber,_that.documentUrl);case _Submitted():
-return submitted();case _:
+return navigateToStep(_that.step);case _FirstNameChanged():
+return firstNameChanged(_that.value);case _LastNameChanged():
+return lastNameChanged(_that.value);case _AgeChanged():
+return ageChanged(_that.value);case _GenderChanged():
+return genderChanged(_that.value);case _CountryChanged():
+return countryChanged(_that.value);case _BasicInfoSaved():
+return basicInfoSaved();case _TwoFactorSetupCompleted():
+return twoFactorSetupCompleted(_that.secretKey,_that.qrData);case _OtpDigitChanged():
+return otpDigitChanged(_that.index,_that.digit);case _TwoFactorVerificationRequested():
+return twoFactorVerificationRequested();case _DocTypeChanged():
+return docTypeChanged(_that.value);case _DocNumberChanged():
+return docNumberChanged(_that.value);case _DocumentSaved():
+return documentSaved();case _Submitted():
+return submitted();case _StartTier2():
+return startTier2();case _SkipTier2():
+return skipTier2();case _SelfieCaptureDone():
+return selfieCaptureDone(_that.selfieUrl);case _LocationCaptured():
+return locationCaptured(_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected);case _ProofOfAddressDocTypeChanged():
+return proofOfAddressDocTypeChanged(_that.value);case _ProofOfAddressUploaded():
+return proofOfAddressUploaded(_that.documentUrl);case _Tier2Submitted():
+return tier2Submitted();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,18 +275,33 @@ return submitted();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadExistingProgress,TResult? Function()?  nextStep,TResult? Function()?  previousStep,TResult? Function( KycSteps step)?  navigateToStep,TResult? Function( String firstName,  String lastName,  String gender,  String age,  String country)?  basicInfoSaved,TResult? Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult? Function( String verificationCode)?  twoFactorVerificationRequested,TResult? Function( String documentType,  String documentNumber,  String documentUrl)?  documentSaved,TResult? Function()?  submitted,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadExistingProgress,TResult? Function()?  nextStep,TResult? Function()?  previousStep,TResult? Function( KycSteps step)?  navigateToStep,TResult? Function( String value)?  firstNameChanged,TResult? Function( String value)?  lastNameChanged,TResult? Function( String value)?  ageChanged,TResult? Function( String value)?  genderChanged,TResult? Function( String value)?  countryChanged,TResult? Function()?  basicInfoSaved,TResult? Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult? Function( int index,  String digit)?  otpDigitChanged,TResult? Function()?  twoFactorVerificationRequested,TResult? Function( String value)?  docTypeChanged,TResult? Function( String value)?  docNumberChanged,TResult? Function()?  documentSaved,TResult? Function()?  submitted,TResult? Function()?  startTier2,TResult? Function()?  skipTier2,TResult? Function( String selfieUrl)?  selfieCaptureDone,TResult? Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)?  locationCaptured,TResult? Function( String value)?  proofOfAddressDocTypeChanged,TResult? Function( String documentUrl)?  proofOfAddressUploaded,TResult? Function()?  tier2Submitted,}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress();case _NextStep() when nextStep != null:
 return nextStep();case _PreviousStep() when previousStep != null:
 return previousStep();case _NavigateToStep() when navigateToStep != null:
-return navigateToStep(_that.step);case _BasicInfoSaved() when basicInfoSaved != null:
-return basicInfoSaved(_that.firstName,_that.lastName,_that.gender,_that.age,_that.country);case _TwoFactorSetupCompleted() when twoFactorSetupCompleted != null:
-return twoFactorSetupCompleted(_that.secretKey,_that.qrData);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
-return twoFactorVerificationRequested(_that.verificationCode);case _DocumentSaved() when documentSaved != null:
-return documentSaved(_that.documentType,_that.documentNumber,_that.documentUrl);case _Submitted() when submitted != null:
-return submitted();case _:
+return navigateToStep(_that.step);case _FirstNameChanged() when firstNameChanged != null:
+return firstNameChanged(_that.value);case _LastNameChanged() when lastNameChanged != null:
+return lastNameChanged(_that.value);case _AgeChanged() when ageChanged != null:
+return ageChanged(_that.value);case _GenderChanged() when genderChanged != null:
+return genderChanged(_that.value);case _CountryChanged() when countryChanged != null:
+return countryChanged(_that.value);case _BasicInfoSaved() when basicInfoSaved != null:
+return basicInfoSaved();case _TwoFactorSetupCompleted() when twoFactorSetupCompleted != null:
+return twoFactorSetupCompleted(_that.secretKey,_that.qrData);case _OtpDigitChanged() when otpDigitChanged != null:
+return otpDigitChanged(_that.index,_that.digit);case _TwoFactorVerificationRequested() when twoFactorVerificationRequested != null:
+return twoFactorVerificationRequested();case _DocTypeChanged() when docTypeChanged != null:
+return docTypeChanged(_that.value);case _DocNumberChanged() when docNumberChanged != null:
+return docNumberChanged(_that.value);case _DocumentSaved() when documentSaved != null:
+return documentSaved();case _Submitted() when submitted != null:
+return submitted();case _StartTier2() when startTier2 != null:
+return startTier2();case _SkipTier2() when skipTier2 != null:
+return skipTier2();case _SelfieCaptureDone() when selfieCaptureDone != null:
+return selfieCaptureDone(_that.selfieUrl);case _LocationCaptured() when locationCaptured != null:
+return locationCaptured(_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected);case _ProofOfAddressDocTypeChanged() when proofOfAddressDocTypeChanged != null:
+return proofOfAddressDocTypeChanged(_that.value);case _ProofOfAddressUploaded() when proofOfAddressUploaded != null:
+return proofOfAddressUploaded(_that.documentUrl);case _Tier2Submitted() when tier2Submitted != null:
+return tier2Submitted();case _:
   return null;
 
 }
@@ -384,47 +474,43 @@ as KycSteps,
 /// @nodoc
 
 
-class _BasicInfoSaved implements KycEvent {
-  const _BasicInfoSaved({required this.firstName, required this.lastName, required this.gender, required this.age, required this.country});
+class _FirstNameChanged implements KycEvent {
+  const _FirstNameChanged(this.value);
   
 
- final  String firstName;
- final  String lastName;
- final  String gender;
- final  String age;
- final  String country;
+ final  String value;
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$BasicInfoSavedCopyWith<_BasicInfoSaved> get copyWith => __$BasicInfoSavedCopyWithImpl<_BasicInfoSaved>(this, _$identity);
+_$FirstNameChangedCopyWith<_FirstNameChanged> get copyWith => __$FirstNameChangedCopyWithImpl<_FirstNameChanged>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BasicInfoSaved&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.age, age) || other.age == age)&&(identical(other.country, country) || other.country == country));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirstNameChanged&&(identical(other.value, value) || other.value == value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,gender,age,country);
+int get hashCode => Object.hash(runtimeType,value);
 
 @override
 String toString() {
-  return 'KycEvent.basicInfoSaved(firstName: $firstName, lastName: $lastName, gender: $gender, age: $age, country: $country)';
+  return 'KycEvent.firstNameChanged(value: $value)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$BasicInfoSavedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
-  factory _$BasicInfoSavedCopyWith(_BasicInfoSaved value, $Res Function(_BasicInfoSaved) _then) = __$BasicInfoSavedCopyWithImpl;
+abstract mixin class _$FirstNameChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$FirstNameChangedCopyWith(_FirstNameChanged value, $Res Function(_FirstNameChanged) _then) = __$FirstNameChangedCopyWithImpl;
 @useResult
 $Res call({
- String firstName, String lastName, String gender, String age, String country
+ String value
 });
 
 
@@ -432,28 +518,320 @@ $Res call({
 
 }
 /// @nodoc
-class __$BasicInfoSavedCopyWithImpl<$Res>
-    implements _$BasicInfoSavedCopyWith<$Res> {
-  __$BasicInfoSavedCopyWithImpl(this._self, this._then);
+class __$FirstNameChangedCopyWithImpl<$Res>
+    implements _$FirstNameChangedCopyWith<$Res> {
+  __$FirstNameChangedCopyWithImpl(this._self, this._then);
 
-  final _BasicInfoSaved _self;
-  final $Res Function(_BasicInfoSaved) _then;
+  final _FirstNameChanged _self;
+  final $Res Function(_FirstNameChanged) _then;
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? firstName = null,Object? lastName = null,Object? gender = null,Object? age = null,Object? country = null,}) {
-  return _then(_BasicInfoSaved(
-firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_FirstNameChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
 
 
 }
+
+/// @nodoc
+
+
+class _LastNameChanged implements KycEvent {
+  const _LastNameChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LastNameChangedCopyWith<_LastNameChanged> get copyWith => __$LastNameChangedCopyWithImpl<_LastNameChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LastNameChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.lastNameChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LastNameChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$LastNameChangedCopyWith(_LastNameChanged value, $Res Function(_LastNameChanged) _then) = __$LastNameChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$LastNameChangedCopyWithImpl<$Res>
+    implements _$LastNameChangedCopyWith<$Res> {
+  __$LastNameChangedCopyWithImpl(this._self, this._then);
+
+  final _LastNameChanged _self;
+  final $Res Function(_LastNameChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_LastNameChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _AgeChanged implements KycEvent {
+  const _AgeChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AgeChangedCopyWith<_AgeChanged> get copyWith => __$AgeChangedCopyWithImpl<_AgeChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AgeChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.ageChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AgeChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$AgeChangedCopyWith(_AgeChanged value, $Res Function(_AgeChanged) _then) = __$AgeChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$AgeChangedCopyWithImpl<$Res>
+    implements _$AgeChangedCopyWith<$Res> {
+  __$AgeChangedCopyWithImpl(this._self, this._then);
+
+  final _AgeChanged _self;
+  final $Res Function(_AgeChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_AgeChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _GenderChanged implements KycEvent {
+  const _GenderChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GenderChangedCopyWith<_GenderChanged> get copyWith => __$GenderChangedCopyWithImpl<_GenderChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenderChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.genderChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$GenderChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$GenderChangedCopyWith(_GenderChanged value, $Res Function(_GenderChanged) _then) = __$GenderChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$GenderChangedCopyWithImpl<$Res>
+    implements _$GenderChangedCopyWith<$Res> {
+  __$GenderChangedCopyWithImpl(this._self, this._then);
+
+  final _GenderChanged _self;
+  final $Res Function(_GenderChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_GenderChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _CountryChanged implements KycEvent {
+  const _CountryChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CountryChangedCopyWith<_CountryChanged> get copyWith => __$CountryChangedCopyWithImpl<_CountryChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CountryChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.countryChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CountryChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$CountryChangedCopyWith(_CountryChanged value, $Res Function(_CountryChanged) _then) = __$CountryChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$CountryChangedCopyWithImpl<$Res>
+    implements _$CountryChangedCopyWith<$Res> {
+  __$CountryChangedCopyWithImpl(this._self, this._then);
+
+  final _CountryChanged _self;
+  final $Res Function(_CountryChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_CountryChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _BasicInfoSaved implements KycEvent {
+  const _BasicInfoSaved();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BasicInfoSaved);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'KycEvent.basicInfoSaved()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
@@ -526,43 +904,44 @@ as String,
 /// @nodoc
 
 
-class _TwoFactorVerificationRequested implements KycEvent {
-  const _TwoFactorVerificationRequested({required this.verificationCode});
+class _OtpDigitChanged implements KycEvent {
+  const _OtpDigitChanged({required this.index, required this.digit});
   
 
- final  String verificationCode;
+ final  int index;
+ final  String digit;
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$TwoFactorVerificationRequestedCopyWith<_TwoFactorVerificationRequested> get copyWith => __$TwoFactorVerificationRequestedCopyWithImpl<_TwoFactorVerificationRequested>(this, _$identity);
+_$OtpDigitChangedCopyWith<_OtpDigitChanged> get copyWith => __$OtpDigitChangedCopyWithImpl<_OtpDigitChanged>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TwoFactorVerificationRequested&&(identical(other.verificationCode, verificationCode) || other.verificationCode == verificationCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OtpDigitChanged&&(identical(other.index, index) || other.index == index)&&(identical(other.digit, digit) || other.digit == digit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,verificationCode);
+int get hashCode => Object.hash(runtimeType,index,digit);
 
 @override
 String toString() {
-  return 'KycEvent.twoFactorVerificationRequested(verificationCode: $verificationCode)';
+  return 'KycEvent.otpDigitChanged(index: $index, digit: $digit)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$TwoFactorVerificationRequestedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
-  factory _$TwoFactorVerificationRequestedCopyWith(_TwoFactorVerificationRequested value, $Res Function(_TwoFactorVerificationRequested) _then) = __$TwoFactorVerificationRequestedCopyWithImpl;
+abstract mixin class _$OtpDigitChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$OtpDigitChangedCopyWith(_OtpDigitChanged value, $Res Function(_OtpDigitChanged) _then) = __$OtpDigitChangedCopyWithImpl;
 @useResult
 $Res call({
- String verificationCode
+ int index, String digit
 });
 
 
@@ -570,18 +949,183 @@ $Res call({
 
 }
 /// @nodoc
-class __$TwoFactorVerificationRequestedCopyWithImpl<$Res>
-    implements _$TwoFactorVerificationRequestedCopyWith<$Res> {
-  __$TwoFactorVerificationRequestedCopyWithImpl(this._self, this._then);
+class __$OtpDigitChangedCopyWithImpl<$Res>
+    implements _$OtpDigitChangedCopyWith<$Res> {
+  __$OtpDigitChangedCopyWithImpl(this._self, this._then);
 
-  final _TwoFactorVerificationRequested _self;
-  final $Res Function(_TwoFactorVerificationRequested) _then;
+  final _OtpDigitChanged _self;
+  final $Res Function(_OtpDigitChanged) _then;
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? verificationCode = null,}) {
-  return _then(_TwoFactorVerificationRequested(
-verificationCode: null == verificationCode ? _self.verificationCode : verificationCode // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? index = null,Object? digit = null,}) {
+  return _then(_OtpDigitChanged(
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,digit: null == digit ? _self.digit : digit // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _TwoFactorVerificationRequested implements KycEvent {
+  const _TwoFactorVerificationRequested();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TwoFactorVerificationRequested);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'KycEvent.twoFactorVerificationRequested()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _DocTypeChanged implements KycEvent {
+  const _DocTypeChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DocTypeChangedCopyWith<_DocTypeChanged> get copyWith => __$DocTypeChangedCopyWithImpl<_DocTypeChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DocTypeChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.docTypeChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DocTypeChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$DocTypeChangedCopyWith(_DocTypeChanged value, $Res Function(_DocTypeChanged) _then) = __$DocTypeChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$DocTypeChangedCopyWithImpl<$Res>
+    implements _$DocTypeChangedCopyWith<$Res> {
+  __$DocTypeChangedCopyWithImpl(this._self, this._then);
+
+  final _DocTypeChanged _self;
+  final $Res Function(_DocTypeChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_DocTypeChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _DocNumberChanged implements KycEvent {
+  const _DocNumberChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DocNumberChangedCopyWith<_DocNumberChanged> get copyWith => __$DocNumberChangedCopyWithImpl<_DocNumberChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DocNumberChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.docNumberChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DocNumberChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$DocNumberChangedCopyWith(_DocNumberChanged value, $Res Function(_DocNumberChanged) _then) = __$DocNumberChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$DocNumberChangedCopyWithImpl<$Res>
+    implements _$DocNumberChangedCopyWith<$Res> {
+  __$DocNumberChangedCopyWithImpl(this._self, this._then);
+
+  final _DocNumberChanged _self;
+  final $Res Function(_DocNumberChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_DocNumberChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -593,71 +1137,33 @@ as String,
 
 
 class _DocumentSaved implements KycEvent {
-  const _DocumentSaved({required this.documentType, required this.documentNumber, required this.documentUrl});
+  const _DocumentSaved();
   
 
- final  String documentType;
- final  String documentNumber;
- final  String documentUrl;
 
-/// Create a copy of KycEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$DocumentSavedCopyWith<_DocumentSaved> get copyWith => __$DocumentSavedCopyWithImpl<_DocumentSaved>(this, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DocumentSaved&&(identical(other.documentType, documentType) || other.documentType == documentType)&&(identical(other.documentNumber, documentNumber) || other.documentNumber == documentNumber)&&(identical(other.documentUrl, documentUrl) || other.documentUrl == documentUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DocumentSaved);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,documentType,documentNumber,documentUrl);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'KycEvent.documentSaved(documentType: $documentType, documentNumber: $documentNumber, documentUrl: $documentUrl)';
+  return 'KycEvent.documentSaved()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class _$DocumentSavedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
-  factory _$DocumentSavedCopyWith(_DocumentSaved value, $Res Function(_DocumentSaved) _then) = __$DocumentSavedCopyWithImpl;
-@useResult
-$Res call({
- String documentType, String documentNumber, String documentUrl
-});
 
 
-
-
-}
-/// @nodoc
-class __$DocumentSavedCopyWithImpl<$Res>
-    implements _$DocumentSavedCopyWith<$Res> {
-  __$DocumentSavedCopyWithImpl(this._self, this._then);
-
-  final _DocumentSaved _self;
-  final $Res Function(_DocumentSaved) _then;
-
-/// Create a copy of KycEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? documentType = null,Object? documentNumber = null,Object? documentUrl = null,}) {
-  return _then(_DocumentSaved(
-documentType: null == documentType ? _self.documentType : documentType // ignore: cast_nullable_to_non_nullable
-as String,documentNumber: null == documentNumber ? _self.documentNumber : documentNumber // ignore: cast_nullable_to_non_nullable
-as String,documentUrl: null == documentUrl ? _self.documentUrl : documentUrl // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
 
 /// @nodoc
 
@@ -692,20 +1198,381 @@ String toString() {
 
 
 /// @nodoc
+
+
+class _StartTier2 implements KycEvent {
+  const _StartTier2();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartTier2);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'KycEvent.startTier2()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _SkipTier2 implements KycEvent {
+  const _SkipTier2();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SkipTier2);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'KycEvent.skipTier2()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _SelfieCaptureDone implements KycEvent {
+  const _SelfieCaptureDone({required this.selfieUrl});
+  
+
+ final  String selfieUrl;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SelfieCaptureDoneCopyWith<_SelfieCaptureDone> get copyWith => __$SelfieCaptureDoneCopyWithImpl<_SelfieCaptureDone>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelfieCaptureDone&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,selfieUrl);
+
+@override
+String toString() {
+  return 'KycEvent.selfieCaptureDone(selfieUrl: $selfieUrl)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SelfieCaptureDoneCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$SelfieCaptureDoneCopyWith(_SelfieCaptureDone value, $Res Function(_SelfieCaptureDone) _then) = __$SelfieCaptureDoneCopyWithImpl;
+@useResult
+$Res call({
+ String selfieUrl
+});
+
+
+
+
+}
+/// @nodoc
+class __$SelfieCaptureDoneCopyWithImpl<$Res>
+    implements _$SelfieCaptureDoneCopyWith<$Res> {
+  __$SelfieCaptureDoneCopyWithImpl(this._self, this._then);
+
+  final _SelfieCaptureDone _self;
+  final $Res Function(_SelfieCaptureDone) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? selfieUrl = null,}) {
+  return _then(_SelfieCaptureDone(
+selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _LocationCaptured implements KycEvent {
+  const _LocationCaptured({required this.latitude, required this.longitude, required this.detectedCountry, required this.isVpnSuspected});
+  
+
+ final  double latitude;
+ final  double longitude;
+ final  String detectedCountry;
+ final  bool isVpnSuspected;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LocationCapturedCopyWith<_LocationCaptured> get copyWith => __$LocationCapturedCopyWithImpl<_LocationCaptured>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LocationCaptured&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,latitude,longitude,detectedCountry,isVpnSuspected);
+
+@override
+String toString() {
+  return 'KycEvent.locationCaptured(latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LocationCapturedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$LocationCapturedCopyWith(_LocationCaptured value, $Res Function(_LocationCaptured) _then) = __$LocationCapturedCopyWithImpl;
+@useResult
+$Res call({
+ double latitude, double longitude, String detectedCountry, bool isVpnSuspected
+});
+
+
+
+
+}
+/// @nodoc
+class __$LocationCapturedCopyWithImpl<$Res>
+    implements _$LocationCapturedCopyWith<$Res> {
+  __$LocationCapturedCopyWithImpl(this._self, this._then);
+
+  final _LocationCaptured _self;
+  final $Res Function(_LocationCaptured) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,}) {
+  return _then(_LocationCaptured(
+latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
+as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ProofOfAddressDocTypeChanged implements KycEvent {
+  const _ProofOfAddressDocTypeChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProofOfAddressDocTypeChangedCopyWith<_ProofOfAddressDocTypeChanged> get copyWith => __$ProofOfAddressDocTypeChangedCopyWithImpl<_ProofOfAddressDocTypeChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProofOfAddressDocTypeChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.proofOfAddressDocTypeChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ProofOfAddressDocTypeChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$ProofOfAddressDocTypeChangedCopyWith(_ProofOfAddressDocTypeChanged value, $Res Function(_ProofOfAddressDocTypeChanged) _then) = __$ProofOfAddressDocTypeChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$ProofOfAddressDocTypeChangedCopyWithImpl<$Res>
+    implements _$ProofOfAddressDocTypeChangedCopyWith<$Res> {
+  __$ProofOfAddressDocTypeChangedCopyWithImpl(this._self, this._then);
+
+  final _ProofOfAddressDocTypeChanged _self;
+  final $Res Function(_ProofOfAddressDocTypeChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_ProofOfAddressDocTypeChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ProofOfAddressUploaded implements KycEvent {
+  const _ProofOfAddressUploaded({required this.documentUrl});
+  
+
+ final  String documentUrl;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProofOfAddressUploadedCopyWith<_ProofOfAddressUploaded> get copyWith => __$ProofOfAddressUploadedCopyWithImpl<_ProofOfAddressUploaded>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProofOfAddressUploaded&&(identical(other.documentUrl, documentUrl) || other.documentUrl == documentUrl));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,documentUrl);
+
+@override
+String toString() {
+  return 'KycEvent.proofOfAddressUploaded(documentUrl: $documentUrl)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ProofOfAddressUploadedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$ProofOfAddressUploadedCopyWith(_ProofOfAddressUploaded value, $Res Function(_ProofOfAddressUploaded) _then) = __$ProofOfAddressUploadedCopyWithImpl;
+@useResult
+$Res call({
+ String documentUrl
+});
+
+
+
+
+}
+/// @nodoc
+class __$ProofOfAddressUploadedCopyWithImpl<$Res>
+    implements _$ProofOfAddressUploadedCopyWith<$Res> {
+  __$ProofOfAddressUploadedCopyWithImpl(this._self, this._then);
+
+  final _ProofOfAddressUploaded _self;
+  final $Res Function(_ProofOfAddressUploaded) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? documentUrl = null,}) {
+  return _then(_ProofOfAddressUploaded(
+documentUrl: null == documentUrl ? _self.documentUrl : documentUrl // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Tier2Submitted implements KycEvent {
+  const _Tier2Submitted();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Tier2Submitted);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'KycEvent.tier2Submitted()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$KycState {
 
-// =========================
-// FLOW CONTROL (BLOC OWNED)
-// =========================
- KycSteps get currentStep; List<KycSteps> get completedSteps;// =========================
-// DATA
-// =========================
- BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification;// =========================
-// STEP STATUSES
-// =========================
- KycStepStatus get basicInfoStatus; KycStepStatus get twoFactorSetupStatus; KycStepStatus get twoFactorVerifyStatus; KycStepStatus get documentStatus; KycStepStatus get submitStatus;// =========================
-// ERROR HANDLING
-// =========================
+// ── FLOW CONTROL ──────────────────────────────────────────────────
+ KycSteps get currentStep; List<KycSteps> get completedSteps; KycTier get activeTier;// ── TIER 1 SAVED DATA ─────────────────────────────────────────────
+ BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification;// ── TIER 1 FIELD VALUES (bloc owns — no TextControllers in UI) ────
+ String get firstName; String get lastName; String get age; String get gender; String get country; List<String> get otpDigits; String get docType; String get docNumber;// ── TIER 2 SAVED DATA ─────────────────────────────────────────────
+ Tier2Model? get tier2Data;// ── TIER 2 FIELD VALUES ───────────────────────────────────────────
+ String get selfieUrl; double get latitude; double get longitude; String get detectedCountry; bool get isVpnSuspected; String get proofOfAddressDocType; String get proofOfAddressUrl;// ── STEP STATUSES ─────────────────────────────────────────────────
+ KycStepStatus get basicInfoStatus; KycStepStatus get twoFactorSetupStatus; KycStepStatus get twoFactorVerifyStatus; KycStepStatus get documentStatus; KycStepStatus get submitStatus; KycStepStatus get selfieStatus; KycStepStatus get locationStatus; KycStepStatus get proofOfAddressStatus; KycStepStatus get tier2SubmitStatus;// ── ERROR ─────────────────────────────────────────────────────────
  String get errorMessage;
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
@@ -717,16 +1584,16 @@ $KycStateCopyWith<KycState> get copyWith => _$KycStateCopyWithImpl<KycState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.activeTier, activeTier) || other.activeTier == activeTier)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.country, country) || other.country == country)&&const DeepCollectionEquality().equals(other.otpDigits, otpDigits)&&(identical(other.docType, docType) || other.docType == docType)&&(identical(other.docNumber, docNumber) || other.docNumber == docNumber)&&(identical(other.tier2Data, tier2Data) || other.tier2Data == tier2Data)&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.selfieStatus, selfieStatus) || other.selfieStatus == selfieStatus)&&(identical(other.locationStatus, locationStatus) || other.locationStatus == locationStatus)&&(identical(other.proofOfAddressStatus, proofOfAddressStatus) || other.proofOfAddressStatus == proofOfAddressStatus)&&(identical(other.tier2SubmitStatus, tier2SubmitStatus) || other.tier2SubmitStatus == tier2SubmitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentStep,const DeepCollectionEquality().hash(completedSteps),basicInfo,twoFactorAuth,documentVerification,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,errorMessage);
+int get hashCode => Object.hashAll([runtimeType,currentStep,const DeepCollectionEquality().hash(completedSteps),activeTier,basicInfo,twoFactorAuth,documentVerification,firstName,lastName,age,gender,country,const DeepCollectionEquality().hash(otpDigits),docType,docNumber,tier2Data,selfieUrl,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,selfieStatus,locationStatus,proofOfAddressStatus,tier2SubmitStatus,errorMessage]);
 
 @override
 String toString() {
-  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, errorMessage: $errorMessage)';
+  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, activeTier: $activeTier, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, country: $country, otpDigits: $otpDigits, docType: $docType, docNumber: $docNumber, tier2Data: $tier2Data, selfieUrl: $selfieUrl, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, selfieStatus: $selfieStatus, locationStatus: $locationStatus, proofOfAddressStatus: $proofOfAddressStatus, tier2SubmitStatus: $tier2SubmitStatus, errorMessage: $errorMessage)';
 }
 
 
@@ -737,11 +1604,11 @@ abstract mixin class $KycStateCopyWith<$Res>  {
   factory $KycStateCopyWith(KycState value, $Res Function(KycState) _then) = _$KycStateCopyWithImpl;
 @useResult
 $Res call({
- KycSteps currentStep, List<KycSteps> completedSteps, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, String errorMessage
+ KycSteps currentStep, List<KycSteps> completedSteps, KycTier activeTier, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, String firstName, String lastName, String age, String gender, String country, List<String> otpDigits, String docType, String docNumber, Tier2Model? tier2Data, String selfieUrl, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, KycStepStatus selfieStatus, KycStepStatus locationStatus, KycStepStatus proofOfAddressStatus, KycStepStatus tier2SubmitStatus, String errorMessage
 });
 
 
-$BasicInfoModelCopyWith<$Res>? get basicInfo;$TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;$DocumentVerificationModelCopyWith<$Res>? get documentVerification;
+$BasicInfoModelCopyWith<$Res>? get basicInfo;$TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;$DocumentVerificationModelCopyWith<$Res>? get documentVerification;$Tier2ModelCopyWith<$Res>? get tier2Data;
 
 }
 /// @nodoc
@@ -754,18 +1621,39 @@ class _$KycStateCopyWithImpl<$Res>
 
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currentStep = null,Object? completedSteps = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currentStep = null,Object? completedSteps = null,Object? activeTier = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? firstName = null,Object? lastName = null,Object? age = null,Object? gender = null,Object? country = null,Object? otpDigits = null,Object? docType = null,Object? docNumber = null,Object? tier2Data = freezed,Object? selfieUrl = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? selfieStatus = null,Object? locationStatus = null,Object? proofOfAddressStatus = null,Object? tier2SubmitStatus = null,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
 currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
-as List<KycSteps>,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
+as List<KycSteps>,activeTier: null == activeTier ? _self.activeTier : activeTier // ignore: cast_nullable_to_non_nullable
+as KycTier,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
-as DocumentVerificationModel?,basicInfoStatus: null == basicInfoStatus ? _self.basicInfoStatus : basicInfoStatus // ignore: cast_nullable_to_non_nullable
+as DocumentVerificationModel?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
+as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as String,otpDigits: null == otpDigits ? _self.otpDigits : otpDigits // ignore: cast_nullable_to_non_nullable
+as List<String>,docType: null == docType ? _self.docType : docType // ignore: cast_nullable_to_non_nullable
+as String,docNumber: null == docNumber ? _self.docNumber : docNumber // ignore: cast_nullable_to_non_nullable
+as String,tier2Data: freezed == tier2Data ? _self.tier2Data : tier2Data // ignore: cast_nullable_to_non_nullable
+as Tier2Model?,selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
+as String,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
+as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
+as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,basicInfoStatus: null == basicInfoStatus ? _self.basicInfoStatus : basicInfoStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorSetupStatus: null == twoFactorSetupStatus ? _self.twoFactorSetupStatus : twoFactorSetupStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorVerifyStatus: null == twoFactorVerifyStatus ? _self.twoFactorVerifyStatus : twoFactorVerifyStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,documentStatus: null == documentStatus ? _self.documentStatus : documentStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,submitStatus: null == submitStatus ? _self.submitStatus : submitStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,selfieStatus: null == selfieStatus ? _self.selfieStatus : selfieStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,locationStatus: null == locationStatus ? _self.locationStatus : locationStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,proofOfAddressStatus: null == proofOfAddressStatus ? _self.proofOfAddressStatus : proofOfAddressStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,tier2SubmitStatus: null == tier2SubmitStatus ? _self.tier2SubmitStatus : tier2SubmitStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -805,6 +1693,18 @@ $DocumentVerificationModelCopyWith<$Res>? get documentVerification {
 
   return $DocumentVerificationModelCopyWith<$Res>(_self.documentVerification!, (value) {
     return _then(_self.copyWith(documentVerification: value));
+  });
+}/// Create a copy of KycState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$Tier2ModelCopyWith<$Res>? get tier2Data {
+    if (_self.tier2Data == null) {
+    return null;
+  }
+
+  return $Tier2ModelCopyWith<$Res>(_self.tier2Data!, (value) {
+    return _then(_self.copyWith(tier2Data: value));
   });
 }
 }
@@ -888,10 +1788,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycTier activeTier,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  String firstName,  String lastName,  String age,  String gender,  String country,  List<String> otpDigits,  String docType,  String docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _KycState() when $default != null:
-return $default(_that.currentStep,_that.completedSteps,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.errorMessage);case _:
+return $default(_that.currentStep,_that.completedSteps,_that.activeTier,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -909,10 +1809,10 @@ return $default(_that.currentStep,_that.completedSteps,_that.basicInfo,_that.two
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  String errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycTier activeTier,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  String firstName,  String lastName,  String age,  String gender,  String country,  List<String> otpDigits,  String docType,  String docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _KycState():
-return $default(_that.currentStep,_that.completedSteps,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.errorMessage);case _:
+return $default(_that.currentStep,_that.completedSteps,_that.activeTier,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -929,10 +1829,10 @@ return $default(_that.currentStep,_that.completedSteps,_that.basicInfo,_that.two
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( KycSteps currentStep,  List<KycSteps> completedSteps,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  String errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycTier activeTier,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  String firstName,  String lastName,  String age,  String gender,  String country,  List<String> otpDigits,  String docType,  String docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _KycState() when $default != null:
-return $default(_that.currentStep,_that.completedSteps,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.errorMessage);case _:
+return $default(_that.currentStep,_that.completedSteps,_that.activeTier,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
   return null;
 
 }
@@ -944,12 +1844,10 @@ return $default(_that.currentStep,_that.completedSteps,_that.basicInfo,_that.two
 
 
 class _KycState extends KycState {
-  const _KycState({this.currentStep = KycSteps.intro, final  List<KycSteps> completedSteps = const [], this.basicInfo, this.twoFactorAuth, this.documentVerification, this.basicInfoStatus = KycStepStatus.initial, this.twoFactorSetupStatus = KycStepStatus.initial, this.twoFactorVerifyStatus = KycStepStatus.initial, this.documentStatus = KycStepStatus.initial, this.submitStatus = KycStepStatus.initial, this.errorMessage = ''}): _completedSteps = completedSteps,super._();
+  const _KycState({this.currentStep = KycSteps.intro, final  List<KycSteps> completedSteps = const [], this.activeTier = KycTier.tier1, this.basicInfo, this.twoFactorAuth, this.documentVerification, this.firstName = '', this.lastName = '', this.age = '', this.gender = '', this.country = '', final  List<String> otpDigits = const ['', '', '', '', '', ''], this.docType = 'NIN', this.docNumber = '', this.tier2Data, this.selfieUrl = '', this.latitude = 0.0, this.longitude = 0.0, this.detectedCountry = '', this.isVpnSuspected = false, this.proofOfAddressDocType = 'Utility Bill', this.proofOfAddressUrl = '', this.basicInfoStatus = KycStepStatus.initial, this.twoFactorSetupStatus = KycStepStatus.initial, this.twoFactorVerifyStatus = KycStepStatus.initial, this.documentStatus = KycStepStatus.initial, this.submitStatus = KycStepStatus.initial, this.selfieStatus = KycStepStatus.initial, this.locationStatus = KycStepStatus.initial, this.proofOfAddressStatus = KycStepStatus.initial, this.tier2SubmitStatus = KycStepStatus.initial, this.errorMessage = ''}): _completedSteps = completedSteps,_otpDigits = otpDigits,super._();
   
 
-// =========================
-// FLOW CONTROL (BLOC OWNED)
-// =========================
+// ── FLOW CONTROL ──────────────────────────────────────────────────
 @override@JsonKey() final  KycSteps currentStep;
  final  List<KycSteps> _completedSteps;
 @override@JsonKey() List<KycSteps> get completedSteps {
@@ -958,23 +1856,47 @@ class _KycState extends KycState {
   return EqualUnmodifiableListView(_completedSteps);
 }
 
-// =========================
-// DATA
-// =========================
+@override@JsonKey() final  KycTier activeTier;
+// ── TIER 1 SAVED DATA ─────────────────────────────────────────────
 @override final  BasicInfoModel? basicInfo;
 @override final  TwoFactorAuthModel? twoFactorAuth;
 @override final  DocumentVerificationModel? documentVerification;
-// =========================
-// STEP STATUSES
-// =========================
+// ── TIER 1 FIELD VALUES (bloc owns — no TextControllers in UI) ────
+@override@JsonKey() final  String firstName;
+@override@JsonKey() final  String lastName;
+@override@JsonKey() final  String age;
+@override@JsonKey() final  String gender;
+@override@JsonKey() final  String country;
+ final  List<String> _otpDigits;
+@override@JsonKey() List<String> get otpDigits {
+  if (_otpDigits is EqualUnmodifiableListView) return _otpDigits;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_otpDigits);
+}
+
+@override@JsonKey() final  String docType;
+@override@JsonKey() final  String docNumber;
+// ── TIER 2 SAVED DATA ─────────────────────────────────────────────
+@override final  Tier2Model? tier2Data;
+// ── TIER 2 FIELD VALUES ───────────────────────────────────────────
+@override@JsonKey() final  String selfieUrl;
+@override@JsonKey() final  double latitude;
+@override@JsonKey() final  double longitude;
+@override@JsonKey() final  String detectedCountry;
+@override@JsonKey() final  bool isVpnSuspected;
+@override@JsonKey() final  String proofOfAddressDocType;
+@override@JsonKey() final  String proofOfAddressUrl;
+// ── STEP STATUSES ─────────────────────────────────────────────────
 @override@JsonKey() final  KycStepStatus basicInfoStatus;
 @override@JsonKey() final  KycStepStatus twoFactorSetupStatus;
 @override@JsonKey() final  KycStepStatus twoFactorVerifyStatus;
 @override@JsonKey() final  KycStepStatus documentStatus;
 @override@JsonKey() final  KycStepStatus submitStatus;
-// =========================
-// ERROR HANDLING
-// =========================
+@override@JsonKey() final  KycStepStatus selfieStatus;
+@override@JsonKey() final  KycStepStatus locationStatus;
+@override@JsonKey() final  KycStepStatus proofOfAddressStatus;
+@override@JsonKey() final  KycStepStatus tier2SubmitStatus;
+// ── ERROR ─────────────────────────────────────────────────────────
 @override@JsonKey() final  String errorMessage;
 
 /// Create a copy of KycState
@@ -987,16 +1909,16 @@ _$KycStateCopyWith<_KycState> get copyWith => __$KycStateCopyWithImpl<_KycState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.activeTier, activeTier) || other.activeTier == activeTier)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.country, country) || other.country == country)&&const DeepCollectionEquality().equals(other._otpDigits, _otpDigits)&&(identical(other.docType, docType) || other.docType == docType)&&(identical(other.docNumber, docNumber) || other.docNumber == docNumber)&&(identical(other.tier2Data, tier2Data) || other.tier2Data == tier2Data)&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.selfieStatus, selfieStatus) || other.selfieStatus == selfieStatus)&&(identical(other.locationStatus, locationStatus) || other.locationStatus == locationStatus)&&(identical(other.proofOfAddressStatus, proofOfAddressStatus) || other.proofOfAddressStatus == proofOfAddressStatus)&&(identical(other.tier2SubmitStatus, tier2SubmitStatus) || other.tier2SubmitStatus == tier2SubmitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentStep,const DeepCollectionEquality().hash(_completedSteps),basicInfo,twoFactorAuth,documentVerification,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,errorMessage);
+int get hashCode => Object.hashAll([runtimeType,currentStep,const DeepCollectionEquality().hash(_completedSteps),activeTier,basicInfo,twoFactorAuth,documentVerification,firstName,lastName,age,gender,country,const DeepCollectionEquality().hash(_otpDigits),docType,docNumber,tier2Data,selfieUrl,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,selfieStatus,locationStatus,proofOfAddressStatus,tier2SubmitStatus,errorMessage]);
 
 @override
 String toString() {
-  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, errorMessage: $errorMessage)';
+  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, activeTier: $activeTier, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, country: $country, otpDigits: $otpDigits, docType: $docType, docNumber: $docNumber, tier2Data: $tier2Data, selfieUrl: $selfieUrl, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, selfieStatus: $selfieStatus, locationStatus: $locationStatus, proofOfAddressStatus: $proofOfAddressStatus, tier2SubmitStatus: $tier2SubmitStatus, errorMessage: $errorMessage)';
 }
 
 
@@ -1007,11 +1929,11 @@ abstract mixin class _$KycStateCopyWith<$Res> implements $KycStateCopyWith<$Res>
   factory _$KycStateCopyWith(_KycState value, $Res Function(_KycState) _then) = __$KycStateCopyWithImpl;
 @override @useResult
 $Res call({
- KycSteps currentStep, List<KycSteps> completedSteps, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, String errorMessage
+ KycSteps currentStep, List<KycSteps> completedSteps, KycTier activeTier, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, String firstName, String lastName, String age, String gender, String country, List<String> otpDigits, String docType, String docNumber, Tier2Model? tier2Data, String selfieUrl, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, KycStepStatus selfieStatus, KycStepStatus locationStatus, KycStepStatus proofOfAddressStatus, KycStepStatus tier2SubmitStatus, String errorMessage
 });
 
 
-@override $BasicInfoModelCopyWith<$Res>? get basicInfo;@override $TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;@override $DocumentVerificationModelCopyWith<$Res>? get documentVerification;
+@override $BasicInfoModelCopyWith<$Res>? get basicInfo;@override $TwoFactorAuthModelCopyWith<$Res>? get twoFactorAuth;@override $DocumentVerificationModelCopyWith<$Res>? get documentVerification;@override $Tier2ModelCopyWith<$Res>? get tier2Data;
 
 }
 /// @nodoc
@@ -1024,18 +1946,39 @@ class __$KycStateCopyWithImpl<$Res>
 
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currentStep = null,Object? completedSteps = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? currentStep = null,Object? completedSteps = null,Object? activeTier = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? firstName = null,Object? lastName = null,Object? age = null,Object? gender = null,Object? country = null,Object? otpDigits = null,Object? docType = null,Object? docNumber = null,Object? tier2Data = freezed,Object? selfieUrl = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? selfieStatus = null,Object? locationStatus = null,Object? proofOfAddressStatus = null,Object? tier2SubmitStatus = null,Object? errorMessage = null,}) {
   return _then(_KycState(
 currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
-as List<KycSteps>,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
+as List<KycSteps>,activeTier: null == activeTier ? _self.activeTier : activeTier // ignore: cast_nullable_to_non_nullable
+as KycTier,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ignore: cast_nullable_to_non_nullable
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
-as DocumentVerificationModel?,basicInfoStatus: null == basicInfoStatus ? _self.basicInfoStatus : basicInfoStatus // ignore: cast_nullable_to_non_nullable
+as DocumentVerificationModel?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
+as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as String,otpDigits: null == otpDigits ? _self._otpDigits : otpDigits // ignore: cast_nullable_to_non_nullable
+as List<String>,docType: null == docType ? _self.docType : docType // ignore: cast_nullable_to_non_nullable
+as String,docNumber: null == docNumber ? _self.docNumber : docNumber // ignore: cast_nullable_to_non_nullable
+as String,tier2Data: freezed == tier2Data ? _self.tier2Data : tier2Data // ignore: cast_nullable_to_non_nullable
+as Tier2Model?,selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
+as String,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
+as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
+as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,basicInfoStatus: null == basicInfoStatus ? _self.basicInfoStatus : basicInfoStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorSetupStatus: null == twoFactorSetupStatus ? _self.twoFactorSetupStatus : twoFactorSetupStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorVerifyStatus: null == twoFactorVerifyStatus ? _self.twoFactorVerifyStatus : twoFactorVerifyStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,documentStatus: null == documentStatus ? _self.documentStatus : documentStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,submitStatus: null == submitStatus ? _self.submitStatus : submitStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,selfieStatus: null == selfieStatus ? _self.selfieStatus : selfieStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,locationStatus: null == locationStatus ? _self.locationStatus : locationStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,proofOfAddressStatus: null == proofOfAddressStatus ? _self.proofOfAddressStatus : proofOfAddressStatus // ignore: cast_nullable_to_non_nullable
+as KycStepStatus,tier2SubmitStatus: null == tier2SubmitStatus ? _self.tier2SubmitStatus : tier2SubmitStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -1076,6 +2019,18 @@ $DocumentVerificationModelCopyWith<$Res>? get documentVerification {
 
   return $DocumentVerificationModelCopyWith<$Res>(_self.documentVerification!, (value) {
     return _then(_self.copyWith(documentVerification: value));
+  });
+}/// Create a copy of KycState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$Tier2ModelCopyWith<$Res>? get tier2Data {
+    if (_self.tier2Data == null) {
+    return null;
+  }
+
+  return $Tier2ModelCopyWith<$Res>(_self.tier2Data!, (value) {
+    return _then(_self.copyWith(tier2Data: value));
   });
 }
 }

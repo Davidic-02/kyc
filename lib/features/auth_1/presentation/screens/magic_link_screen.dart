@@ -19,7 +19,7 @@ class MagicLinkScreen extends HookWidget {
     final emailFocusNode = useFocusNode();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       body: BlocListener<MagicLinkBloc, MagicLinkState>(
         listenWhen: (prev, curr) =>
             prev.isAuthenticated != curr.isAuthenticated ||
@@ -52,7 +52,7 @@ class MagicLinkScreen extends HookWidget {
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height * .18),
 
@@ -67,13 +67,6 @@ class MagicLinkScreen extends HookWidget {
 
                     const SizedBox(height: AppSizes.sm),
 
-                    Text(
-                      'Enter your email and we\'ll send you a secure magic link to continue.',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-
                     const SizedBox(height: AppSizes.xl),
 
                     CustomTextFormField(
@@ -81,7 +74,7 @@ class MagicLinkScreen extends HookWidget {
                       hintText: 'Email Address',
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
-                      fillColor: AppColors.surface,
+                      fillColor: AppColors.background,
                       onChanged: (value) {
                         context.read<MagicLinkBloc>().add(
                           MagicLinkEvent.emailChanged(value),
@@ -101,7 +94,6 @@ class MagicLinkScreen extends HookWidget {
 
                     const SizedBox(height: AppSizes.xl),
 
-                    // ✅ Show inline error under button too
                     if (state.errorMessage.isNotEmpty &&
                         state.sendStatus == MagicLinkStatus.failure) ...[
                       Container(
@@ -137,7 +129,7 @@ class MagicLinkScreen extends HookWidget {
 
                     if (!state.linkSent)
                       Button(
-                        'Send Magic Link',
+                        'Send Link',
                         busy: state.sendStatus == MagicLinkStatus.loading,
                         onPressed:
                             state.sendStatus == MagicLinkStatus.loading ||
@@ -198,7 +190,7 @@ class MagicLinkScreen extends HookWidget {
                       ),
                     ],
 
-                    SizedBox(height: MediaQuery.of(context).size.height * .25),
+                    const SizedBox(height: AppSizes.lg),
 
                     Center(
                       child: Text(

@@ -79,13 +79,62 @@ abstract class DocumentVerificationModel with _$DocumentVerificationModel {
 // =========================
 
 @freezed
+abstract class Tier2Model with _$Tier2Model {
+  const factory Tier2Model({
+    // Step 4 — Selfie
+    required String selfieUrl,
+    @Default(false) bool selfieReviewed, // set to true by admin/backend
+    @Default(false) bool selfieApproved,
+
+    // Step 5 — Location
+    required double latitude,
+    required double longitude,
+    required String detectedCountry,
+    @Default(false) bool isVpnSuspected,
+
+    // Step 6 — Proof of address
+    required String proofOfAddressDocType,
+    required String proofOfAddressUrl,
+    @Default(false) bool proofReviewed,
+    @Default(false) bool proofApproved,
+
+    // Overall
+    @Default('pending_review') String status,
+
+    // status values:
+    //   'pending_review'   — submitted, awaiting manual check
+    //   'approved'         — all checks passed
+    //   'rejected'         — failed verification
+    //   'needs_resubmit'   — one or more docs need resubmission
+    DateTime? submittedAt,
+    DateTime? reviewedAt,
+
+    // Future: add Onfido applicantId / AWS jobId here
+    // String? onfidoApplicantId,
+    // String? rekognitionJobId,
+  }) = _Tier2Model;
+
+  factory Tier2Model.fromJson(Map<String, dynamic> json) =>
+      _$Tier2ModelFromJson(json);
+}
+
+// =========================
+// UPDATED KYC PROGRESS MODEL
+// Evolves Firestore from flat → tiered
+// =========================
+
+@freezed
 abstract class KycProgressModel with _$KycProgressModel {
   const factory KycProgressModel({
     required String uid,
 
+    // Tier 1
     BasicInfoModel? basicInfo,
     TwoFactorAuthModel? twoFactorAuth,
     DocumentVerificationModel? documentVerification,
+
+    // Tier 2
+    Tier2Model? tier2,
 
     @JsonKey(fromJson: _stepsFromJson, toJson: _stepsToJson)
     @Default([])
@@ -95,10 +144,13 @@ abstract class KycProgressModel with _$KycProgressModel {
     @Default(KycSteps.intro)
     KycSteps currentStep,
 
+    // 'in_progress' | 'tier1_submitted' | 'tier1_verified'
+    // | 'tier2_pending_review' | 'tier2_approved' | 'tier2_rejected'
     @Default('in_progress') String status,
 
     DateTime? createdAt,
-    DateTime? completedAt,
+    DateTime? tier1CompletedAt,
+    DateTime? tier2SubmittedAt,
   }) = _KycProgressModel;
 
   factory KycProgressModel.fromJson(Map<String, dynamic> json) =>

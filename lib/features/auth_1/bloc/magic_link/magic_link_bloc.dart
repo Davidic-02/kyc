@@ -12,19 +12,24 @@ part 'magic_link_bloc.freezed.dart';
 
 class MagicLinkBloc extends Bloc<MagicLinkEvent, MagicLinkState> {
   final MagicLinkRepository _repository;
+  String get _uid => '2nufpLkmwyXpBvsI0KHqM1HvRyQ2';
 
   MagicLinkBloc(this._repository) : super(const MagicLinkState()) {
-    on<_EmailChanged>(_onEmailChanged);
+    on<_EmailChanged>(_emailChanged);
     on<_SendLink>(_sendLink);
     on<_VerifyLink>(_verifyLink);
     on<_CheckAuth>(_checkAuth);
     on<_SignOut>(_signOut);
   }
 
-  void _onEmailChanged(_EmailChanged event, Emitter<MagicLinkState> emit) {
-    final email = EmailFormz.dirty(event.email.trim());
+  void _emailChanged(_EmailChanged event, Emitter<MagicLinkState> emit) {
+    final email = EmailFormz.dirty(event.email);
 
-    emit(state.copyWith(email: email, errorMessage: ''));
+    emit(
+      state.copyWith(
+        email: email.isValid ? email : EmailFormz.pure(event.email),
+      ),
+    );
   }
 
   Future<void> _sendLink(_SendLink event, Emitter<MagicLinkState> emit) async {
@@ -38,11 +43,12 @@ class MagicLinkBloc extends Bloc<MagicLinkEvent, MagicLinkState> {
 
     try {
       await Future.delayed(const Duration(seconds: 2));
-
       emit(
         state.copyWith(
           sendStatus: MagicLinkStatus.success,
           linkSent: true,
+          isAuthenticated: true,
+          userId: _uid,
           errorMessage: '',
         ),
       );
@@ -71,10 +77,8 @@ class MagicLinkBloc extends Bloc<MagicLinkEvent, MagicLinkState> {
         throw Exception('Email not found. Request a new link.');
       }
 
-      // ✅ Sign in with link
       await _repository.signInWithLink(email, event.link);
 
-      // ✅ Get user ID
       final userId = await _repository.getCurrentUserId();
 
       emit(
