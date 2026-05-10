@@ -15,7 +15,6 @@ class KycIntroScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Load saved progress once when screen mounts
     useEffect(() {
       context.read<KycBloc>().add(const KycEvent.loadExistingProgress());
       return null;
@@ -25,6 +24,7 @@ class KycIntroScreen extends HookWidget {
       listenWhen: (prev, curr) => prev.currentStep != curr.currentStep,
       listener: (context, state) {
         switch (state.currentStep) {
+          // ── Tier 1 ─────────────────────────────────────────────────
           case KycSteps.basicInfo:
             context.goNamed('kyc_step1');
           case KycSteps.twoFactorSetup:
@@ -34,8 +34,11 @@ class KycIntroScreen extends HookWidget {
           case KycSteps.documents:
             context.goNamed('kyc_step3');
           case KycSteps.completed:
-            context.goNamed('kyc_completion');
-          // Tier 2
+            context.goNamed('kyc_decision');
+
+          // ── Tier 2 ─────────────────────────────────────────────────
+          case KycSteps.tier2Intro:
+            context.goNamed('kyc_tier2_intro');
           case KycSteps.selfieCapture:
             context.goNamed('kyc_selfie');
           case KycSteps.locationVerify:
@@ -44,8 +47,10 @@ class KycIntroScreen extends HookWidget {
             context.goNamed('kyc_proof_of_address');
           case KycSteps.tier2Completed:
             context.goNamed('kyc_tier2_completion');
+
+          // ── Stay here ───────────────────────────────────────────────
           case KycSteps.intro:
-            break;
+            break; // already on this screen — do nothing
         }
       },
       child: Scaffold(
@@ -61,7 +66,6 @@ class KycIntroScreen extends HookWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ── Animation ──────────────────────────────────────
                     Center(
                       child: SizedBox(
                         height: 180,
@@ -73,10 +77,10 @@ class KycIntroScreen extends HookWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 82),
 
                     Text(
-                      "Let's get your\naccount set up",
+                      "Let's get your account set up",
                       style: Theme.of(context).textTheme.headlineMedium
                           ?.copyWith(
                             color: AppColors.textPrimary,
@@ -93,7 +97,6 @@ class KycIntroScreen extends HookWidget {
 
                     const SizedBox(height: 32),
 
-                    // ── Tier 1 label ───────────────────────────────────
                     _TierLabel(
                       label: 'Tier 1 — Identity Verification',
                       isComplete: isTier1Done,
@@ -130,7 +133,6 @@ class KycIntroScreen extends HookWidget {
 
                     const SizedBox(height: 28),
 
-                    // ── Tier 2 label ───────────────────────────────────
                     _TierLabel(
                       label: 'Tier 2 — Enhanced Verification (optional)',
                       isComplete: state.isTier2Complete,
@@ -138,41 +140,8 @@ class KycIntroScreen extends HookWidget {
                     ),
                     const SizedBox(height: 12),
 
-                    _StepIndicator(
-                      number: 4,
-                      title: 'Selfie Capture',
-                      description: 'Take a live photo for identity match',
-                      isCompleted: done.contains(KycSteps.selfieCapture),
-                      isActive:
-                          isTier1Done && !done.contains(KycSteps.selfieCapture),
-                      isLocked: !isTier1Done,
-                    ),
-                    const SizedBox(height: 12),
-                    _StepIndicator(
-                      number: 5,
-                      title: 'Location Verification',
-                      description: 'Confirm your current location',
-                      isCompleted: done.contains(KycSteps.locationVerify),
-                      isActive:
-                          done.contains(KycSteps.selfieCapture) &&
-                          !done.contains(KycSteps.locationVerify),
-                      isLocked: !isTier1Done,
-                    ),
-                    const SizedBox(height: 12),
-                    _StepIndicator(
-                      number: 6,
-                      title: 'Proof of Address',
-                      description: 'Utility bill or bank statement',
-                      isCompleted: done.contains(KycSteps.proofOfAddress),
-                      isActive:
-                          done.contains(KycSteps.locationVerify) &&
-                          !done.contains(KycSteps.proofOfAddress),
-                      isLocked: !isTier1Done,
-                    ),
-
                     const SizedBox(height: 40),
 
-                    // ── CTA button — smart label based on progress ──────
                     Button(
                       _buttonLabel(state),
                       onPressed: () {
@@ -190,7 +159,6 @@ class KycIntroScreen extends HookWidget {
 
                     const SizedBox(height: 16),
 
-                    // Skip — only shown if Tier 1 not yet done
                     if (!isTier1Done)
                       Center(
                         child: GestureDetector(
@@ -202,7 +170,6 @@ class KycIntroScreen extends HookWidget {
                         ),
                       ),
 
-                    // Skip Tier 2 — shown if Tier 1 done but Tier 2 not started
                     if (isTier1Done && !state.isTier2Complete)
                       Center(
                         child: GestureDetector(
@@ -235,7 +202,7 @@ class KycIntroScreen extends HookWidget {
   }
 }
 
-// ─── Tier label banner ────────────────────────────────────────────────────────
+// ─── Tier label ───────────────────────────────────────────────────────────────
 class _TierLabel extends StatelessWidget {
   final String label;
   final bool isComplete;
@@ -319,7 +286,11 @@ class _StepIndicator extends StatelessWidget {
             ),
             child: Center(
               child: isLocked
-                  ? const Icon(Icons.lock, color: Colors.white, size: 16)
+                  ? const Icon(
+                      Icons.lock,
+                      color: AppColors.textSecondary,
+                      size: 16,
+                    )
                   : isCompleted
                   ? const Icon(Icons.check, color: Colors.white, size: 20)
                   : Text(

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:kyc/core/constants/app_colors.dart';
 import 'package:kyc/core/constants/app_sizes.dart';
@@ -16,6 +17,16 @@ import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 class KycSelfieScreen extends HookWidget {
   const KycSelfieScreen({super.key});
 
+  Future<bool> _requestCameraPermission() async {
+    var status = await Permission.camera.status;
+    if (status.isDenied) status = await Permission.camera.request();
+    if (status.isPermanentlyDenied) {
+      await openAppSettings();
+      return false;
+    }
+    return status.isGranted;
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = useState<CameraController?>(null);
@@ -23,12 +34,17 @@ class KycSelfieScreen extends HookWidget {
     final isCameraReady = useState(false);
     final isInitializing = useState(true);
 
-    // Init front camera
     useEffect(() {
-      _initCamera(controller, isCameraReady, isInitializing);
-      return () {
-        controller.value?.dispose();
-      };
+      Future.microtask(() async {
+        final granted = await _requestCameraPermission();
+        if (!granted) {
+          isInitializing.value = false;
+          isCameraReady.value = false;
+          return;
+        }
+        await _initCamera(controller, isCameraReady, isInitializing);
+      });
+      return () => controller.value?.dispose();
     }, const []);
 
     return BlocListener<KycBloc, KycState>(
@@ -53,50 +69,54 @@ class KycSelfieScreen extends HookWidget {
               return Column(
                 children: [
                   // ── Header ───────────────────────────────────────────
-                  Padding(
-                    padding: const EdgeInsets.all(AppSizes.radiusL),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () => context.read<KycBloc>().add(
-                                const KycEvent.previousStep(),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_back,
-                                color: AppColors.textPrimary,
-                              ),
+                  // ── Header ─────────────────────────────────────────
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // App name (same pattern as Location screen)
+                      Text(
+                        'Stocks', // <- change this to your REAL app name if needed
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.textPrimary,
                             ),
-                            const SizedBox(width: 12),
-                            Text(
-                              'Selfie Capture',
-                              style: Theme.of(context).textTheme.headlineSmall
-                                  ?.copyWith(color: AppColors.textPrimary),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: const LinearProgressIndicator(
-                            value: 0.6,
-                            minHeight: 4,
-                            backgroundColor: AppColors.surface,
-                            color: AppColors.primary,
+                      ),
+
+                      const SizedBox(height: 4),
+
+                      // Trust line (same pattern as your location screen)
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.lock_outline,
+                            size: 11,
+                            color: AppColors.textSecondary,
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          capturedImagePath.value == null
-                              ? 'Position your face in the frame and take a clear selfie'
-                              : 'Looking good! Confirm or retake.',
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: AppColors.textSecondary),
-                        ),
-                      ],
-                    ),
+                          SizedBox(width: 4),
+                          Text(
+                            'Secure identity verification',
+                            style: TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      // Step title (your actual screen purpose)
+                      Text(
+                        'Selfie Capture',
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textPrimary,
+                            ),
+                      ),
+                    ],
                   ),
 
                   // ── Camera / Preview ─────────────────────────────────
@@ -105,7 +125,6 @@ class KycSelfieScreen extends HookWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: ClipOval(
                         child: capturedImagePath.value != null
-                            // Show captured image for review
                             ? Image.file(
                                 File(capturedImagePath.value!),
                                 fit: BoxFit.cover,
@@ -167,18 +186,30 @@ class KycSelfieScreen extends HookWidget {
                       AppSizes.radiusL,
                     ),
                     child: capturedImagePath.value == null
-                        ? Button(
-                            'Take Selfie',
-                            onPressed: isCameraReady.value
-                                ? () async {
-                                    final path = await _takePicture(
-                                      controller.value,
-                                    );
-                                    if (path != null) {
-                                      capturedImagePath.value = path;
-                                    }
-                                  }
-                                : null,
+                        ? Column(
+                            children: [
+                              Button(
+                                'Take Selfie',
+                                onPressed: isCameraReady.value
+                                    ? () async {
+                                        final path = await _takePicture(
+                                          controller.value,
+                                        );
+                                        if (path != null) {
+                                          capturedImagePath.value = path;
+                                        }
+                                      }
+                                    : null,
+                              ),
+                              const SizedBox(height: 12),
+                              Button(
+                                'Skip for now',
+                                color: AppColors.surface,
+                                textColor: AppColors.textSecondary,
+                                onPressed: () =>
+                                    context.goNamed('kyc_proof_of_address'),
+                              ),
+                            ],
                           )
                         : Column(
                             children: [
@@ -198,9 +229,7 @@ class KycSelfieScreen extends HookWidget {
                                 'Retake',
                                 color: AppColors.surface,
                                 textColor: AppColors.textPrimary,
-                                onPressed: () {
-                                  capturedImagePath.value = null;
-                                },
+                                onPressed: () => capturedImagePath.value = null,
                               ),
                             ],
                           ),
@@ -229,7 +258,8 @@ class KycSelfieScreen extends HookWidget {
       await cam.initialize();
       controller.value = cam;
       isCameraReady.value = true;
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Camera error: $e');
       isCameraReady.value = false;
     } finally {
       isInitializing.value = false;

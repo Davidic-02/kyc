@@ -42,22 +42,70 @@ class KycStep2SetupScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 16),
 
-                Row(
+                // ── Header ───────────────────────────────────────────
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () => context.read<KycBloc>().add(
-                        const KycEvent.previousStep(),
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back,
+                    // Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child: GestureDetector(
+                    //     onTap: () => context.read<KycBloc>().add(
+                    //       const KycEvent.previousStep(),
+                    //     ),
+                    //     child: const Icon(
+                    //       Icons.arrow_back_ios,
+                    //       color: AppColors.textPrimary,
+                    //       size: 18,
+                    //     ),
+                    //   ),
+                    // ),
+
+                    // 🔵 LOGO (your Stocks text)
+                    Text(
+                      'Stocks',
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.textPrimary,
+                          ),
+                    ),
+
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          size: 11,
+                          color: AppColors.textSecondary,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          '100% non-custodial',
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    Text(
+                      'KYC Verification',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary,
                       ),
                     ),
-                    const SizedBox(width: 12),
+
+                    const SizedBox(height: 6),
+
                     Text(
-                      'Setup 2FA',
-                      style: Theme.of(context).textTheme.headlineSmall
-                          ?.copyWith(color: AppColors.textPrimary),
+                      'Step 2 of 4',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -74,7 +122,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                const SizedBox(height: 82),
 
                 Center(
                   child: Container(
@@ -86,12 +134,12 @@ class KycStep2SetupScreen extends StatelessWidget {
                     child: QrImageView(
                       data: qrData,
                       version: QrVersions.auto,
-                      size: 220,
+                      size: 320,
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 64),
 
                 Text(
                   'Scan with authenticator app',
@@ -109,7 +157,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 14),
 
                 Text(
                   "Can't scan? Enter manually:",
@@ -158,7 +206,7 @@ class KycStep2SetupScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 60),
 
                 BlocBuilder<KycBloc, KycState>(
                   buildWhen: (prev, curr) =>

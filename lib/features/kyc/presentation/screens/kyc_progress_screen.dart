@@ -7,6 +7,7 @@ import 'package:kyc/core/constants/app_sizes.dart';
 import 'package:kyc/features/kyc/bloc/kyc/kyc_bloc.dart';
 import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 import 'package:kyc/core/widgets/custom_button.dart';
+import 'package:lottie/lottie.dart';
 
 class KycProgressScreen extends StatelessWidget {
   const KycProgressScreen({super.key});
@@ -23,133 +24,151 @@ class KycProgressScreen extends StatelessWidget {
               final done = state.completedSteps;
               final nextStep = state.getNextStepFromProgress();
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 40),
-
-                  Text(
-                    "Let's Get Your\nAccount Setup",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'In 3 easy steps',
-                    style: TextStyle(color: AppColors.textSecondary),
-                  ),
-
-                  const SizedBox(height: 48),
-
-                  // Step 1
-                  _StepRow(
-                    number: 1,
-                    title: 'Provide Basic Information',
-                    subtitle: 'Let us get to know you',
-                    isCompleted: done.contains(KycSteps.basicInfo),
-                    isActive: !done.contains(KycSteps.basicInfo),
-                  ),
-
-                  _StepConnector(
-                    isCompleted: done.contains(KycSteps.basicInfo),
-                  ),
-
-                  // Step 2
-                  _StepRow(
-                    number: 2,
-                    title: 'Set Up Two-Factor Authentication',
-                    subtitle: 'Add an extra layer of security to your account',
-                    isCompleted: done.contains(KycSteps.twoFactorVerify),
-                    isActive:
-                        done.contains(KycSteps.basicInfo) &&
-                        !done.contains(KycSteps.twoFactorVerify),
-                  ),
-
-                  _StepConnector(
-                    isCompleted: done.contains(KycSteps.twoFactorVerify),
-                  ),
-
-                  // Step 3
-                  _StepRow(
-                    number: 3,
-                    title: 'Complete Identity Verification',
-                    subtitle:
-                        'Verify your identity to unlock access to real trading',
-                    isCompleted: done.contains(KycSteps.documents),
-                    isActive:
-                        done.contains(KycSteps.twoFactorVerify) &&
-                        !done.contains(KycSteps.documents),
-                  ),
-
-                  const Spacer(),
-
-                  // Dynamic button label based on next step
-                  Button(
-                    _nextButtonLabel(nextStep),
-                    onPressed: () {
-                      switch (nextStep) {
-                        case KycSteps.basicInfo:
-                          context.goNamed('kyc_step1');
-                          break;
-
-                        case KycSteps.twoFactorSetup:
-                          context.goNamed('kyc_step2_setup');
-                          break;
-
-                        case KycSteps.twoFactorVerify:
-                          context.goNamed('kyc_step2_verify');
-                          break;
-
-                        case KycSteps.documents:
-                          context.goNamed('kyc_step3');
-                          break;
-
-                        // ─────────────────────────────
-                        // TIER 2
-                        // ─────────────────────────────
-
-                        case KycSteps.selfieCapture:
-                          context.goNamed('kyc_selfie');
-                          break;
-
-                        case KycSteps.locationVerify:
-                          context.goNamed('kyc_location');
-                          break;
-
-                        case KycSteps.proofOfAddress:
-                          context.goNamed('kyc_proof_of_address');
-                          break;
-
-                        case KycSteps.completed:
-                          context.goNamed('kyc_completion');
-                          break;
-
-                        case KycSteps.tier2Completed:
-                          context.goNamed('kyc_tier2_completion');
-                          break;
-
-                        case KycSteps.intro:
-                          break;
-                      }
-                    },
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  Center(
-                    child: GestureDetector(
-                      onTap: () => context.pop(),
-                      child: const Text(
-                        'Skip',
-                        style: TextStyle(color: AppColors.textSecondary),
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
+                    Center(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.25,
+                        child: Lottie.asset(
+                          'assets/animations/Cybersecurity.json',
+                          repeat: true,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 40),
+                    Text(
+                      "Let's Get Your\nAccount Setup",
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'In 3 easy steps',
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
 
-                  const SizedBox(height: AppSizes.radiusL),
-                ],
+                    const SizedBox(height: 48),
+
+                    // Step 1
+                    _StepRow(
+                      number: 1,
+                      title: 'Provide Basic Information',
+                      subtitle: 'Let us get to know you',
+                      isCompleted: done.contains(KycSteps.basicInfo),
+                      isActive: !done.contains(KycSteps.basicInfo),
+                    ),
+
+                    _StepConnector(
+                      isCompleted: done.contains(KycSteps.basicInfo),
+                    ),
+
+                    // Step 2
+                    _StepRow(
+                      number: 2,
+                      title: 'Set Up Two-Factor Authentication',
+                      subtitle:
+                          'Add an extra layer of security to your account',
+                      isCompleted: done.contains(KycSteps.twoFactorVerify),
+                      isActive:
+                          done.contains(KycSteps.basicInfo) &&
+                          !done.contains(KycSteps.twoFactorVerify),
+                    ),
+
+                    _StepConnector(
+                      isCompleted: done.contains(KycSteps.twoFactorVerify),
+                    ),
+
+                    // Step 3
+                    _StepRow(
+                      number: 3,
+                      title: 'Complete Identity Verification',
+                      subtitle:
+                          'Verify your identity to unlock access to real trading',
+                      isCompleted: done.contains(KycSteps.documents),
+                      isActive:
+                          done.contains(KycSteps.twoFactorVerify) &&
+                          !done.contains(KycSteps.documents),
+                    ),
+
+                    const SizedBox(height: 32),
+
+                    // Dynamic button label based on next step
+                    Button(
+                      _nextButtonLabel(nextStep),
+                      onPressed: () {
+                        switch (nextStep) {
+                          case KycSteps.basicInfo:
+                            context.goNamed('kyc_step1');
+                            break;
+
+                          case KycSteps.twoFactorSetup:
+                            context.goNamed('kyc_step2_setup');
+                            break;
+
+                          case KycSteps.twoFactorVerify:
+                            context.goNamed('kyc_step2_verify');
+                            break;
+
+                          case KycSteps.documents:
+                            context.goNamed('kyc_step3');
+                            break;
+
+                          // ─────────────────────────────
+                          // TIER 2
+                          // ─────────────────────────────
+
+                          case KycSteps.tier2Intro:
+                            context.goNamed('kyc_tier2_intro');
+                            break;
+
+                          case KycSteps.selfieCapture:
+                            context.goNamed('kyc_selfie');
+                            break;
+
+                          case KycSteps.locationVerify:
+                            context.goNamed('kyc_location');
+                            break;
+
+                          case KycSteps.proofOfAddress:
+                            context.goNamed('kyc_proof_of_address');
+                            break;
+
+                          case KycSteps.completed:
+                            context.goNamed('kyc_completion');
+                            break;
+
+                          case KycSteps.tier2Completed:
+                            context.goNamed('kyc_tier2_completion');
+                            break;
+
+                          case KycSteps.intro:
+                            break;
+                        }
+                      },
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    Center(
+                      child: GestureDetector(
+                        onTap: () => context.pop(),
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(color: AppColors.textSecondary),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: AppSizes.radiusL),
+                  ],
+                ),
               );
             },
           ),

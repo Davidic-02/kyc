@@ -2,25 +2,35 @@ part of 'kyc_bloc.dart';
 
 enum KycStepStatus { initial, loading, success, failure }
 
-// Which tier the user is currently working on
-enum KycTier { tier1, tier2 }
+// Mirrors the Firestore `status` field — backend/admin controls this
+// The app reads this to decide what the user can access
+enum KycStatus {
+  inProgress, // still filling steps
+  tier1Submitted, // submitted, awaiting admin review
+  tier1Verified, // admin approved Tier 1 → full dashboard access
+  tier2PendingReview, // Tier 2 submitted, awaiting review
+  tier2Approved, // Tier 2 approved → higher limits unlocked
+  tier2Rejected, // Tier 2 rejected → user must resubmit
+}
 
 @freezed
 abstract class KycState with _$KycState {
   const KycState._();
 
   const factory KycState({
-    // ── FLOW CONTROL ──────────────────────────────────────────────────
+    // ── FLOW ──────────────────────────────────────────────────────────
     @Default(KycSteps.intro) KycSteps currentStep,
     @Default([]) List<KycSteps> completedSteps,
-    @Default(KycTier.tier1) KycTier activeTier,
+
+    // Firestore-driven status — backend sets this, app reads it
+    @Default(KycStatus.inProgress) KycStatus kycStatus,
 
     // ── TIER 1 SAVED DATA ─────────────────────────────────────────────
     BasicInfoModel? basicInfo,
     TwoFactorAuthModel? twoFactorAuth,
     DocumentVerificationModel? documentVerification,
 
-    // ── TIER 1 FIELD VALUES (bloc owns — no TextControllers in UI) ────
+    // ── TIER 1 FIELD VALUES (no TextControllers in UI) ────────────────
     @Default('') String firstName,
     @Default('') String lastName,
     @Default('') String age,
@@ -57,7 +67,7 @@ abstract class KycState with _$KycState {
     @Default('') String errorMessage,
   }) = _KycState;
 
-  // ── DERIVED: Tier 1 validation ────────────────────────────────────────
+  // ── DERIVED: form validity ────────────────────────────────────────────
   bool get isBasicInfoValid =>
       firstName.trim().isNotEmpty &&
       lastName.trim().isNotEmpty &&
@@ -70,11 +80,11 @@ abstract class KycState with _$KycState {
 
   bool get isDocumentValid => docNumber.trim().isNotEmpty && docType.isNotEmpty;
 
-  // ── DERIVED: Tier 2 validation ────────────────────────────────────────
   bool get isSelfieValid => selfieUrl.isNotEmpty;
   bool get isLocationValid => latitude != 0.0 && longitude != 0.0;
   bool get isProofOfAddressValid => proofOfAddressUrl.isNotEmpty;
 
+  // ── DERIVED: tier completion ──────────────────────────────────────────
   bool get isTier1Complete => completedSteps.toSet().containsAll([
     KycSteps.basicInfo,
     KycSteps.twoFactorSetup,
@@ -87,6 +97,15 @@ abstract class KycState with _$KycState {
     KycSteps.locationVerify,
     KycSteps.proofOfAddress,
   ]);
+
+  // Dashboard access is NOT based on completedSteps —
+  // it's based on the Firestore status set by the backend/admin
+  bool get canAccessDashboard =>
+      kycStatus == KycStatus.tier1Verified ||
+      kycStatus == KycStatus.tier2PendingReview ||
+      kycStatus == KycStatus.tier2Approved;
+
+  bool get hasTier2Privileges => kycStatus == KycStatus.tier2Approved;
 
   bool get isReadyToSubmit => isTier1Complete;
   bool get isReadyToSubmitTier2 => isTier2Complete;
@@ -106,7 +125,8 @@ abstract class KycState with _$KycState {
         return completedSteps.contains(KycSteps.twoFactorVerify);
       case KycSteps.completed:
         return isTier1Complete;
-      // Tier 2
+      case KycSteps.tier2Intro:
+        return isTier1Complete;
       case KycSteps.selfieCapture:
         return isTier1Complete;
       case KycSteps.locationVerify:
@@ -126,16 +146,14 @@ abstract class KycState with _$KycState {
     if (!completedSteps.contains(KycSteps.twoFactorVerify))
       return KycSteps.twoFactorVerify;
     if (!completedSteps.contains(KycSteps.documents)) return KycSteps.documents;
-    if (activeTier == KycTier.tier2) {
-      if (!completedSteps.contains(KycSteps.selfieCapture))
-        return KycSteps.selfieCapture;
-      if (!completedSteps.contains(KycSteps.locationVerify))
-        return KycSteps.locationVerify;
-      if (!completedSteps.contains(KycSteps.proofOfAddress))
-        return KycSteps.proofOfAddress;
-      return KycSteps.tier2Completed;
-    }
-    return KycSteps.completed;
+    // Tier 2
+    if (!completedSteps.contains(KycSteps.selfieCapture))
+      return KycSteps.selfieCapture;
+    if (!completedSteps.contains(KycSteps.locationVerify))
+      return KycSteps.locationVerify;
+    if (!completedSteps.contains(KycSteps.proofOfAddress))
+      return KycSteps.proofOfAddress;
+    return KycSteps.tier2Completed;
   }
 
   bool get isStepBlocked => !canGoToStep(currentStep);

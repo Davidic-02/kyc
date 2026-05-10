@@ -36,7 +36,7 @@ class KycStep3Screen extends HookWidget {
           ToastService.toast(state.errorMessage, ToastType.error);
         }
         if (state.currentStep == KycSteps.completed) {
-          context.goNamed('kyc_completion');
+          context.goNamed('kyc_decision');
         }
       },
       child: Scaffold(
@@ -54,22 +54,65 @@ class KycStep3Screen extends HookWidget {
                     const SizedBox(height: 16),
 
                     // ── Header ───────────────────────────────────────────
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () => context.read<KycBloc>().add(
-                            const KycEvent.previousStep(),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: AppColors.textPrimary,
-                          ),
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: GestureDetector(
+                        //     onTap: () => context.read<KycBloc>().add(
+                        //       const KycEvent.previousStep(),
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.arrow_back_ios,
+                        //       color: AppColors.textPrimary,
+                        //       size: 18,
+                        //     ),
+                        //   ),
+                        // ),
+                        const SizedBox(height: 12),
+
+                        // 🔵 BRAND (your logo text)
+                        Text(
+                          'Stocks',
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.textPrimary,
+                              ),
                         ),
-                        const SizedBox(width: 12),
+
+                        const SizedBox(height: 4),
+
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.lock_outline,
+                              size: 11,
+                              color: AppColors.textSecondary,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              '100% non-custodial',
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // 🔵 STEP TITLE
                         Text(
                           'Document Verification',
-                          style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(color: AppColors.textPrimary),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textPrimary,
+                              ),
                         ),
                       ],
                     ),
@@ -90,50 +133,73 @@ class KycStep3Screen extends HookWidget {
                     const SizedBox(height: 32),
 
                     // ── Document type chips ──────────────────────────────
-                    Text(
-                      'Select document type',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: AppSizes.sm),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Select document type',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
 
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: _docTypes.map((type) {
-                        final isSelected = state.docType == type;
-                        return GestureDetector(
-                          onTap: () => context.read<KycBloc>().add(
-                            KycEvent.docTypeChanged(type),
-                          ),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? AppColors.primary
-                                  : AppColors.surface.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(
-                                AppSizes.radiusM,
+                        const SizedBox(height: AppSizes.sm),
+
+                        Column(
+                          children: _docTypes.map((type) {
+                            final isSelected = state.docType == type;
+
+                            return GestureDetector(
+                              onTap: () => context.read<KycBloc>().add(
+                                KycEvent.docTypeChanged(type),
                               ),
-                            ),
-                            child: Text(
-                              type,
-                              style: TextStyle(
-                                color: isSelected
-                                    ? Colors.white
-                                    : AppColors.textSecondary,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
-                                fontSize: 14,
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 20),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 20,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.surface.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.radiusM,
+                                  ),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? AppColors.primary
+                                        : Colors.transparent,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      type,
+                                      style: TextStyle(
+                                        color: isSelected
+                                            ? AppColors.textPrimary
+                                            : AppColors.textSecondary,
+                                        fontWeight: isSelected
+                                            ? FontWeight.w600
+                                            : FontWeight.normal,
+                                      ),
+                                    ),
+
+                                    if (isSelected)
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: AppColors.primary,
+                                        size: 20,
+                                      )
+                                    else
+                                      const SizedBox(width: 20),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
 
                     const SizedBox(height: 24),

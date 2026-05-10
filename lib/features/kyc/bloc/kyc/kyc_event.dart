@@ -51,22 +51,26 @@ class KycEvent with _$KycEvent {
 
   // =========================
   // TIER 1 FINAL SUBMIT
+  // Saves status = "tier1_submitted" — does NOT unlock dashboard
+  // Dashboard access is gated by status = "tier1_verified" (set by backend/admin)
   // =========================
   const factory KycEvent.submitted() = _Submitted;
 
   // =========================
-  // TIER 2 — OPT-IN / SKIP
+  // TIER 2 FLOW
+  // startTier2 → navigates to tier2Intro screen (explanation)
+  // skipTier2  → user stays on decision/home screen
   // =========================
   const factory KycEvent.startTier2() = _StartTier2;
   const factory KycEvent.skipTier2() = _SkipTier2;
 
   // =========================
   // STEP 4: SELFIE CAPTURE
-  // Swap selfieUrl for API token when integrating Onfido/Rekognition
+  // selfieUrl = local file path for now
+  // TODO: replace with CDN URL when integrating Onfido / AWS Rekognition
   // =========================
-  const factory KycEvent.selfieCaptureDone({
-    required String selfieUrl, // local file path now; CDN URL in production
-  }) = _SelfieCaptureDone;
+  const factory KycEvent.selfieCaptureDone({required String selfieUrl}) =
+      _SelfieCaptureDone;
 
   // =========================
   // STEP 5: LOCATION VERIFY
@@ -75,7 +79,7 @@ class KycEvent with _$KycEvent {
     required double latitude,
     required double longitude,
     required String detectedCountry,
-    required bool isVpnSuspected, // hook this to a backend check later
+    required bool isVpnSuspected,
   }) = _LocationCaptured;
 
   // =========================
@@ -88,6 +92,7 @@ class KycEvent with _$KycEvent {
 
   // =========================
   // TIER 2 FINAL SUBMIT
+  // Saves status = "tier2_pending_review" — admin reviews and approves
   // =========================
   const factory KycEvent.tier2Submitted() = _Tier2Submitted;
 }

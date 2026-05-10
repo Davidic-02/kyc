@@ -59,22 +59,77 @@ class KycStep1Screen extends HookWidget {
                     const SizedBox(height: 16),
 
                     // ── Header ───────────────────────────────────────────
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () => context.read<KycBloc>().add(
-                            const KycEvent.previousStep(),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.textPrimary,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
+                        // 🔙 back button (left aligned)
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: GestureDetector(
+                        //     onTap: () => context.read<KycBloc>().add(
+                        //       const KycEvent.previousStep(),
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.arrow_back_ios,
+                        //       color: AppColors.textPrimary,
+                        //       size: 18,
+                        //     ),
+                        //   ),
+                        // ),
+                        const SizedBox(height: 16),
+
+                        // 🟢 STOCKS (top branding)
                         Text(
-                          'Basic Information',
+                          'Stocks',
+                          textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(color: AppColors.textPrimary),
+                              ?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.textPrimary,
+                              ),
+                        ),
+
+                        const SizedBox(height: 4),
+
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.lock_outline,
+                              size: 11,
+                              color: AppColors.textSecondary,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              '100% non-custodial',
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 8,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        // 🟣 KYC TITLE (BELOW STOCKS)
+                        Text(
+                          'KYC Verification',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textPrimary,
+                              ),
+                        ),
+
+                        const SizedBox(height: 6),
+
+                        Text(
+                          'Step 1 of 4',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: AppColors.textSecondary),
                         ),
                       ],
                     ),
@@ -180,6 +235,7 @@ class KycStep1Screen extends HookWidget {
                       const SizedBox(height: 12),
                     ],
 
+                    const SizedBox(height: 60),
                     // ── Continue button ──────────────────────────────────
                     Button(
                       isBusy ? 'Saving...' : 'Continue',
@@ -226,31 +282,58 @@ class _KycDropdown extends StatelessWidget {
       children: [
         Text(title, style: Theme.of(context).textTheme.bodySmall),
         const SizedBox(height: AppSizes.sm),
-        DropdownButtonFormField<String>(
-          value: value,
-          isExpanded: true,
-          dropdownColor: AppColors.surface,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(color: AppColors.textPrimary),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(
-              fontSize: 14,
-              color: AppColors.textSecondary,
-            ),
-            filled: true,
-            fillColor: AppColors.surface.withOpacity(0.5),
-            contentPadding: const EdgeInsets.all(AppSizes.md),
-            border: OutlineInputBorder(
+
+        GestureDetector(
+          onTap: () async {
+            final selected = await showModalBottomSheet<String>(
+              context: context,
+              backgroundColor: AppColors.background,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              builder: (_) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+
+                    return ListTile(
+                      title: Text(item),
+                      onTap: () {
+                        Navigator.pop(context, item);
+                      },
+                    );
+                  },
+                );
+              },
+            );
+
+            if (selected != null) {
+              onChanged(selected);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(AppSizes.md),
+            decoration: BoxDecoration(
+              color: AppColors.surface.withOpacity(0.5),
               borderRadius: BorderRadius.circular(AppSizes.radiusM),
-              borderSide: BorderSide.none,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  value ?? hint,
+                  style: TextStyle(
+                    color: value == null
+                        ? AppColors.textSecondary
+                        : AppColors.textPrimary,
+                  ),
+                ),
+                const Icon(Icons.keyboard_arrow_down),
+              ],
             ),
           ),
-          items: items
-              .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-              .toList(),
-          onChanged: onChanged,
         ),
       ],
     );

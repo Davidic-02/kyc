@@ -57,20 +57,14 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     on<_StartTier2>(
       (e, emit) => emit(
         state.copyWith(
-          activeTier: KycTier.tier2,
-          currentStep: KycSteps.selfieCapture,
+          // Goes to the explanation intro screen first — not directly to selfie
+          currentStep: KycSteps.tier2Intro,
           errorMessage: '',
         ),
       ),
     );
-    on<_SkipTier2>(
-      (e, emit) => emit(
-        state.copyWith(
-          activeTier: KycTier.tier1, // stays on tier 1
-          errorMessage: '',
-        ),
-      ),
-    );
+
+    on<_SkipTier2>((e, emit) => emit(state.copyWith(errorMessage: '')));
 
     on<_SelfieCaptureDone>(_onSelfieCaptureDone);
     on<_LocationCaptured>(_onLocationCaptured);
@@ -87,7 +81,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   bool _verifyTotpCode(String secret, String code) =>
       code.length == 6 && int.tryParse(code) != null;
 
-  // ── OTP digit ────────────────────────────────────────────────────────────
   void _onOtpDigitChanged(_OtpDigitChanged event, Emitter<KycState> emit) {
     final updated = [...state.otpDigits];
     updated[event.index] = event.digit;
@@ -102,6 +95,9 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     try {
       final progress = await _repository.getKycProgress(_uid);
       if (progress != null) {
+        // Map Firestore status string → KycStatus enum
+        final kycStatus = _mapStatus(progress.status);
+
         emit(
           state.copyWith(
             completedSteps: progress.completedSteps,
@@ -110,7 +106,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
             documentVerification: progress.documentVerification,
             tier2Data: progress.tier2,
             currentStep: progress.currentStep,
-            // Pre-fill Tier 1 fields
+            kycStatus: kycStatus,
+            // Pre-fill fields
             firstName: progress.basicInfo?.firstName ?? '',
             lastName: progress.basicInfo?.lastName ?? '',
             age: progress.basicInfo?.age ?? '',
@@ -118,7 +115,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
             country: progress.basicInfo?.country ?? '',
             docType: progress.documentVerification?.documentType ?? 'NIN',
             docNumber: progress.documentVerification?.documentNumber ?? '',
-            // Pre-fill Tier 2 fields
             selfieUrl: progress.tier2?.selfieUrl ?? '',
             proofOfAddressDocType:
                 progress.tier2?.proofOfAddressDocType ?? 'Utility Bill',
@@ -128,6 +124,23 @@ class KycBloc extends Bloc<KycEvent, KycState> {
       }
     } catch (e) {
       emit(state.copyWith(errorMessage: e.toString()));
+    }
+  }
+
+  KycStatus _mapStatus(String raw) {
+    switch (raw) {
+      case 'tier1_submitted':
+        return KycStatus.tier1Submitted;
+      case 'tier1_verified':
+        return KycStatus.tier1Verified;
+      case 'tier2_pending_review':
+        return KycStatus.tier2PendingReview;
+      case 'tier2_approved':
+        return KycStatus.tier2Approved;
+      case 'tier2_rejected':
+        return KycStatus.tier2Rejected;
+      default:
+        return KycStatus.inProgress;
     }
   }
 
@@ -155,9 +168,10 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     _PreviousStep event,
     Emitter<KycState> emit,
   ) async {
-    final idx = kycFlow.indexOf(state.currentStep);
+    final allSteps = KycSteps.values;
+    final idx = allSteps.indexOf(state.currentStep);
     if (idx <= 0) return;
-    emit(state.copyWith(currentStep: kycFlow[idx - 1], errorMessage: ''));
+    emit(state.copyWith(currentStep: allSteps[idx - 1], errorMessage: ''));
   }
 
   // ── Step 1 ────────────────────────────────────────────────────────────────
@@ -318,7 +332,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           documentVerification: model,
           completedSteps: completed,
           documentStatus: KycStepStatus.success,
-          currentStep: KycSteps.completed,
+          currentStep: KycSteps.completed, // → Decision screen
           errorMessage: '',
         ),
       );
@@ -333,6 +347,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   }
 
   // ── Tier 1 submit ─────────────────────────────────────────────────────────
+  // Sets status = "tier1_submitted"
+  // Backend/admin then sets it to "tier1_verified" to unlock the dashboard
   Future<void> _onSubmitted(_Submitted event, Emitter<KycState> emit) async {
     if (!state.isReadyToSubmit) {
       emit(
@@ -344,7 +360,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     try {
       await _repository.submitKyc(_uid);
       emit(
-        state.copyWith(submitStatus: KycStepStatus.success, errorMessage: ''),
+        state.copyWith(
+          submitStatus: KycStepStatus.success,
+          kycStatus: KycStatus.tier1Submitted, // 👈 pending, not verified
+          errorMessage: '',
+        ),
       );
     } catch (e) {
       emit(
@@ -372,7 +392,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           selfieUrl: event.selfieUrl,
           completedSteps: completed,
           selfieStatus: KycStepStatus.success,
-          currentStep: KycSteps.locationVerify,
+          currentStep: KycSteps.proofOfAddress,
           errorMessage: '',
         ),
       );
@@ -411,7 +431,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           isVpnSuspected: event.isVpnSuspected,
           completedSteps: completed,
           locationStatus: KycStepStatus.success,
-          currentStep: KycSteps.proofOfAddress,
+          currentStep: KycSteps.tier2Completed,
           errorMessage: '',
         ),
       );
@@ -445,7 +465,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           proofOfAddressUrl: event.documentUrl,
           completedSteps: completed,
           proofOfAddressStatus: KycStepStatus.success,
-          currentStep: KycSteps.tier2Completed,
+          currentStep: KycSteps.locationVerify,
           errorMessage: '',
         ),
       );
@@ -460,6 +480,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   }
 
   // ── Tier 2 submit ─────────────────────────────────────────────────────────
+  // Sets status = "tier2_pending_review"
+  // Backend reviews selfie + address and sets "tier2_approved" or "tier2_rejected"
   Future<void> _onTier2Submitted(
     _Tier2Submitted event,
     Emitter<KycState> emit,
@@ -485,6 +507,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
         state.copyWith(
           tier2Data: tier2,
           tier2SubmitStatus: KycStepStatus.success,
+          kycStatus:
+              KycStatus.tier2PendingReview, // 👈 pending review, not approved
           errorMessage: '',
         ),
       );

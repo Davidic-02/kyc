@@ -3,7 +3,7 @@ import 'package:kyc/features/auth/presentation/screens/phone_input_screen.dart';
 import 'package:kyc/features/auth/presentation/screens/phone_otp_screen.dart';
 import 'package:kyc/features/auth_1/presentation/screens/magic_link_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/home.dart';
-import 'package:kyc/features/kyc/presentation/screens/kyc_completion_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/kyc_decision_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/kyc_intro_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/kyc_progress_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/tier_1/kyc_step1_screen.dart';
@@ -13,10 +13,11 @@ import 'package:kyc/features/kyc/presentation/screens/tier_1/kyc_step3_screen.da
 import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_location_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_proof_of_address.dart';
 import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_selfie_screen.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_tier2_intro_screen.dart';
 import 'package:kyc/features/onboarding/presentation/screens/onboarding.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/kyc',
+  initialLocation: '/onboarding',
   routes: [
     GoRoute(
       path: '/onboarding',
@@ -44,6 +45,18 @@ final GoRouter router = GoRouter(
       path: '/kyc/progress',
       builder: (_, __) => const KycProgressScreen(),
     ),
+    GoRoute(
+      name: 'kyc_decision',
+      path: '/kyc/decision',
+      builder: (_, __) => const KycDecisionScreen(),
+    ),
+
+    // NEW ROUTES:
+    GoRoute(
+      name: 'kyc_tier2_intro',
+      path: '/kyc/tier2-intro',
+      builder: (_, __) => const KycTier2IntroScreen(),
+    ),
 
     GoRoute(
       path: '/kyc',
@@ -70,12 +83,12 @@ final GoRouter router = GoRouter(
       name: 'kyc_step3',
       builder: (context, state) => const KycStep3Screen(),
     ),
-    GoRoute(
-      path: '/kyc/completion',
-      name: 'kyc_completion',
-      builder: (context, state) => const KycCompletionScreen(),
-    ),
 
+    // GoRoute(
+    //   path: '/kyc/completion',
+    //   name: 'kyc_completion',
+    //   builder: (context, state) => const KycCompletionScreen(),
+    // ),
     GoRoute(
       name: 'kyc_selfie',
       path: '/kyc/selfie',

@@ -39,8 +39,8 @@ class KycProofOfAddressScreen extends HookWidget {
         if (state.errorMessage.isNotEmpty) {
           ToastService.toast(state.errorMessage, ToastType.error);
         }
-        if (state.currentStep == KycSteps.tier2Completed) {
-          context.goNamed('kyc_tier2_completion');
+        if (state.currentStep == KycSteps.locationVerify) {
+          context.goNamed('kyc_location');
         }
       },
       child: Scaffold(
@@ -61,22 +61,66 @@ class KycProofOfAddressScreen extends HookWidget {
                     const SizedBox(height: 16),
 
                     // ── Header ─────────────────────────────────────────
-                    Row(
+                    // ── Header ───────────────────────────────────────────
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () => context.read<KycBloc>().add(
-                            const KycEvent.previousStep(),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: AppColors.textPrimary,
-                          ),
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: GestureDetector(
+                        //     onTap: () => context.read<KycBloc>().add(
+                        //       const KycEvent.previousStep(),
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.arrow_back_ios,
+                        //       color: AppColors.textPrimary,
+                        //       size: 18,
+                        //     ),
+                        //   ),
+                        // ),
+                        const SizedBox(height: 12),
+
+                        // 🔵 BRAND
+                        Text(
+                          'Stocks',
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.textPrimary,
+                              ),
                         ),
-                        const SizedBox(width: 12),
+
+                        const SizedBox(height: 4),
+
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.lock_outline,
+                              size: 11,
+                              color: AppColors.textSecondary,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              '100% non-custodial',
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // 🔵 PAGE TITLE
                         Text(
                           'Proof of Address',
-                          style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(color: AppColors.textPrimary),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textPrimary,
+                              ),
                         ),
                       ],
                     ),
@@ -86,7 +130,7 @@ class KycProofOfAddressScreen extends HookWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: const LinearProgressIndicator(
-                        value: 0.9,
+                        value: 0.75,
                         minHeight: 4,
                         backgroundColor: AppColors.surface,
                         color: AppColors.primary,
@@ -96,50 +140,76 @@ class KycProofOfAddressScreen extends HookWidget {
                     const SizedBox(height: 32),
 
                     // ── Document type chips ────────────────────────────
-                    Text(
-                      'Document type',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
                     const SizedBox(height: AppSizes.sm),
 
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: _docTypes.map((type) {
-                        final isSelected = state.proofOfAddressDocType == type;
-                        return GestureDetector(
-                          onTap: () => context.read<KycBloc>().add(
-                            KycEvent.proofOfAddressDocTypeChanged(type),
-                          ),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? AppColors.primary
-                                  : AppColors.surface.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(
-                                AppSizes.radiusM,
+                    // ── Document type ─────────────────────────────────────
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Document type',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+
+                        const SizedBox(height: AppSizes.sm),
+
+                        Column(
+                          children: _docTypes.map((type) {
+                            final isSelected =
+                                state.proofOfAddressDocType == type;
+
+                            return GestureDetector(
+                              onTap: () => context.read<KycBloc>().add(
+                                KycEvent.proofOfAddressDocTypeChanged(type),
                               ),
-                            ),
-                            child: Text(
-                              type,
-                              style: TextStyle(
-                                color: isSelected
-                                    ? Colors.white
-                                    : AppColors.textSecondary,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
-                                fontSize: 13,
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 18,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.surface.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.radiusM,
+                                  ),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? AppColors.primary
+                                        : Colors.transparent,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      type,
+                                      style: TextStyle(
+                                        color: isSelected
+                                            ? AppColors.textPrimary
+                                            : AppColors.textSecondary,
+                                        fontWeight: isSelected
+                                            ? FontWeight.w600
+                                            : FontWeight.normal,
+                                      ),
+                                    ),
+                                    if (isSelected)
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: AppColors.primary,
+                                        size: 20,
+                                      )
+                                    else
+                                      const SizedBox(width: 20),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
 
                     const SizedBox(height: 24),
@@ -268,7 +338,7 @@ class KycProofOfAddressScreen extends HookWidget {
                     ],
 
                     Button(
-                      isBusy ? 'Submitting...' : 'Submit for Review',
+                      isBusy ? 'Submitting...' : 'Continue',
                       busy: isBusy,
                       onPressed: isBusy || !isValid
                           ? null

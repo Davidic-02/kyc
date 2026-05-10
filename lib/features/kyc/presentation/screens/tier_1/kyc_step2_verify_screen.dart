@@ -50,26 +50,68 @@ class KycStep2VerifyScreen extends HookWidget {
                     const SizedBox(height: 16),
 
                     // ── Header ─────────────────────────────────────────
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () => context.read<KycBloc>().add(
-                            const KycEvent.previousStep(),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: AppColors.textPrimary,
-                          ),
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: GestureDetector(
+                        //     onTap: () => context.read<KycBloc>().add(
+                        //       const KycEvent.previousStep(),
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.arrow_back_ios,
+                        //       color: AppColors.textPrimary,
+                        //       size: 18,
+                        //     ),
+                        //   ),
+                        // ),
+                        const SizedBox(height: 12),
+
+                        // 🔵 BRAND
+                        Text(
+                          'Stocks',
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.textPrimary,
+                              ),
                         ),
-                        const SizedBox(width: 12),
+
+                        const SizedBox(height: 4),
+
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.lock_outline,
+                              size: 11,
+                              color: AppColors.textSecondary,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              '100% non-custodial',
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // 🔵 PAGE TITLE
                         Text(
                           'Verify 2FA',
-                          style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(color: AppColors.textPrimary),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textPrimary,
+                              ),
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 24),
 
                     // ── Progress ───────────────────────────────────────
@@ -83,7 +125,7 @@ class KycStep2VerifyScreen extends HookWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 72),
 
                     Text(
                       'Enter verification code',
