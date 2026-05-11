@@ -156,15 +156,15 @@ class KycStep2VerifyScreen extends HookWidget {
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
                             maxLength: 1,
-                            // Show the digit stored in bloc state
-                            controller:
-                                TextEditingController(text: state.otpDigits[i])
-                                  ..selection = TextSelection.collapsed(
-                                    offset: state.otpDigits[i].length,
-                                  ),
+
+                            controller: TextEditingController(
+                              text: state.otpDigits[i].value,
+                            ),
+
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
+
                             decoration: InputDecoration(
                               counterText: '',
                               filled: true,
@@ -177,20 +177,21 @@ class KycStep2VerifyScreen extends HookWidget {
                               ),
                               contentPadding: EdgeInsets.zero,
                             ),
+
                             style: const TextStyle(
                               color: AppColors.textPrimary,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
+
                             onChanged: (value) {
-                              // Dispatch to bloc
                               context.read<KycBloc>().add(
                                 KycEvent.otpDigitChanged(
                                   index: i,
                                   digit: value,
                                 ),
                               );
-                              // Move focus forward/back
+
                               if (value.isNotEmpty && i < 5) {
                                 focusNodes[i + 1].requestFocus();
                               } else if (value.isEmpty && i > 0) {

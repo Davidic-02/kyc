@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BasicInfoModel {
 
- String get firstName; String get lastName; String get gender; String get age; String get country;
+ String get firstName; String get lastName; String get gender; String get dob; String get age; String get country;
 /// Create a copy of BasicInfoModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $BasicInfoModelCopyWith<BasicInfoModel> get copyWith => _$BasicInfoModelCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BasicInfoModel&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.age, age) || other.age == age)&&(identical(other.country, country) || other.country == country));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BasicInfoModel&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.age, age) || other.age == age)&&(identical(other.country, country) || other.country == country));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,gender,age,country);
+int get hashCode => Object.hash(runtimeType,firstName,lastName,gender,dob,age,country);
 
 @override
 String toString() {
-  return 'BasicInfoModel(firstName: $firstName, lastName: $lastName, gender: $gender, age: $age, country: $country)';
+  return 'BasicInfoModel(firstName: $firstName, lastName: $lastName, gender: $gender, dob: $dob, age: $age, country: $country)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $BasicInfoModelCopyWith<$Res>  {
   factory $BasicInfoModelCopyWith(BasicInfoModel value, $Res Function(BasicInfoModel) _then) = _$BasicInfoModelCopyWithImpl;
 @useResult
 $Res call({
- String firstName, String lastName, String gender, String age, String country
+ String firstName, String lastName, String gender, String dob, String age, String country
 });
 
 
@@ -65,11 +65,12 @@ class _$BasicInfoModelCopyWithImpl<$Res>
 
 /// Create a copy of BasicInfoModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? firstName = null,Object? lastName = null,Object? gender = null,Object? age = null,Object? country = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? firstName = null,Object? lastName = null,Object? gender = null,Object? dob = null,Object? age = null,Object? country = null,}) {
   return _then(_self.copyWith(
 firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,dob: null == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
 as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String,
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String gender,  String dob,  String age,  String country)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BasicInfoModel() when $default != null:
-return $default(_that.firstName,_that.lastName,_that.gender,_that.age,_that.country);case _:
+return $default(_that.firstName,_that.lastName,_that.gender,_that.dob,_that.age,_that.country);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.firstName,_that.lastName,_that.gender,_that.age,_that.coun
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String gender,  String age,  String country)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String gender,  String dob,  String age,  String country)  $default,) {final _that = this;
 switch (_that) {
 case _BasicInfoModel():
-return $default(_that.firstName,_that.lastName,_that.gender,_that.age,_that.country);case _:
+return $default(_that.firstName,_that.lastName,_that.gender,_that.dob,_that.age,_that.country);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.firstName,_that.lastName,_that.gender,_that.age,_that.coun
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String firstName,  String lastName,  String gender,  String age,  String country)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String firstName,  String lastName,  String gender,  String dob,  String age,  String country)?  $default,) {final _that = this;
 switch (_that) {
 case _BasicInfoModel() when $default != null:
-return $default(_that.firstName,_that.lastName,_that.gender,_that.age,_that.country);case _:
+return $default(_that.firstName,_that.lastName,_that.gender,_that.dob,_that.age,_that.country);case _:
   return null;
 
 }
@@ -213,12 +214,13 @@ return $default(_that.firstName,_that.lastName,_that.gender,_that.age,_that.coun
 @JsonSerializable()
 
 class _BasicInfoModel implements BasicInfoModel {
-  const _BasicInfoModel({required this.firstName, required this.lastName, required this.gender, required this.age, required this.country});
+  const _BasicInfoModel({required this.firstName, required this.lastName, required this.gender, required this.dob, required this.age, required this.country});
   factory _BasicInfoModel.fromJson(Map<String, dynamic> json) => _$BasicInfoModelFromJson(json);
 
 @override final  String firstName;
 @override final  String lastName;
 @override final  String gender;
+@override final  String dob;
 @override final  String age;
 @override final  String country;
 
@@ -235,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BasicInfoModel&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.age, age) || other.age == age)&&(identical(other.country, country) || other.country == country));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BasicInfoModel&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.age, age) || other.age == age)&&(identical(other.country, country) || other.country == country));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,gender,age,country);
+int get hashCode => Object.hash(runtimeType,firstName,lastName,gender,dob,age,country);
 
 @override
 String toString() {
-  return 'BasicInfoModel(firstName: $firstName, lastName: $lastName, gender: $gender, age: $age, country: $country)';
+  return 'BasicInfoModel(firstName: $firstName, lastName: $lastName, gender: $gender, dob: $dob, age: $age, country: $country)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$BasicInfoModelCopyWith<$Res> implements $BasicInfoModelCo
   factory _$BasicInfoModelCopyWith(_BasicInfoModel value, $Res Function(_BasicInfoModel) _then) = __$BasicInfoModelCopyWithImpl;
 @override @useResult
 $Res call({
- String firstName, String lastName, String gender, String age, String country
+ String firstName, String lastName, String gender, String dob, String age, String country
 });
 
 
@@ -272,11 +274,12 @@ class __$BasicInfoModelCopyWithImpl<$Res>
 
 /// Create a copy of BasicInfoModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? firstName = null,Object? lastName = null,Object? gender = null,Object? age = null,Object? country = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? firstName = null,Object? lastName = null,Object? gender = null,Object? dob = null,Object? age = null,Object? country = null,}) {
   return _then(_BasicInfoModel(
 firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,dob: null == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
 as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String,
@@ -844,7 +847,7 @@ mixin _$Tier2Model {
  String get selfieUrl; bool get selfieReviewed;// set to true by admin/backend
  bool get selfieApproved;// Step 5 — Location
  double get latitude; double get longitude; String get detectedCountry; bool get isVpnSuspected;// Step 6 — Proof of address
- String get proofOfAddressDocType; String get proofOfAddressUrl; bool get proofReviewed; bool get proofApproved;// Overall
+ String get proofOfAddressDocType; String get proofOfAddressFrontUrl; String get proofOfAddressBackUrl; bool get proofReviewed; bool get proofApproved;// Overall
  String get status;// status values:
 //   'pending_review'   — submitted, awaiting manual check
 //   'approved'         — all checks passed
@@ -863,16 +866,16 @@ $Tier2ModelCopyWith<Tier2Model> get copyWith => _$Tier2ModelCopyWithImpl<Tier2Mo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Tier2Model&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.selfieReviewed, selfieReviewed) || other.selfieReviewed == selfieReviewed)&&(identical(other.selfieApproved, selfieApproved) || other.selfieApproved == selfieApproved)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.proofReviewed, proofReviewed) || other.proofReviewed == proofReviewed)&&(identical(other.proofApproved, proofApproved) || other.proofApproved == proofApproved)&&(identical(other.status, status) || other.status == status)&&(identical(other.submittedAt, submittedAt) || other.submittedAt == submittedAt)&&(identical(other.reviewedAt, reviewedAt) || other.reviewedAt == reviewedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Tier2Model&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.selfieReviewed, selfieReviewed) || other.selfieReviewed == selfieReviewed)&&(identical(other.selfieApproved, selfieApproved) || other.selfieApproved == selfieApproved)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressFrontUrl, proofOfAddressFrontUrl) || other.proofOfAddressFrontUrl == proofOfAddressFrontUrl)&&(identical(other.proofOfAddressBackUrl, proofOfAddressBackUrl) || other.proofOfAddressBackUrl == proofOfAddressBackUrl)&&(identical(other.proofReviewed, proofReviewed) || other.proofReviewed == proofReviewed)&&(identical(other.proofApproved, proofApproved) || other.proofApproved == proofApproved)&&(identical(other.status, status) || other.status == status)&&(identical(other.submittedAt, submittedAt) || other.submittedAt == submittedAt)&&(identical(other.reviewedAt, reviewedAt) || other.reviewedAt == reviewedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,selfieUrl,selfieReviewed,selfieApproved,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,proofReviewed,proofApproved,status,submittedAt,reviewedAt);
+int get hashCode => Object.hash(runtimeType,selfieUrl,selfieReviewed,selfieApproved,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressFrontUrl,proofOfAddressBackUrl,proofReviewed,proofApproved,status,submittedAt,reviewedAt);
 
 @override
 String toString() {
-  return 'Tier2Model(selfieUrl: $selfieUrl, selfieReviewed: $selfieReviewed, selfieApproved: $selfieApproved, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, proofReviewed: $proofReviewed, proofApproved: $proofApproved, status: $status, submittedAt: $submittedAt, reviewedAt: $reviewedAt)';
+  return 'Tier2Model(selfieUrl: $selfieUrl, selfieReviewed: $selfieReviewed, selfieApproved: $selfieApproved, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressFrontUrl: $proofOfAddressFrontUrl, proofOfAddressBackUrl: $proofOfAddressBackUrl, proofReviewed: $proofReviewed, proofApproved: $proofApproved, status: $status, submittedAt: $submittedAt, reviewedAt: $reviewedAt)';
 }
 
 
@@ -883,7 +886,7 @@ abstract mixin class $Tier2ModelCopyWith<$Res>  {
   factory $Tier2ModelCopyWith(Tier2Model value, $Res Function(Tier2Model) _then) = _$Tier2ModelCopyWithImpl;
 @useResult
 $Res call({
- String selfieUrl, bool selfieReviewed, bool selfieApproved, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, bool proofReviewed, bool proofApproved, String status, DateTime? submittedAt, DateTime? reviewedAt
+ String selfieUrl, bool selfieReviewed, bool selfieApproved, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressFrontUrl, String proofOfAddressBackUrl, bool proofReviewed, bool proofApproved, String status, DateTime? submittedAt, DateTime? reviewedAt
 });
 
 
@@ -900,7 +903,7 @@ class _$Tier2ModelCopyWithImpl<$Res>
 
 /// Create a copy of Tier2Model
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selfieUrl = null,Object? selfieReviewed = null,Object? selfieApproved = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? proofReviewed = null,Object? proofApproved = null,Object? status = null,Object? submittedAt = freezed,Object? reviewedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selfieUrl = null,Object? selfieReviewed = null,Object? selfieApproved = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressFrontUrl = null,Object? proofOfAddressBackUrl = null,Object? proofReviewed = null,Object? proofApproved = null,Object? status = null,Object? submittedAt = freezed,Object? reviewedAt = freezed,}) {
   return _then(_self.copyWith(
 selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
 as String,selfieReviewed: null == selfieReviewed ? _self.selfieReviewed : selfieReviewed // ignore: cast_nullable_to_non_nullable
@@ -910,7 +913,8 @@ as double,longitude: null == longitude ? _self.longitude : longitude // ignore: 
 as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
 as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
 as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
-as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressFrontUrl: null == proofOfAddressFrontUrl ? _self.proofOfAddressFrontUrl : proofOfAddressFrontUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressBackUrl: null == proofOfAddressBackUrl ? _self.proofOfAddressBackUrl : proofOfAddressBackUrl // ignore: cast_nullable_to_non_nullable
 as String,proofReviewed: null == proofReviewed ? _self.proofReviewed : proofReviewed // ignore: cast_nullable_to_non_nullable
 as bool,proofApproved: null == proofApproved ? _self.proofApproved : proofApproved // ignore: cast_nullable_to_non_nullable
 as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
@@ -1001,10 +1005,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressFrontUrl,  String proofOfAddressBackUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Tier2Model() when $default != null:
-return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
+return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressFrontUrl,_that.proofOfAddressBackUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
   return orElse();
 
 }
@@ -1022,10 +1026,10 @@ return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressFrontUrl,  String proofOfAddressBackUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Tier2Model():
-return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
+return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressFrontUrl,_that.proofOfAddressBackUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1042,10 +1046,10 @@ return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selfieUrl,  bool selfieReviewed,  bool selfieApproved,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressFrontUrl,  String proofOfAddressBackUrl,  bool proofReviewed,  bool proofApproved,  String status,  DateTime? submittedAt,  DateTime? reviewedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Tier2Model() when $default != null:
-return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
+return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressFrontUrl,_that.proofOfAddressBackUrl,_that.proofReviewed,_that.proofApproved,_that.status,_that.submittedAt,_that.reviewedAt);case _:
   return null;
 
 }
@@ -1057,7 +1061,7 @@ return $default(_that.selfieUrl,_that.selfieReviewed,_that.selfieApproved,_that.
 @JsonSerializable()
 
 class _Tier2Model implements Tier2Model {
-  const _Tier2Model({required this.selfieUrl, this.selfieReviewed = false, this.selfieApproved = false, required this.latitude, required this.longitude, required this.detectedCountry, this.isVpnSuspected = false, required this.proofOfAddressDocType, required this.proofOfAddressUrl, this.proofReviewed = false, this.proofApproved = false, this.status = 'pending_review', this.submittedAt, this.reviewedAt});
+  const _Tier2Model({required this.selfieUrl, this.selfieReviewed = false, this.selfieApproved = false, required this.latitude, required this.longitude, required this.detectedCountry, this.isVpnSuspected = false, required this.proofOfAddressDocType, required this.proofOfAddressFrontUrl, required this.proofOfAddressBackUrl, this.proofReviewed = false, this.proofApproved = false, this.status = 'pending_review', this.submittedAt, this.reviewedAt});
   factory _Tier2Model.fromJson(Map<String, dynamic> json) => _$Tier2ModelFromJson(json);
 
 // Step 4 — Selfie
@@ -1072,7 +1076,8 @@ class _Tier2Model implements Tier2Model {
 @override@JsonKey() final  bool isVpnSuspected;
 // Step 6 — Proof of address
 @override final  String proofOfAddressDocType;
-@override final  String proofOfAddressUrl;
+@override final  String proofOfAddressFrontUrl;
+@override final  String proofOfAddressBackUrl;
 @override@JsonKey() final  bool proofReviewed;
 @override@JsonKey() final  bool proofApproved;
 // Overall
@@ -1098,16 +1103,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Tier2Model&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.selfieReviewed, selfieReviewed) || other.selfieReviewed == selfieReviewed)&&(identical(other.selfieApproved, selfieApproved) || other.selfieApproved == selfieApproved)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.proofReviewed, proofReviewed) || other.proofReviewed == proofReviewed)&&(identical(other.proofApproved, proofApproved) || other.proofApproved == proofApproved)&&(identical(other.status, status) || other.status == status)&&(identical(other.submittedAt, submittedAt) || other.submittedAt == submittedAt)&&(identical(other.reviewedAt, reviewedAt) || other.reviewedAt == reviewedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Tier2Model&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.selfieReviewed, selfieReviewed) || other.selfieReviewed == selfieReviewed)&&(identical(other.selfieApproved, selfieApproved) || other.selfieApproved == selfieApproved)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressFrontUrl, proofOfAddressFrontUrl) || other.proofOfAddressFrontUrl == proofOfAddressFrontUrl)&&(identical(other.proofOfAddressBackUrl, proofOfAddressBackUrl) || other.proofOfAddressBackUrl == proofOfAddressBackUrl)&&(identical(other.proofReviewed, proofReviewed) || other.proofReviewed == proofReviewed)&&(identical(other.proofApproved, proofApproved) || other.proofApproved == proofApproved)&&(identical(other.status, status) || other.status == status)&&(identical(other.submittedAt, submittedAt) || other.submittedAt == submittedAt)&&(identical(other.reviewedAt, reviewedAt) || other.reviewedAt == reviewedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,selfieUrl,selfieReviewed,selfieApproved,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,proofReviewed,proofApproved,status,submittedAt,reviewedAt);
+int get hashCode => Object.hash(runtimeType,selfieUrl,selfieReviewed,selfieApproved,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressFrontUrl,proofOfAddressBackUrl,proofReviewed,proofApproved,status,submittedAt,reviewedAt);
 
 @override
 String toString() {
-  return 'Tier2Model(selfieUrl: $selfieUrl, selfieReviewed: $selfieReviewed, selfieApproved: $selfieApproved, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, proofReviewed: $proofReviewed, proofApproved: $proofApproved, status: $status, submittedAt: $submittedAt, reviewedAt: $reviewedAt)';
+  return 'Tier2Model(selfieUrl: $selfieUrl, selfieReviewed: $selfieReviewed, selfieApproved: $selfieApproved, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressFrontUrl: $proofOfAddressFrontUrl, proofOfAddressBackUrl: $proofOfAddressBackUrl, proofReviewed: $proofReviewed, proofApproved: $proofApproved, status: $status, submittedAt: $submittedAt, reviewedAt: $reviewedAt)';
 }
 
 
@@ -1118,7 +1123,7 @@ abstract mixin class _$Tier2ModelCopyWith<$Res> implements $Tier2ModelCopyWith<$
   factory _$Tier2ModelCopyWith(_Tier2Model value, $Res Function(_Tier2Model) _then) = __$Tier2ModelCopyWithImpl;
 @override @useResult
 $Res call({
- String selfieUrl, bool selfieReviewed, bool selfieApproved, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, bool proofReviewed, bool proofApproved, String status, DateTime? submittedAt, DateTime? reviewedAt
+ String selfieUrl, bool selfieReviewed, bool selfieApproved, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressFrontUrl, String proofOfAddressBackUrl, bool proofReviewed, bool proofApproved, String status, DateTime? submittedAt, DateTime? reviewedAt
 });
 
 
@@ -1135,7 +1140,7 @@ class __$Tier2ModelCopyWithImpl<$Res>
 
 /// Create a copy of Tier2Model
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selfieUrl = null,Object? selfieReviewed = null,Object? selfieApproved = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? proofReviewed = null,Object? proofApproved = null,Object? status = null,Object? submittedAt = freezed,Object? reviewedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selfieUrl = null,Object? selfieReviewed = null,Object? selfieApproved = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressFrontUrl = null,Object? proofOfAddressBackUrl = null,Object? proofReviewed = null,Object? proofApproved = null,Object? status = null,Object? submittedAt = freezed,Object? reviewedAt = freezed,}) {
   return _then(_Tier2Model(
 selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
 as String,selfieReviewed: null == selfieReviewed ? _self.selfieReviewed : selfieReviewed // ignore: cast_nullable_to_non_nullable
@@ -1145,7 +1150,8 @@ as double,longitude: null == longitude ? _self.longitude : longitude // ignore: 
 as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
 as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
 as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
-as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressFrontUrl: null == proofOfAddressFrontUrl ? _self.proofOfAddressFrontUrl : proofOfAddressFrontUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressBackUrl: null == proofOfAddressBackUrl ? _self.proofOfAddressBackUrl : proofOfAddressBackUrl // ignore: cast_nullable_to_non_nullable
 as String,proofReviewed: null == proofReviewed ? _self.proofReviewed : proofReviewed // ignore: cast_nullable_to_non_nullable
 as bool,proofApproved: null == proofApproved ? _self.proofApproved : proofApproved // ignore: cast_nullable_to_non_nullable
 as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable

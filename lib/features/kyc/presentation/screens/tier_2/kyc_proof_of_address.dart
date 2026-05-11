@@ -1,7 +1,3 @@
-// ════════════════════════════════════════════════════════════════════════════
-// kyc_proof_of_address_screen.dart  — Step 6
-// ════════════════════════════════════════════════════════════════════════════
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -29,7 +25,9 @@ class KycProofOfAddressScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pickedImagePath = useState<String?>(null);
+    // Two separate image states — front and back
+    final frontImagePath = useState<String?>(null);
+    final backImagePath = useState<String?>(null);
 
     return BlocListener<KycBloc, KycState>(
       listenWhen: (prev, curr) =>
@@ -50,8 +48,10 @@ class KycProofOfAddressScreen extends HookWidget {
             builder: (context, state) {
               final isBusy =
                   state.proofOfAddressStatus == KycStepStatus.loading;
-              final hasImage = pickedImagePath.value != null;
-              final isValid = hasImage;
+              final hasFront = frontImagePath.value != null;
+              final hasBack = backImagePath.value != null;
+              // Both sides required before continuing
+              final isValid = hasFront && hasBack;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.all(AppSizes.radiusL),
@@ -61,26 +61,9 @@ class KycProofOfAddressScreen extends HookWidget {
                     const SizedBox(height: 16),
 
                     // ── Header ─────────────────────────────────────────
-                    // ── Header ───────────────────────────────────────────
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Align(
-                        //   alignment: Alignment.centerLeft,
-                        //   child: GestureDetector(
-                        //     onTap: () => context.read<KycBloc>().add(
-                        //       const KycEvent.previousStep(),
-                        //     ),
-                        //     child: const Icon(
-                        //       Icons.arrow_back_ios,
-                        //       color: AppColors.textPrimary,
-                        //       size: 18,
-                        //     ),
-                        //   ),
-                        // ),
-                        const SizedBox(height: 12),
-
-                        // 🔵 BRAND
                         Text(
                           'Stocks',
                           style: Theme.of(context).textTheme.headlineSmall
@@ -89,9 +72,7 @@ class KycProofOfAddressScreen extends HookWidget {
                                 color: AppColors.textPrimary,
                               ),
                         ),
-
                         const SizedBox(height: 4),
-
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -110,10 +91,7 @@ class KycProofOfAddressScreen extends HookWidget {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 16),
-
-                        // 🔵 PAGE TITLE
                         Text(
                           'Proof of Address',
                           style: Theme.of(context).textTheme.titleMedium
@@ -130,7 +108,7 @@ class KycProofOfAddressScreen extends HookWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: const LinearProgressIndicator(
-                        value: 0.75,
+                        value: 0.9,
                         minHeight: 4,
                         backgroundColor: AppColors.surface,
                         color: AppColors.primary,
@@ -139,165 +117,119 @@ class KycProofOfAddressScreen extends HookWidget {
 
                     const SizedBox(height: 32),
 
-                    // ── Document type chips ────────────────────────────
+                    // ── Document type ──────────────────────────────────
+                    Text(
+                      'Document type',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                     const SizedBox(height: AppSizes.sm),
 
-                    // ── Document type ─────────────────────────────────────
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Document type',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-
-                        const SizedBox(height: AppSizes.sm),
-
-                        Column(
-                          children: _docTypes.map((type) {
-                            final isSelected =
-                                state.proofOfAddressDocType == type;
-
-                            return GestureDetector(
-                              onTap: () => context.read<KycBloc>().add(
-                                KycEvent.proofOfAddressDocTypeChanged(type),
+                      children: _docTypes.map((type) {
+                        final isSelected = state.proofOfAddressDocType == type;
+                        return GestureDetector(
+                          onTap: () => context.read<KycBloc>().add(
+                            KycEvent.proofOfAddressDocTypeChanged(type),
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 18,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.surface.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(
+                                AppSizes.radiusM,
                               ),
-                              child: Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 18,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.surface.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(
-                                    AppSizes.radiusM,
-                                  ),
-                                  border: Border.all(
+                              border: Border.all(
+                                color: isSelected
+                                    ? AppColors.primary
+                                    : Colors.transparent,
+                                width: 1,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  type,
+                                  style: TextStyle(
                                     color: isSelected
-                                        ? AppColors.primary
-                                        : Colors.transparent,
-                                    width: 1,
+                                        ? AppColors.textPrimary
+                                        : AppColors.textSecondary,
+                                    fontWeight: isSelected
+                                        ? FontWeight.w600
+                                        : FontWeight.normal,
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      type,
-                                      style: TextStyle(
-                                        color: isSelected
-                                            ? AppColors.textPrimary
-                                            : AppColors.textSecondary,
-                                        fontWeight: isSelected
-                                            ? FontWeight.w600
-                                            : FontWeight.normal,
-                                      ),
-                                    ),
-                                    if (isSelected)
-                                      const Icon(
-                                        Icons.check_circle,
-                                        color: AppColors.primary,
-                                        size: 20,
-                                      )
-                                    else
-                                      const SizedBox(width: 20),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ],
+                                if (isSelected)
+                                  const Icon(
+                                    Icons.check_circle,
+                                    color: AppColors.primary,
+                                    size: 20,
+                                  )
+                                else
+                                  const SizedBox(width: 20),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
 
                     const SizedBox(height: 24),
 
-                    // ── Upload area ────────────────────────────────────
+                    // ── Upload — Front & Back ──────────────────────────
                     Text(
                       'Upload document',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: AppSizes.sm),
-
-                    GestureDetector(
-                      onTap: () => _pickImage(pickedImagePath),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        width: double.infinity,
-                        height: hasImage ? 220 : 140,
-                        decoration: BoxDecoration(
-                          color: AppColors.surface.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                          border: Border.all(
-                            color: hasImage
-                                ? AppColors.primary
-                                : AppColors.textSecondary.withOpacity(0.3),
-                            width: 1.5,
-                          ),
-                        ),
-                        child: hasImage
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  AppSizes.radiusM,
-                                ),
-                                child: Image.file(
-                                  File(pickedImagePath.value!),
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.cloud_upload_outlined,
-                                    color: AppColors.textSecondary,
-                                    size: 40,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Tap to upload or take a photo',
-                                    style: Theme.of(context).textTheme.bodySmall
-                                        ?.copyWith(
-                                          color: AppColors.textSecondary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'JPG, PNG or PDF — max 5MB',
-                                    style: TextStyle(
-                                      color: AppColors.textSecondary
-                                          .withOpacity(0.6),
-                                      fontSize: 11,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Both front and back are required',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
                       ),
                     ),
+                    const SizedBox(height: 16),
 
-                    if (hasImage)
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton.icon(
-                          onPressed: () => _pickImage(pickedImagePath),
-                          icon: const Icon(
-                            Icons.refresh,
-                            color: AppColors.textSecondary,
-                            size: 16,
-                          ),
-                          label: const Text(
-                            'Change',
-                            style: TextStyle(
-                              color: AppColors.textSecondary,
-                              fontSize: 13,
-                            ),
+                    // ── Side-by-side upload boxes ──────────────────────
+                    Row(
+                      children: [
+                        // Front
+                        Expanded(
+                          child: _UploadBox(
+                            label: 'Front',
+                            imagePath: frontImagePath.value,
+                            icon: Icons.flip_to_front_outlined,
+                            onTap: () => _pickImage(frontImagePath, context),
                           ),
                         ),
-                      ),
+                        const SizedBox(width: 12),
+                        // Back
+                        Expanded(
+                          child: _UploadBox(
+                            label: 'Back',
+                            imagePath: backImagePath.value,
+                            icon: Icons.flip_to_back_outlined,
+                            onTap: () => _pickImage(backImagePath, context),
+                          ),
+                        ),
+                      ],
+                    ),
 
-                    const SizedBox(height: 8),
+                    // ── Progress chips ─────────────────────────────────
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        _StatusChip(label: 'Front', isDone: hasFront),
+                        const SizedBox(width: 8),
+                        _StatusChip(label: 'Back', isDone: hasBack),
+                      ],
+                    ),
+
+                    const SizedBox(height: 24),
 
                     // ── Requirement note ───────────────────────────────
                     Container(
@@ -318,7 +250,8 @@ class KycProofOfAddressScreen extends HookWidget {
                           Expanded(
                             child: Text(
                               'Document must show your name and address clearly. '
-                              'Must be issued within the last 3 months.',
+                              'Must be issued within the last 3 months. '
+                              'Upload both front and back sides.',
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(color: AppColors.textSecondary),
                             ),
@@ -344,7 +277,8 @@ class KycProofOfAddressScreen extends HookWidget {
                           ? null
                           : () => context.read<KycBloc>().add(
                               KycEvent.proofOfAddressUploaded(
-                                documentUrl: pickedImagePath.value!,
+                                frontDocumentUrl: frontImagePath.value!,
+                                backDocumentUrl: backImagePath.value!,
                               ),
                             ),
                     ),
@@ -360,21 +294,228 @@ class KycProofOfAddressScreen extends HookWidget {
     );
   }
 
-  Future<void> _pickImage(ValueNotifier<String?> pickedImagePath) async {
-    final picker = ImagePicker();
-    final picked = await picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 85,
+  Future<void> _pickImage(
+    ValueNotifier<String?> imagePath,
+    BuildContext context,
+  ) async {
+    // Let user choose camera or gallery
+    final source = await showModalBottomSheet<ImageSource>(
+      context: context,
+      backgroundColor: AppColors.background,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 12),
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ListTile(
+              leading: const Icon(
+                Icons.camera_alt_outlined,
+                color: AppColors.primary,
+              ),
+              title: const Text(
+                'Take a photo',
+                style: TextStyle(color: AppColors.textPrimary),
+              ),
+              onTap: () => Navigator.pop(context, ImageSource.camera),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.photo_library_outlined,
+                color: AppColors.primary,
+              ),
+              title: const Text(
+                'Choose from gallery',
+                style: TextStyle(color: AppColors.textPrimary),
+              ),
+              onTap: () => Navigator.pop(context, ImageSource.gallery),
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
     );
+
+    if (source == null) return;
+
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: source, imageQuality: 85);
     if (picked != null) {
-      pickedImagePath.value = picked.path;
+      imagePath.value = picked.path;
     }
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// kyc_tier2_completion_screen.dart  — Tier 2 done, pending review
-// ════════════════════════════════════════════════════════════════════════════
+// ─── Upload box widget ────────────────────────────────────────────────────────
+class _UploadBox extends StatelessWidget {
+  final String label;
+  final String? imagePath;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _UploadBox({
+    required this.label,
+    required this.imagePath,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasImage = imagePath != null;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        height: 160,
+        decoration: BoxDecoration(
+          color: AppColors.surface.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(AppSizes.radiusM),
+          border: Border.all(
+            color: hasImage
+                ? AppColors.primary
+                : AppColors.textSecondary.withOpacity(0.3),
+            width: 1.5,
+          ),
+        ),
+        child: hasImage
+            ? Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(AppSizes.radiusM - 1),
+                    child: Image.file(
+                      File(imagePath!),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                  ),
+                  // Re-tap overlay
+                  Positioned(
+                    bottom: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: AppColors.background.withOpacity(0.85),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.edit,
+                        color: AppColors.primary,
+                        size: 16,
+                      ),
+                    ),
+                  ),
+                  // Label badge
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        label,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, color: AppColors.textSecondary, size: 32),
+                  const SizedBox(height: 8),
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Tap to upload',
+                    style: TextStyle(
+                      color: AppColors.textSecondary.withOpacity(0.7),
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+}
+
+// ─── Status chip ──────────────────────────────────────────────────────────────
+class _StatusChip extends StatelessWidget {
+  final String label;
+  final bool isDone;
+  const _StatusChip({required this.label, required this.isDone});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+      decoration: BoxDecoration(
+        color: isDone
+            ? AppColors.primary.withOpacity(0.12)
+            : AppColors.surface.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isDone
+              ? AppColors.primary
+              : AppColors.textSecondary.withOpacity(0.2),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            isDone ? Icons.check_circle : Icons.radio_button_unchecked,
+            size: 14,
+            color: isDone ? AppColors.primary : AppColors.textSecondary,
+          ),
+          const SizedBox(width: 5),
+          Text(
+            '$label ${isDone ? 'uploaded' : 'required'}',
+            style: TextStyle(
+              color: isDone ? AppColors.primary : AppColors.textSecondary,
+              fontSize: 11,
+              fontWeight: isDone ? FontWeight.w600 : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class KycTier2CompletionScreen extends HookWidget {
   const KycTier2CompletionScreen({super.key});

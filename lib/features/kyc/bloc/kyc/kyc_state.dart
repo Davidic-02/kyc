@@ -31,14 +31,26 @@ abstract class KycState with _$KycState {
     DocumentVerificationModel? documentVerification,
 
     // ── TIER 1 FIELD VALUES (no TextControllers in UI) ────────────────
-    @Default('') String firstName,
-    @Default('') String lastName,
-    @Default('') String age,
-    @Default('') String gender,
-    @Default('') String country,
-    @Default(['', '', '', '', '', '']) List<String> otpDigits,
+    @Default(FirstNameFormz.pure()) FirstNameFormz firstName,
+    @Default(LastNameFormz.pure()) LastNameFormz lastName,
+    @Default(AgeFormz.pure()) AgeFormz age,
+    @Default(GenderFormz.pure()) GenderFormz gender,
+    @Default(CountryFormz.pure()) CountryFormz country,
+    @Default('') String dob,
+
+    @Default([
+      OtpDigitFormz.pure(),
+      OtpDigitFormz.pure(),
+      OtpDigitFormz.pure(),
+      OtpDigitFormz.pure(),
+      OtpDigitFormz.pure(),
+      OtpDigitFormz.pure(),
+    ])
+    List<OtpDigitFormz> otpDigits,
+
     @Default('NIN') String docType,
-    @Default('') String docNumber,
+
+    @Default(DocumentNumberFormz.pure()) DocumentNumberFormz docNumber,
 
     // ── TIER 2 SAVED DATA ─────────────────────────────────────────────
     Tier2Model? tier2Data,
@@ -50,7 +62,8 @@ abstract class KycState with _$KycState {
     @Default('') String detectedCountry,
     @Default(false) bool isVpnSuspected,
     @Default('Utility Bill') String proofOfAddressDocType,
-    @Default('') String proofOfAddressUrl,
+    @Default('') String proofOfAddressFrontUrl,
+    @Default('') String proofOfAddressBackUrl,
 
     // ── STEP STATUSES ─────────────────────────────────────────────────
     @Default(KycStepStatus.initial) KycStepStatus basicInfoStatus,
@@ -69,20 +82,22 @@ abstract class KycState with _$KycState {
 
   // ── DERIVED: form validity ────────────────────────────────────────────
   bool get isBasicInfoValid =>
-      firstName.trim().isNotEmpty &&
-      lastName.trim().isNotEmpty &&
-      age.trim().isNotEmpty &&
-      gender.isNotEmpty &&
-      country.isNotEmpty;
+      firstName.isValid &&
+      lastName.isValid &&
+      age.isValid &&
+      gender.isValid &&
+      country.isValid;
 
-  String get otpCode => otpDigits.join();
-  bool get isOtpComplete => otpCode.length == 6 && !otpDigits.contains('');
+  String get otpCode => otpDigits.map((digit) => digit.value).join();
 
-  bool get isDocumentValid => docNumber.trim().isNotEmpty && docType.isNotEmpty;
+  bool get isOtpComplete => otpDigits.every((digit) => digit.isValid);
+
+  bool get isDocumentValid => docNumber.isValid && docType.isNotEmpty;
 
   bool get isSelfieValid => selfieUrl.isNotEmpty;
   bool get isLocationValid => latitude != 0.0 && longitude != 0.0;
-  bool get isProofOfAddressValid => proofOfAddressUrl.isNotEmpty;
+  bool get isProofOfAddressValid =>
+      proofOfAddressFrontUrl.isNotEmpty && proofOfAddressBackUrl.isNotEmpty;
 
   // ── DERIVED: tier completion ──────────────────────────────────────────
   bool get isTier1Complete => completedSteps.toSet().containsAll([
@@ -157,4 +172,171 @@ abstract class KycState with _$KycState {
   }
 
   bool get isStepBlocked => !canGoToStep(currentStep);
+}
+
+class FirstNameFormz extends FormzInput<String, ValidationError> {
+  const FirstNameFormz.pure([super.value = '']) : super.pure();
+
+  const FirstNameFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return ValidationError.empty;
+    }
+
+    final regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value.trim())) {
+      return ValidationError.invalid;
+    }
+
+    if (value.trim().length < 2) {
+      return ValidationError.short;
+    }
+
+    return null;
+  }
+}
+
+class LastNameFormz extends FormzInput<String, ValidationError> {
+  const LastNameFormz.pure([super.value = '']) : super.pure();
+
+  const LastNameFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return ValidationError.empty;
+    }
+
+    final regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value.trim())) {
+      return ValidationError.invalid;
+    }
+
+    if (value.trim().length < 6) {
+      return ValidationError.short;
+    }
+
+    return null;
+  }
+}
+
+class AgeFormz extends FormzInput<String, ValidationError> {
+  const AgeFormz.pure([super.value = '']) : super.pure();
+
+  const AgeFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return ValidationError.empty;
+    }
+
+    final age = int.tryParse(value);
+
+    if (age == null) {
+      return ValidationError.invalid;
+    }
+
+    if (age < 18) {
+      return ValidationError.small;
+    }
+
+    if (age > 120) {
+      return ValidationError.large;
+    }
+
+    return null;
+  }
+}
+
+class GenderFormz extends FormzInput<String, ValidationError> {
+  const GenderFormz.pure([super.value = '']) : super.pure();
+
+  const GenderFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return ValidationError.empty;
+    }
+
+    const genders = ['Male', 'Female', 'Other'];
+
+    if (!genders.contains(value.trim())) {
+      return ValidationError.invalid;
+    }
+
+    return null;
+  }
+}
+
+class CountryFormz extends FormzInput<String, ValidationError> {
+  const CountryFormz.pure([super.value = '']) : super.pure();
+
+  const CountryFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return ValidationError.empty;
+    }
+
+    if (value.trim().length < 2) {
+      return ValidationError.short;
+    }
+
+    return null;
+  }
+}
+
+class DocumentNumberFormz extends FormzInput<String, ValidationError> {
+  const DocumentNumberFormz.pure([super.value = '']) : super.pure();
+
+  const DocumentNumberFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return ValidationError.empty;
+    }
+
+    final cleanValue = value.replaceAll(' ', '');
+
+    if (cleanValue.length < 6) {
+      return ValidationError.short;
+    }
+
+    final regex = RegExp(r'^[a-zA-Z0-9]+$');
+
+    if (!regex.hasMatch(cleanValue)) {
+      return ValidationError.invalid;
+    }
+
+    return null;
+  }
+}
+
+class OtpDigitFormz extends FormzInput<String, ValidationError> {
+  const OtpDigitFormz.pure([super.value = '']) : super.pure();
+
+  const OtpDigitFormz.dirty([super.value = '']) : super.dirty();
+
+  @override
+  ValidationError? validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return ValidationError.empty;
+    }
+
+    final regex = RegExp(r'^[0-9]$');
+
+    if (!regex.hasMatch(value)) {
+      return ValidationError.invalid;
+    }
+
+    return null;
+  }
 }

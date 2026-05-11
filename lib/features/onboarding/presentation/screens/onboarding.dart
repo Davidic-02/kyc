@@ -209,18 +209,18 @@ class OnboardingScreen extends HookWidget {
                         padding: const EdgeInsets.all(11),
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
-                          color: AppColors.primary.withOpacity(0.15),
+                          color: AppColors.primary.withValues(alpha: 0.20),
                         ),
                         child: const Icon(
                           Icons.arrow_forward,
                           color: AppColors.primary,
-                          size: 20,
+                          size: 30,
                         ),
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: AppSizes.md),
+                  const SizedBox(height: AppSizes.lg * 2),
                 ],
               ),
             ),

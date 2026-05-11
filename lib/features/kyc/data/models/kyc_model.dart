@@ -27,6 +27,7 @@ abstract class BasicInfoModel with _$BasicInfoModel {
     required String firstName,
     required String lastName,
     required String gender,
+    required String dob,
     required String age,
     required String country,
   }) = _BasicInfoModel;
@@ -94,7 +95,8 @@ abstract class Tier2Model with _$Tier2Model {
 
     // Step 6 — Proof of address
     required String proofOfAddressDocType,
-    required String proofOfAddressUrl,
+    required String proofOfAddressFrontUrl,
+    required String proofOfAddressBackUrl,
     @Default(false) bool proofReviewed,
     @Default(false) bool proofApproved,
 

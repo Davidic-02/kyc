@@ -55,7 +55,7 @@ extension KycEventPatterns on KycEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadExistingProgress value)?  loadExistingProgress,TResult Function( _NextStep value)?  nextStep,TResult Function( _PreviousStep value)?  previousStep,TResult Function( _NavigateToStep value)?  navigateToStep,TResult Function( _FirstNameChanged value)?  firstNameChanged,TResult Function( _LastNameChanged value)?  lastNameChanged,TResult Function( _AgeChanged value)?  ageChanged,TResult Function( _GenderChanged value)?  genderChanged,TResult Function( _CountryChanged value)?  countryChanged,TResult Function( _BasicInfoSaved value)?  basicInfoSaved,TResult Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult Function( _OtpDigitChanged value)?  otpDigitChanged,TResult Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult Function( _DocTypeChanged value)?  docTypeChanged,TResult Function( _DocNumberChanged value)?  docNumberChanged,TResult Function( _DocumentSaved value)?  documentSaved,TResult Function( _Submitted value)?  submitted,TResult Function( _StartTier2 value)?  startTier2,TResult Function( _SkipTier2 value)?  skipTier2,TResult Function( _SelfieCaptureDone value)?  selfieCaptureDone,TResult Function( _LocationCaptured value)?  locationCaptured,TResult Function( _ProofOfAddressDocTypeChanged value)?  proofOfAddressDocTypeChanged,TResult Function( _ProofOfAddressUploaded value)?  proofOfAddressUploaded,TResult Function( _Tier2Submitted value)?  tier2Submitted,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadExistingProgress value)?  loadExistingProgress,TResult Function( _NextStep value)?  nextStep,TResult Function( _PreviousStep value)?  previousStep,TResult Function( _NavigateToStep value)?  navigateToStep,TResult Function( _FirstNameChanged value)?  firstNameChanged,TResult Function( _LastNameChanged value)?  lastNameChanged,TResult Function( _DobChanged value)?  dobChanged,TResult Function( _AgeChanged value)?  ageChanged,TResult Function( _GenderChanged value)?  genderChanged,TResult Function( _CountryChanged value)?  countryChanged,TResult Function( _BasicInfoSaved value)?  basicInfoSaved,TResult Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult Function( _OtpDigitChanged value)?  otpDigitChanged,TResult Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult Function( _DocTypeChanged value)?  docTypeChanged,TResult Function( _DocNumberChanged value)?  docNumberChanged,TResult Function( _DocumentSaved value)?  documentSaved,TResult Function( _Submitted value)?  submitted,TResult Function( _StartTier2 value)?  startTier2,TResult Function( _SkipTier2 value)?  skipTier2,TResult Function( _SelfieCaptureDone value)?  selfieCaptureDone,TResult Function( _LocationCaptured value)?  locationCaptured,TResult Function( _ProofOfAddressDocTypeChanged value)?  proofOfAddressDocTypeChanged,TResult Function( _ProofOfAddressUploaded value)?  proofOfAddressUploaded,TResult Function( _Tier2Submitted value)?  tier2Submitted,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
@@ -64,7 +64,8 @@ return nextStep(_that);case _PreviousStep() when previousStep != null:
 return previousStep(_that);case _NavigateToStep() when navigateToStep != null:
 return navigateToStep(_that);case _FirstNameChanged() when firstNameChanged != null:
 return firstNameChanged(_that);case _LastNameChanged() when lastNameChanged != null:
-return lastNameChanged(_that);case _AgeChanged() when ageChanged != null:
+return lastNameChanged(_that);case _DobChanged() when dobChanged != null:
+return dobChanged(_that);case _AgeChanged() when ageChanged != null:
 return ageChanged(_that);case _GenderChanged() when genderChanged != null:
 return genderChanged(_that);case _CountryChanged() when countryChanged != null:
 return countryChanged(_that);case _BasicInfoSaved() when basicInfoSaved != null:
@@ -100,7 +101,7 @@ return tier2Submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadExistingProgress value)  loadExistingProgress,required TResult Function( _NextStep value)  nextStep,required TResult Function( _PreviousStep value)  previousStep,required TResult Function( _NavigateToStep value)  navigateToStep,required TResult Function( _FirstNameChanged value)  firstNameChanged,required TResult Function( _LastNameChanged value)  lastNameChanged,required TResult Function( _AgeChanged value)  ageChanged,required TResult Function( _GenderChanged value)  genderChanged,required TResult Function( _CountryChanged value)  countryChanged,required TResult Function( _BasicInfoSaved value)  basicInfoSaved,required TResult Function( _TwoFactorSetupCompleted value)  twoFactorSetupCompleted,required TResult Function( _OtpDigitChanged value)  otpDigitChanged,required TResult Function( _TwoFactorVerificationRequested value)  twoFactorVerificationRequested,required TResult Function( _DocTypeChanged value)  docTypeChanged,required TResult Function( _DocNumberChanged value)  docNumberChanged,required TResult Function( _DocumentSaved value)  documentSaved,required TResult Function( _Submitted value)  submitted,required TResult Function( _StartTier2 value)  startTier2,required TResult Function( _SkipTier2 value)  skipTier2,required TResult Function( _SelfieCaptureDone value)  selfieCaptureDone,required TResult Function( _LocationCaptured value)  locationCaptured,required TResult Function( _ProofOfAddressDocTypeChanged value)  proofOfAddressDocTypeChanged,required TResult Function( _ProofOfAddressUploaded value)  proofOfAddressUploaded,required TResult Function( _Tier2Submitted value)  tier2Submitted,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadExistingProgress value)  loadExistingProgress,required TResult Function( _NextStep value)  nextStep,required TResult Function( _PreviousStep value)  previousStep,required TResult Function( _NavigateToStep value)  navigateToStep,required TResult Function( _FirstNameChanged value)  firstNameChanged,required TResult Function( _LastNameChanged value)  lastNameChanged,required TResult Function( _DobChanged value)  dobChanged,required TResult Function( _AgeChanged value)  ageChanged,required TResult Function( _GenderChanged value)  genderChanged,required TResult Function( _CountryChanged value)  countryChanged,required TResult Function( _BasicInfoSaved value)  basicInfoSaved,required TResult Function( _TwoFactorSetupCompleted value)  twoFactorSetupCompleted,required TResult Function( _OtpDigitChanged value)  otpDigitChanged,required TResult Function( _TwoFactorVerificationRequested value)  twoFactorVerificationRequested,required TResult Function( _DocTypeChanged value)  docTypeChanged,required TResult Function( _DocNumberChanged value)  docNumberChanged,required TResult Function( _DocumentSaved value)  documentSaved,required TResult Function( _Submitted value)  submitted,required TResult Function( _StartTier2 value)  startTier2,required TResult Function( _SkipTier2 value)  skipTier2,required TResult Function( _SelfieCaptureDone value)  selfieCaptureDone,required TResult Function( _LocationCaptured value)  locationCaptured,required TResult Function( _ProofOfAddressDocTypeChanged value)  proofOfAddressDocTypeChanged,required TResult Function( _ProofOfAddressUploaded value)  proofOfAddressUploaded,required TResult Function( _Tier2Submitted value)  tier2Submitted,}){
 final _that = this;
 switch (_that) {
 case _LoadExistingProgress():
@@ -109,7 +110,8 @@ return nextStep(_that);case _PreviousStep():
 return previousStep(_that);case _NavigateToStep():
 return navigateToStep(_that);case _FirstNameChanged():
 return firstNameChanged(_that);case _LastNameChanged():
-return lastNameChanged(_that);case _AgeChanged():
+return lastNameChanged(_that);case _DobChanged():
+return dobChanged(_that);case _AgeChanged():
 return ageChanged(_that);case _GenderChanged():
 return genderChanged(_that);case _CountryChanged():
 return countryChanged(_that);case _BasicInfoSaved():
@@ -144,7 +146,7 @@ return tier2Submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadExistingProgress value)?  loadExistingProgress,TResult? Function( _NextStep value)?  nextStep,TResult? Function( _PreviousStep value)?  previousStep,TResult? Function( _NavigateToStep value)?  navigateToStep,TResult? Function( _FirstNameChanged value)?  firstNameChanged,TResult? Function( _LastNameChanged value)?  lastNameChanged,TResult? Function( _AgeChanged value)?  ageChanged,TResult? Function( _GenderChanged value)?  genderChanged,TResult? Function( _CountryChanged value)?  countryChanged,TResult? Function( _BasicInfoSaved value)?  basicInfoSaved,TResult? Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult? Function( _OtpDigitChanged value)?  otpDigitChanged,TResult? Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult? Function( _DocTypeChanged value)?  docTypeChanged,TResult? Function( _DocNumberChanged value)?  docNumberChanged,TResult? Function( _DocumentSaved value)?  documentSaved,TResult? Function( _Submitted value)?  submitted,TResult? Function( _StartTier2 value)?  startTier2,TResult? Function( _SkipTier2 value)?  skipTier2,TResult? Function( _SelfieCaptureDone value)?  selfieCaptureDone,TResult? Function( _LocationCaptured value)?  locationCaptured,TResult? Function( _ProofOfAddressDocTypeChanged value)?  proofOfAddressDocTypeChanged,TResult? Function( _ProofOfAddressUploaded value)?  proofOfAddressUploaded,TResult? Function( _Tier2Submitted value)?  tier2Submitted,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadExistingProgress value)?  loadExistingProgress,TResult? Function( _NextStep value)?  nextStep,TResult? Function( _PreviousStep value)?  previousStep,TResult? Function( _NavigateToStep value)?  navigateToStep,TResult? Function( _FirstNameChanged value)?  firstNameChanged,TResult? Function( _LastNameChanged value)?  lastNameChanged,TResult? Function( _DobChanged value)?  dobChanged,TResult? Function( _AgeChanged value)?  ageChanged,TResult? Function( _GenderChanged value)?  genderChanged,TResult? Function( _CountryChanged value)?  countryChanged,TResult? Function( _BasicInfoSaved value)?  basicInfoSaved,TResult? Function( _TwoFactorSetupCompleted value)?  twoFactorSetupCompleted,TResult? Function( _OtpDigitChanged value)?  otpDigitChanged,TResult? Function( _TwoFactorVerificationRequested value)?  twoFactorVerificationRequested,TResult? Function( _DocTypeChanged value)?  docTypeChanged,TResult? Function( _DocNumberChanged value)?  docNumberChanged,TResult? Function( _DocumentSaved value)?  documentSaved,TResult? Function( _Submitted value)?  submitted,TResult? Function( _StartTier2 value)?  startTier2,TResult? Function( _SkipTier2 value)?  skipTier2,TResult? Function( _SelfieCaptureDone value)?  selfieCaptureDone,TResult? Function( _LocationCaptured value)?  locationCaptured,TResult? Function( _ProofOfAddressDocTypeChanged value)?  proofOfAddressDocTypeChanged,TResult? Function( _ProofOfAddressUploaded value)?  proofOfAddressUploaded,TResult? Function( _Tier2Submitted value)?  tier2Submitted,}){
 final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
@@ -153,7 +155,8 @@ return nextStep(_that);case _PreviousStep() when previousStep != null:
 return previousStep(_that);case _NavigateToStep() when navigateToStep != null:
 return navigateToStep(_that);case _FirstNameChanged() when firstNameChanged != null:
 return firstNameChanged(_that);case _LastNameChanged() when lastNameChanged != null:
-return lastNameChanged(_that);case _AgeChanged() when ageChanged != null:
+return lastNameChanged(_that);case _DobChanged() when dobChanged != null:
+return dobChanged(_that);case _AgeChanged() when ageChanged != null:
 return ageChanged(_that);case _GenderChanged() when genderChanged != null:
 return genderChanged(_that);case _CountryChanged() when countryChanged != null:
 return countryChanged(_that);case _BasicInfoSaved() when basicInfoSaved != null:
@@ -188,7 +191,7 @@ return tier2Submitted(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadExistingProgress,TResult Function()?  nextStep,TResult Function()?  previousStep,TResult Function( KycSteps step)?  navigateToStep,TResult Function( String value)?  firstNameChanged,TResult Function( String value)?  lastNameChanged,TResult Function( String value)?  ageChanged,TResult Function( String value)?  genderChanged,TResult Function( String value)?  countryChanged,TResult Function()?  basicInfoSaved,TResult Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult Function( int index,  String digit)?  otpDigitChanged,TResult Function()?  twoFactorVerificationRequested,TResult Function( String value)?  docTypeChanged,TResult Function( String value)?  docNumberChanged,TResult Function()?  documentSaved,TResult Function()?  submitted,TResult Function()?  startTier2,TResult Function()?  skipTier2,TResult Function( String selfieUrl)?  selfieCaptureDone,TResult Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)?  locationCaptured,TResult Function( String value)?  proofOfAddressDocTypeChanged,TResult Function( String documentUrl)?  proofOfAddressUploaded,TResult Function()?  tier2Submitted,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadExistingProgress,TResult Function()?  nextStep,TResult Function()?  previousStep,TResult Function( KycSteps step)?  navigateToStep,TResult Function( String value)?  firstNameChanged,TResult Function( String value)?  lastNameChanged,TResult Function( String value)?  dobChanged,TResult Function( String value)?  ageChanged,TResult Function( String value)?  genderChanged,TResult Function( String value)?  countryChanged,TResult Function()?  basicInfoSaved,TResult Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult Function( int index,  String digit)?  otpDigitChanged,TResult Function()?  twoFactorVerificationRequested,TResult Function( String value)?  docTypeChanged,TResult Function( String value)?  docNumberChanged,TResult Function()?  documentSaved,TResult Function()?  submitted,TResult Function()?  startTier2,TResult Function()?  skipTier2,TResult Function( String selfieUrl)?  selfieCaptureDone,TResult Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)?  locationCaptured,TResult Function( String value)?  proofOfAddressDocTypeChanged,TResult Function( String frontDocumentUrl,  String backDocumentUrl)?  proofOfAddressUploaded,TResult Function()?  tier2Submitted,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress();case _NextStep() when nextStep != null:
@@ -196,7 +199,8 @@ return nextStep();case _PreviousStep() when previousStep != null:
 return previousStep();case _NavigateToStep() when navigateToStep != null:
 return navigateToStep(_that.step);case _FirstNameChanged() when firstNameChanged != null:
 return firstNameChanged(_that.value);case _LastNameChanged() when lastNameChanged != null:
-return lastNameChanged(_that.value);case _AgeChanged() when ageChanged != null:
+return lastNameChanged(_that.value);case _DobChanged() when dobChanged != null:
+return dobChanged(_that.value);case _AgeChanged() when ageChanged != null:
 return ageChanged(_that.value);case _GenderChanged() when genderChanged != null:
 return genderChanged(_that.value);case _CountryChanged() when countryChanged != null:
 return countryChanged(_that.value);case _BasicInfoSaved() when basicInfoSaved != null:
@@ -213,7 +217,7 @@ return skipTier2();case _SelfieCaptureDone() when selfieCaptureDone != null:
 return selfieCaptureDone(_that.selfieUrl);case _LocationCaptured() when locationCaptured != null:
 return locationCaptured(_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected);case _ProofOfAddressDocTypeChanged() when proofOfAddressDocTypeChanged != null:
 return proofOfAddressDocTypeChanged(_that.value);case _ProofOfAddressUploaded() when proofOfAddressUploaded != null:
-return proofOfAddressUploaded(_that.documentUrl);case _Tier2Submitted() when tier2Submitted != null:
+return proofOfAddressUploaded(_that.frontDocumentUrl,_that.backDocumentUrl);case _Tier2Submitted() when tier2Submitted != null:
 return tier2Submitted();case _:
   return orElse();
 
@@ -232,7 +236,7 @@ return tier2Submitted();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadExistingProgress,required TResult Function()  nextStep,required TResult Function()  previousStep,required TResult Function( KycSteps step)  navigateToStep,required TResult Function( String value)  firstNameChanged,required TResult Function( String value)  lastNameChanged,required TResult Function( String value)  ageChanged,required TResult Function( String value)  genderChanged,required TResult Function( String value)  countryChanged,required TResult Function()  basicInfoSaved,required TResult Function( String secretKey,  String qrData)  twoFactorSetupCompleted,required TResult Function( int index,  String digit)  otpDigitChanged,required TResult Function()  twoFactorVerificationRequested,required TResult Function( String value)  docTypeChanged,required TResult Function( String value)  docNumberChanged,required TResult Function()  documentSaved,required TResult Function()  submitted,required TResult Function()  startTier2,required TResult Function()  skipTier2,required TResult Function( String selfieUrl)  selfieCaptureDone,required TResult Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)  locationCaptured,required TResult Function( String value)  proofOfAddressDocTypeChanged,required TResult Function( String documentUrl)  proofOfAddressUploaded,required TResult Function()  tier2Submitted,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadExistingProgress,required TResult Function()  nextStep,required TResult Function()  previousStep,required TResult Function( KycSteps step)  navigateToStep,required TResult Function( String value)  firstNameChanged,required TResult Function( String value)  lastNameChanged,required TResult Function( String value)  dobChanged,required TResult Function( String value)  ageChanged,required TResult Function( String value)  genderChanged,required TResult Function( String value)  countryChanged,required TResult Function()  basicInfoSaved,required TResult Function( String secretKey,  String qrData)  twoFactorSetupCompleted,required TResult Function( int index,  String digit)  otpDigitChanged,required TResult Function()  twoFactorVerificationRequested,required TResult Function( String value)  docTypeChanged,required TResult Function( String value)  docNumberChanged,required TResult Function()  documentSaved,required TResult Function()  submitted,required TResult Function()  startTier2,required TResult Function()  skipTier2,required TResult Function( String selfieUrl)  selfieCaptureDone,required TResult Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)  locationCaptured,required TResult Function( String value)  proofOfAddressDocTypeChanged,required TResult Function( String frontDocumentUrl,  String backDocumentUrl)  proofOfAddressUploaded,required TResult Function()  tier2Submitted,}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress():
 return loadExistingProgress();case _NextStep():
@@ -240,7 +244,8 @@ return nextStep();case _PreviousStep():
 return previousStep();case _NavigateToStep():
 return navigateToStep(_that.step);case _FirstNameChanged():
 return firstNameChanged(_that.value);case _LastNameChanged():
-return lastNameChanged(_that.value);case _AgeChanged():
+return lastNameChanged(_that.value);case _DobChanged():
+return dobChanged(_that.value);case _AgeChanged():
 return ageChanged(_that.value);case _GenderChanged():
 return genderChanged(_that.value);case _CountryChanged():
 return countryChanged(_that.value);case _BasicInfoSaved():
@@ -257,7 +262,7 @@ return skipTier2();case _SelfieCaptureDone():
 return selfieCaptureDone(_that.selfieUrl);case _LocationCaptured():
 return locationCaptured(_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected);case _ProofOfAddressDocTypeChanged():
 return proofOfAddressDocTypeChanged(_that.value);case _ProofOfAddressUploaded():
-return proofOfAddressUploaded(_that.documentUrl);case _Tier2Submitted():
+return proofOfAddressUploaded(_that.frontDocumentUrl,_that.backDocumentUrl);case _Tier2Submitted():
 return tier2Submitted();case _:
   throw StateError('Unexpected subclass');
 
@@ -275,7 +280,7 @@ return tier2Submitted();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadExistingProgress,TResult? Function()?  nextStep,TResult? Function()?  previousStep,TResult? Function( KycSteps step)?  navigateToStep,TResult? Function( String value)?  firstNameChanged,TResult? Function( String value)?  lastNameChanged,TResult? Function( String value)?  ageChanged,TResult? Function( String value)?  genderChanged,TResult? Function( String value)?  countryChanged,TResult? Function()?  basicInfoSaved,TResult? Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult? Function( int index,  String digit)?  otpDigitChanged,TResult? Function()?  twoFactorVerificationRequested,TResult? Function( String value)?  docTypeChanged,TResult? Function( String value)?  docNumberChanged,TResult? Function()?  documentSaved,TResult? Function()?  submitted,TResult? Function()?  startTier2,TResult? Function()?  skipTier2,TResult? Function( String selfieUrl)?  selfieCaptureDone,TResult? Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)?  locationCaptured,TResult? Function( String value)?  proofOfAddressDocTypeChanged,TResult? Function( String documentUrl)?  proofOfAddressUploaded,TResult? Function()?  tier2Submitted,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadExistingProgress,TResult? Function()?  nextStep,TResult? Function()?  previousStep,TResult? Function( KycSteps step)?  navigateToStep,TResult? Function( String value)?  firstNameChanged,TResult? Function( String value)?  lastNameChanged,TResult? Function( String value)?  dobChanged,TResult? Function( String value)?  ageChanged,TResult? Function( String value)?  genderChanged,TResult? Function( String value)?  countryChanged,TResult? Function()?  basicInfoSaved,TResult? Function( String secretKey,  String qrData)?  twoFactorSetupCompleted,TResult? Function( int index,  String digit)?  otpDigitChanged,TResult? Function()?  twoFactorVerificationRequested,TResult? Function( String value)?  docTypeChanged,TResult? Function( String value)?  docNumberChanged,TResult? Function()?  documentSaved,TResult? Function()?  submitted,TResult? Function()?  startTier2,TResult? Function()?  skipTier2,TResult? Function( String selfieUrl)?  selfieCaptureDone,TResult? Function( double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected)?  locationCaptured,TResult? Function( String value)?  proofOfAddressDocTypeChanged,TResult? Function( String frontDocumentUrl,  String backDocumentUrl)?  proofOfAddressUploaded,TResult? Function()?  tier2Submitted,}) {final _that = this;
 switch (_that) {
 case _LoadExistingProgress() when loadExistingProgress != null:
 return loadExistingProgress();case _NextStep() when nextStep != null:
@@ -283,7 +288,8 @@ return nextStep();case _PreviousStep() when previousStep != null:
 return previousStep();case _NavigateToStep() when navigateToStep != null:
 return navigateToStep(_that.step);case _FirstNameChanged() when firstNameChanged != null:
 return firstNameChanged(_that.value);case _LastNameChanged() when lastNameChanged != null:
-return lastNameChanged(_that.value);case _AgeChanged() when ageChanged != null:
+return lastNameChanged(_that.value);case _DobChanged() when dobChanged != null:
+return dobChanged(_that.value);case _AgeChanged() when ageChanged != null:
 return ageChanged(_that.value);case _GenderChanged() when genderChanged != null:
 return genderChanged(_that.value);case _CountryChanged() when countryChanged != null:
 return countryChanged(_that.value);case _BasicInfoSaved() when basicInfoSaved != null:
@@ -300,7 +306,7 @@ return skipTier2();case _SelfieCaptureDone() when selfieCaptureDone != null:
 return selfieCaptureDone(_that.selfieUrl);case _LocationCaptured() when locationCaptured != null:
 return locationCaptured(_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected);case _ProofOfAddressDocTypeChanged() when proofOfAddressDocTypeChanged != null:
 return proofOfAddressDocTypeChanged(_that.value);case _ProofOfAddressUploaded() when proofOfAddressUploaded != null:
-return proofOfAddressUploaded(_that.documentUrl);case _Tier2Submitted() when tier2Submitted != null:
+return proofOfAddressUploaded(_that.frontDocumentUrl,_that.backDocumentUrl);case _Tier2Submitted() when tier2Submitted != null:
 return tier2Submitted();case _:
   return null;
 
@@ -595,6 +601,72 @@ class __$LastNameChangedCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
   return _then(_LastNameChanged(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _DobChanged implements KycEvent {
+  const _DobChanged(this.value);
+  
+
+ final  String value;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DobChangedCopyWith<_DobChanged> get copyWith => __$DobChangedCopyWithImpl<_DobChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DobChanged&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'KycEvent.dobChanged(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DobChangedCopyWith<$Res> implements $KycEventCopyWith<$Res> {
+  factory _$DobChangedCopyWith(_DobChanged value, $Res Function(_DobChanged) _then) = __$DobChangedCopyWithImpl;
+@useResult
+$Res call({
+ String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$DobChangedCopyWithImpl<$Res>
+    implements _$DobChangedCopyWith<$Res> {
+  __$DobChangedCopyWithImpl(this._self, this._then);
+
+  final _DobChanged _self;
+  final $Res Function(_DobChanged) _then;
+
+/// Create a copy of KycEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_DobChanged(
 null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -1469,10 +1541,11 @@ as String,
 
 
 class _ProofOfAddressUploaded implements KycEvent {
-  const _ProofOfAddressUploaded({required this.documentUrl});
+  const _ProofOfAddressUploaded({required this.frontDocumentUrl, required this.backDocumentUrl});
   
 
- final  String documentUrl;
+ final  String frontDocumentUrl;
+ final  String backDocumentUrl;
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -1484,16 +1557,16 @@ _$ProofOfAddressUploadedCopyWith<_ProofOfAddressUploaded> get copyWith => __$Pro
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProofOfAddressUploaded&&(identical(other.documentUrl, documentUrl) || other.documentUrl == documentUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProofOfAddressUploaded&&(identical(other.frontDocumentUrl, frontDocumentUrl) || other.frontDocumentUrl == frontDocumentUrl)&&(identical(other.backDocumentUrl, backDocumentUrl) || other.backDocumentUrl == backDocumentUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,documentUrl);
+int get hashCode => Object.hash(runtimeType,frontDocumentUrl,backDocumentUrl);
 
 @override
 String toString() {
-  return 'KycEvent.proofOfAddressUploaded(documentUrl: $documentUrl)';
+  return 'KycEvent.proofOfAddressUploaded(frontDocumentUrl: $frontDocumentUrl, backDocumentUrl: $backDocumentUrl)';
 }
 
 
@@ -1504,7 +1577,7 @@ abstract mixin class _$ProofOfAddressUploadedCopyWith<$Res> implements $KycEvent
   factory _$ProofOfAddressUploadedCopyWith(_ProofOfAddressUploaded value, $Res Function(_ProofOfAddressUploaded) _then) = __$ProofOfAddressUploadedCopyWithImpl;
 @useResult
 $Res call({
- String documentUrl
+ String frontDocumentUrl, String backDocumentUrl
 });
 
 
@@ -1521,9 +1594,10 @@ class __$ProofOfAddressUploadedCopyWithImpl<$Res>
 
 /// Create a copy of KycEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? documentUrl = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? frontDocumentUrl = null,Object? backDocumentUrl = null,}) {
   return _then(_ProofOfAddressUploaded(
-documentUrl: null == documentUrl ? _self.documentUrl : documentUrl // ignore: cast_nullable_to_non_nullable
+frontDocumentUrl: null == frontDocumentUrl ? _self.frontDocumentUrl : frontDocumentUrl // ignore: cast_nullable_to_non_nullable
+as String,backDocumentUrl: null == backDocumentUrl ? _self.backDocumentUrl : backDocumentUrl // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -1570,9 +1644,9 @@ mixin _$KycState {
  KycSteps get currentStep; List<KycSteps> get completedSteps;// Firestore-driven status — backend sets this, app reads it
  KycStatus get kycStatus;// ── TIER 1 SAVED DATA ─────────────────────────────────────────────
  BasicInfoModel? get basicInfo; TwoFactorAuthModel? get twoFactorAuth; DocumentVerificationModel? get documentVerification;// ── TIER 1 FIELD VALUES (no TextControllers in UI) ────────────────
- String get firstName; String get lastName; String get age; String get gender; String get country; List<String> get otpDigits; String get docType; String get docNumber;// ── TIER 2 SAVED DATA ─────────────────────────────────────────────
+ FirstNameFormz get firstName; LastNameFormz get lastName; AgeFormz get age; GenderFormz get gender; CountryFormz get country; String get dob; List<OtpDigitFormz> get otpDigits; String get docType; DocumentNumberFormz get docNumber;// ── TIER 2 SAVED DATA ─────────────────────────────────────────────
  Tier2Model? get tier2Data;// ── TIER 2 FIELD VALUES ───────────────────────────────────────────
- String get selfieUrl; double get latitude; double get longitude; String get detectedCountry; bool get isVpnSuspected; String get proofOfAddressDocType; String get proofOfAddressUrl;// ── STEP STATUSES ─────────────────────────────────────────────────
+ String get selfieUrl; double get latitude; double get longitude; String get detectedCountry; bool get isVpnSuspected; String get proofOfAddressDocType; String get proofOfAddressFrontUrl; String get proofOfAddressBackUrl;// ── STEP STATUSES ─────────────────────────────────────────────────
  KycStepStatus get basicInfoStatus; KycStepStatus get twoFactorSetupStatus; KycStepStatus get twoFactorVerifyStatus; KycStepStatus get documentStatus; KycStepStatus get submitStatus; KycStepStatus get selfieStatus; KycStepStatus get locationStatus; KycStepStatus get proofOfAddressStatus; KycStepStatus get tier2SubmitStatus;// ── ERROR ─────────────────────────────────────────────────────────
  String get errorMessage;
 /// Create a copy of KycState
@@ -1585,16 +1659,16 @@ $KycStateCopyWith<KycState> get copyWith => _$KycStateCopyWithImpl<KycState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.kycStatus, kycStatus) || other.kycStatus == kycStatus)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.country, country) || other.country == country)&&const DeepCollectionEquality().equals(other.otpDigits, otpDigits)&&(identical(other.docType, docType) || other.docType == docType)&&(identical(other.docNumber, docNumber) || other.docNumber == docNumber)&&(identical(other.tier2Data, tier2Data) || other.tier2Data == tier2Data)&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.selfieStatus, selfieStatus) || other.selfieStatus == selfieStatus)&&(identical(other.locationStatus, locationStatus) || other.locationStatus == locationStatus)&&(identical(other.proofOfAddressStatus, proofOfAddressStatus) || other.proofOfAddressStatus == proofOfAddressStatus)&&(identical(other.tier2SubmitStatus, tier2SubmitStatus) || other.tier2SubmitStatus == tier2SubmitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other.completedSteps, completedSteps)&&(identical(other.kycStatus, kycStatus) || other.kycStatus == kycStatus)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.country, country) || other.country == country)&&(identical(other.dob, dob) || other.dob == dob)&&const DeepCollectionEquality().equals(other.otpDigits, otpDigits)&&(identical(other.docType, docType) || other.docType == docType)&&(identical(other.docNumber, docNumber) || other.docNumber == docNumber)&&(identical(other.tier2Data, tier2Data) || other.tier2Data == tier2Data)&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressFrontUrl, proofOfAddressFrontUrl) || other.proofOfAddressFrontUrl == proofOfAddressFrontUrl)&&(identical(other.proofOfAddressBackUrl, proofOfAddressBackUrl) || other.proofOfAddressBackUrl == proofOfAddressBackUrl)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.selfieStatus, selfieStatus) || other.selfieStatus == selfieStatus)&&(identical(other.locationStatus, locationStatus) || other.locationStatus == locationStatus)&&(identical(other.proofOfAddressStatus, proofOfAddressStatus) || other.proofOfAddressStatus == proofOfAddressStatus)&&(identical(other.tier2SubmitStatus, tier2SubmitStatus) || other.tier2SubmitStatus == tier2SubmitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,currentStep,const DeepCollectionEquality().hash(completedSteps),kycStatus,basicInfo,twoFactorAuth,documentVerification,firstName,lastName,age,gender,country,const DeepCollectionEquality().hash(otpDigits),docType,docNumber,tier2Data,selfieUrl,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,selfieStatus,locationStatus,proofOfAddressStatus,tier2SubmitStatus,errorMessage]);
+int get hashCode => Object.hashAll([runtimeType,currentStep,const DeepCollectionEquality().hash(completedSteps),kycStatus,basicInfo,twoFactorAuth,documentVerification,firstName,lastName,age,gender,country,dob,const DeepCollectionEquality().hash(otpDigits),docType,docNumber,tier2Data,selfieUrl,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressFrontUrl,proofOfAddressBackUrl,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,selfieStatus,locationStatus,proofOfAddressStatus,tier2SubmitStatus,errorMessage]);
 
 @override
 String toString() {
-  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, kycStatus: $kycStatus, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, country: $country, otpDigits: $otpDigits, docType: $docType, docNumber: $docNumber, tier2Data: $tier2Data, selfieUrl: $selfieUrl, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, selfieStatus: $selfieStatus, locationStatus: $locationStatus, proofOfAddressStatus: $proofOfAddressStatus, tier2SubmitStatus: $tier2SubmitStatus, errorMessage: $errorMessage)';
+  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, kycStatus: $kycStatus, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, country: $country, dob: $dob, otpDigits: $otpDigits, docType: $docType, docNumber: $docNumber, tier2Data: $tier2Data, selfieUrl: $selfieUrl, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressFrontUrl: $proofOfAddressFrontUrl, proofOfAddressBackUrl: $proofOfAddressBackUrl, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, selfieStatus: $selfieStatus, locationStatus: $locationStatus, proofOfAddressStatus: $proofOfAddressStatus, tier2SubmitStatus: $tier2SubmitStatus, errorMessage: $errorMessage)';
 }
 
 
@@ -1605,7 +1679,7 @@ abstract mixin class $KycStateCopyWith<$Res>  {
   factory $KycStateCopyWith(KycState value, $Res Function(KycState) _then) = _$KycStateCopyWithImpl;
 @useResult
 $Res call({
- KycSteps currentStep, List<KycSteps> completedSteps, KycStatus kycStatus, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, String firstName, String lastName, String age, String gender, String country, List<String> otpDigits, String docType, String docNumber, Tier2Model? tier2Data, String selfieUrl, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, KycStepStatus selfieStatus, KycStepStatus locationStatus, KycStepStatus proofOfAddressStatus, KycStepStatus tier2SubmitStatus, String errorMessage
+ KycSteps currentStep, List<KycSteps> completedSteps, KycStatus kycStatus, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, FirstNameFormz firstName, LastNameFormz lastName, AgeFormz age, GenderFormz gender, CountryFormz country, String dob, List<OtpDigitFormz> otpDigits, String docType, DocumentNumberFormz docNumber, Tier2Model? tier2Data, String selfieUrl, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressFrontUrl, String proofOfAddressBackUrl, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, KycStepStatus selfieStatus, KycStepStatus locationStatus, KycStepStatus proofOfAddressStatus, KycStepStatus tier2SubmitStatus, String errorMessage
 });
 
 
@@ -1622,7 +1696,7 @@ class _$KycStateCopyWithImpl<$Res>
 
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currentStep = null,Object? completedSteps = null,Object? kycStatus = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? firstName = null,Object? lastName = null,Object? age = null,Object? gender = null,Object? country = null,Object? otpDigits = null,Object? docType = null,Object? docNumber = null,Object? tier2Data = freezed,Object? selfieUrl = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? selfieStatus = null,Object? locationStatus = null,Object? proofOfAddressStatus = null,Object? tier2SubmitStatus = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currentStep = null,Object? completedSteps = null,Object? kycStatus = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? firstName = null,Object? lastName = null,Object? age = null,Object? gender = null,Object? country = null,Object? dob = null,Object? otpDigits = null,Object? docType = null,Object? docNumber = null,Object? tier2Data = freezed,Object? selfieUrl = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressFrontUrl = null,Object? proofOfAddressBackUrl = null,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? selfieStatus = null,Object? locationStatus = null,Object? proofOfAddressStatus = null,Object? tier2SubmitStatus = null,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
 currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,completedSteps: null == completedSteps ? _self.completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
@@ -1631,21 +1705,23 @@ as KycStatus,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ig
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
 as DocumentVerificationModel?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as FirstNameFormz,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as LastNameFormz,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
+as AgeFormz,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as GenderFormz,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as CountryFormz,dob: null == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String,otpDigits: null == otpDigits ? _self.otpDigits : otpDigits // ignore: cast_nullable_to_non_nullable
-as List<String>,docType: null == docType ? _self.docType : docType // ignore: cast_nullable_to_non_nullable
+as List<OtpDigitFormz>,docType: null == docType ? _self.docType : docType // ignore: cast_nullable_to_non_nullable
 as String,docNumber: null == docNumber ? _self.docNumber : docNumber // ignore: cast_nullable_to_non_nullable
-as String,tier2Data: freezed == tier2Data ? _self.tier2Data : tier2Data // ignore: cast_nullable_to_non_nullable
+as DocumentNumberFormz,tier2Data: freezed == tier2Data ? _self.tier2Data : tier2Data // ignore: cast_nullable_to_non_nullable
 as Tier2Model?,selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
 as String,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
 as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
 as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
 as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
 as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
-as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressFrontUrl: null == proofOfAddressFrontUrl ? _self.proofOfAddressFrontUrl : proofOfAddressFrontUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressBackUrl: null == proofOfAddressBackUrl ? _self.proofOfAddressBackUrl : proofOfAddressBackUrl // ignore: cast_nullable_to_non_nullable
 as String,basicInfoStatus: null == basicInfoStatus ? _self.basicInfoStatus : basicInfoStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorSetupStatus: null == twoFactorSetupStatus ? _self.twoFactorSetupStatus : twoFactorSetupStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorVerifyStatus: null == twoFactorVerifyStatus ? _self.twoFactorVerifyStatus : twoFactorVerifyStatus // ignore: cast_nullable_to_non_nullable
@@ -1789,10 +1865,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycStatus kycStatus,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  String firstName,  String lastName,  String age,  String gender,  String country,  List<String> otpDigits,  String docType,  String docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycStatus kycStatus,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  FirstNameFormz firstName,  LastNameFormz lastName,  AgeFormz age,  GenderFormz gender,  CountryFormz country,  String dob,  List<OtpDigitFormz> otpDigits,  String docType,  DocumentNumberFormz docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressFrontUrl,  String proofOfAddressBackUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _KycState() when $default != null:
-return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
+return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.dob,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressFrontUrl,_that.proofOfAddressBackUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -1810,10 +1886,10 @@ return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.bas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycStatus kycStatus,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  String firstName,  String lastName,  String age,  String gender,  String country,  List<String> otpDigits,  String docType,  String docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycStatus kycStatus,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  FirstNameFormz firstName,  LastNameFormz lastName,  AgeFormz age,  GenderFormz gender,  CountryFormz country,  String dob,  List<OtpDigitFormz> otpDigits,  String docType,  DocumentNumberFormz docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressFrontUrl,  String proofOfAddressBackUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _KycState():
-return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
+return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.dob,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressFrontUrl,_that.proofOfAddressBackUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1830,10 +1906,10 @@ return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.bas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycStatus kycStatus,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  String firstName,  String lastName,  String age,  String gender,  String country,  List<String> otpDigits,  String docType,  String docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( KycSteps currentStep,  List<KycSteps> completedSteps,  KycStatus kycStatus,  BasicInfoModel? basicInfo,  TwoFactorAuthModel? twoFactorAuth,  DocumentVerificationModel? documentVerification,  FirstNameFormz firstName,  LastNameFormz lastName,  AgeFormz age,  GenderFormz gender,  CountryFormz country,  String dob,  List<OtpDigitFormz> otpDigits,  String docType,  DocumentNumberFormz docNumber,  Tier2Model? tier2Data,  String selfieUrl,  double latitude,  double longitude,  String detectedCountry,  bool isVpnSuspected,  String proofOfAddressDocType,  String proofOfAddressFrontUrl,  String proofOfAddressBackUrl,  KycStepStatus basicInfoStatus,  KycStepStatus twoFactorSetupStatus,  KycStepStatus twoFactorVerifyStatus,  KycStepStatus documentStatus,  KycStepStatus submitStatus,  KycStepStatus selfieStatus,  KycStepStatus locationStatus,  KycStepStatus proofOfAddressStatus,  KycStepStatus tier2SubmitStatus,  String errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _KycState() when $default != null:
-return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
+return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.basicInfo,_that.twoFactorAuth,_that.documentVerification,_that.firstName,_that.lastName,_that.age,_that.gender,_that.country,_that.dob,_that.otpDigits,_that.docType,_that.docNumber,_that.tier2Data,_that.selfieUrl,_that.latitude,_that.longitude,_that.detectedCountry,_that.isVpnSuspected,_that.proofOfAddressDocType,_that.proofOfAddressFrontUrl,_that.proofOfAddressBackUrl,_that.basicInfoStatus,_that.twoFactorSetupStatus,_that.twoFactorVerifyStatus,_that.documentStatus,_that.submitStatus,_that.selfieStatus,_that.locationStatus,_that.proofOfAddressStatus,_that.tier2SubmitStatus,_that.errorMessage);case _:
   return null;
 
 }
@@ -1845,7 +1921,7 @@ return $default(_that.currentStep,_that.completedSteps,_that.kycStatus,_that.bas
 
 
 class _KycState extends KycState {
-  const _KycState({this.currentStep = KycSteps.intro, final  List<KycSteps> completedSteps = const [], this.kycStatus = KycStatus.inProgress, this.basicInfo, this.twoFactorAuth, this.documentVerification, this.firstName = '', this.lastName = '', this.age = '', this.gender = '', this.country = '', final  List<String> otpDigits = const ['', '', '', '', '', ''], this.docType = 'NIN', this.docNumber = '', this.tier2Data, this.selfieUrl = '', this.latitude = 0.0, this.longitude = 0.0, this.detectedCountry = '', this.isVpnSuspected = false, this.proofOfAddressDocType = 'Utility Bill', this.proofOfAddressUrl = '', this.basicInfoStatus = KycStepStatus.initial, this.twoFactorSetupStatus = KycStepStatus.initial, this.twoFactorVerifyStatus = KycStepStatus.initial, this.documentStatus = KycStepStatus.initial, this.submitStatus = KycStepStatus.initial, this.selfieStatus = KycStepStatus.initial, this.locationStatus = KycStepStatus.initial, this.proofOfAddressStatus = KycStepStatus.initial, this.tier2SubmitStatus = KycStepStatus.initial, this.errorMessage = ''}): _completedSteps = completedSteps,_otpDigits = otpDigits,super._();
+  const _KycState({this.currentStep = KycSteps.intro, final  List<KycSteps> completedSteps = const [], this.kycStatus = KycStatus.inProgress, this.basicInfo, this.twoFactorAuth, this.documentVerification, this.firstName = const FirstNameFormz.pure(), this.lastName = const LastNameFormz.pure(), this.age = const AgeFormz.pure(), this.gender = const GenderFormz.pure(), this.country = const CountryFormz.pure(), this.dob = '', final  List<OtpDigitFormz> otpDigits = const [OtpDigitFormz.pure(), OtpDigitFormz.pure(), OtpDigitFormz.pure(), OtpDigitFormz.pure(), OtpDigitFormz.pure(), OtpDigitFormz.pure()], this.docType = 'NIN', this.docNumber = const DocumentNumberFormz.pure(), this.tier2Data, this.selfieUrl = '', this.latitude = 0.0, this.longitude = 0.0, this.detectedCountry = '', this.isVpnSuspected = false, this.proofOfAddressDocType = 'Utility Bill', this.proofOfAddressFrontUrl = '', this.proofOfAddressBackUrl = '', this.basicInfoStatus = KycStepStatus.initial, this.twoFactorSetupStatus = KycStepStatus.initial, this.twoFactorVerifyStatus = KycStepStatus.initial, this.documentStatus = KycStepStatus.initial, this.submitStatus = KycStepStatus.initial, this.selfieStatus = KycStepStatus.initial, this.locationStatus = KycStepStatus.initial, this.proofOfAddressStatus = KycStepStatus.initial, this.tier2SubmitStatus = KycStepStatus.initial, this.errorMessage = ''}): _completedSteps = completedSteps,_otpDigits = otpDigits,super._();
   
 
 // ── FLOW ──────────────────────────────────────────────────────────
@@ -1864,20 +1940,21 @@ class _KycState extends KycState {
 @override final  TwoFactorAuthModel? twoFactorAuth;
 @override final  DocumentVerificationModel? documentVerification;
 // ── TIER 1 FIELD VALUES (no TextControllers in UI) ────────────────
-@override@JsonKey() final  String firstName;
-@override@JsonKey() final  String lastName;
-@override@JsonKey() final  String age;
-@override@JsonKey() final  String gender;
-@override@JsonKey() final  String country;
- final  List<String> _otpDigits;
-@override@JsonKey() List<String> get otpDigits {
+@override@JsonKey() final  FirstNameFormz firstName;
+@override@JsonKey() final  LastNameFormz lastName;
+@override@JsonKey() final  AgeFormz age;
+@override@JsonKey() final  GenderFormz gender;
+@override@JsonKey() final  CountryFormz country;
+@override@JsonKey() final  String dob;
+ final  List<OtpDigitFormz> _otpDigits;
+@override@JsonKey() List<OtpDigitFormz> get otpDigits {
   if (_otpDigits is EqualUnmodifiableListView) return _otpDigits;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_otpDigits);
 }
 
 @override@JsonKey() final  String docType;
-@override@JsonKey() final  String docNumber;
+@override@JsonKey() final  DocumentNumberFormz docNumber;
 // ── TIER 2 SAVED DATA ─────────────────────────────────────────────
 @override final  Tier2Model? tier2Data;
 // ── TIER 2 FIELD VALUES ───────────────────────────────────────────
@@ -1887,7 +1964,8 @@ class _KycState extends KycState {
 @override@JsonKey() final  String detectedCountry;
 @override@JsonKey() final  bool isVpnSuspected;
 @override@JsonKey() final  String proofOfAddressDocType;
-@override@JsonKey() final  String proofOfAddressUrl;
+@override@JsonKey() final  String proofOfAddressFrontUrl;
+@override@JsonKey() final  String proofOfAddressBackUrl;
 // ── STEP STATUSES ─────────────────────────────────────────────────
 @override@JsonKey() final  KycStepStatus basicInfoStatus;
 @override@JsonKey() final  KycStepStatus twoFactorSetupStatus;
@@ -1911,16 +1989,16 @@ _$KycStateCopyWith<_KycState> get copyWith => __$KycStateCopyWithImpl<_KycState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.kycStatus, kycStatus) || other.kycStatus == kycStatus)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.country, country) || other.country == country)&&const DeepCollectionEquality().equals(other._otpDigits, _otpDigits)&&(identical(other.docType, docType) || other.docType == docType)&&(identical(other.docNumber, docNumber) || other.docNumber == docNumber)&&(identical(other.tier2Data, tier2Data) || other.tier2Data == tier2Data)&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressUrl, proofOfAddressUrl) || other.proofOfAddressUrl == proofOfAddressUrl)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.selfieStatus, selfieStatus) || other.selfieStatus == selfieStatus)&&(identical(other.locationStatus, locationStatus) || other.locationStatus == locationStatus)&&(identical(other.proofOfAddressStatus, proofOfAddressStatus) || other.proofOfAddressStatus == proofOfAddressStatus)&&(identical(other.tier2SubmitStatus, tier2SubmitStatus) || other.tier2SubmitStatus == tier2SubmitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KycState&&(identical(other.currentStep, currentStep) || other.currentStep == currentStep)&&const DeepCollectionEquality().equals(other._completedSteps, _completedSteps)&&(identical(other.kycStatus, kycStatus) || other.kycStatus == kycStatus)&&(identical(other.basicInfo, basicInfo) || other.basicInfo == basicInfo)&&(identical(other.twoFactorAuth, twoFactorAuth) || other.twoFactorAuth == twoFactorAuth)&&(identical(other.documentVerification, documentVerification) || other.documentVerification == documentVerification)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.country, country) || other.country == country)&&(identical(other.dob, dob) || other.dob == dob)&&const DeepCollectionEquality().equals(other._otpDigits, _otpDigits)&&(identical(other.docType, docType) || other.docType == docType)&&(identical(other.docNumber, docNumber) || other.docNumber == docNumber)&&(identical(other.tier2Data, tier2Data) || other.tier2Data == tier2Data)&&(identical(other.selfieUrl, selfieUrl) || other.selfieUrl == selfieUrl)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.detectedCountry, detectedCountry) || other.detectedCountry == detectedCountry)&&(identical(other.isVpnSuspected, isVpnSuspected) || other.isVpnSuspected == isVpnSuspected)&&(identical(other.proofOfAddressDocType, proofOfAddressDocType) || other.proofOfAddressDocType == proofOfAddressDocType)&&(identical(other.proofOfAddressFrontUrl, proofOfAddressFrontUrl) || other.proofOfAddressFrontUrl == proofOfAddressFrontUrl)&&(identical(other.proofOfAddressBackUrl, proofOfAddressBackUrl) || other.proofOfAddressBackUrl == proofOfAddressBackUrl)&&(identical(other.basicInfoStatus, basicInfoStatus) || other.basicInfoStatus == basicInfoStatus)&&(identical(other.twoFactorSetupStatus, twoFactorSetupStatus) || other.twoFactorSetupStatus == twoFactorSetupStatus)&&(identical(other.twoFactorVerifyStatus, twoFactorVerifyStatus) || other.twoFactorVerifyStatus == twoFactorVerifyStatus)&&(identical(other.documentStatus, documentStatus) || other.documentStatus == documentStatus)&&(identical(other.submitStatus, submitStatus) || other.submitStatus == submitStatus)&&(identical(other.selfieStatus, selfieStatus) || other.selfieStatus == selfieStatus)&&(identical(other.locationStatus, locationStatus) || other.locationStatus == locationStatus)&&(identical(other.proofOfAddressStatus, proofOfAddressStatus) || other.proofOfAddressStatus == proofOfAddressStatus)&&(identical(other.tier2SubmitStatus, tier2SubmitStatus) || other.tier2SubmitStatus == tier2SubmitStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,currentStep,const DeepCollectionEquality().hash(_completedSteps),kycStatus,basicInfo,twoFactorAuth,documentVerification,firstName,lastName,age,gender,country,const DeepCollectionEquality().hash(_otpDigits),docType,docNumber,tier2Data,selfieUrl,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressUrl,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,selfieStatus,locationStatus,proofOfAddressStatus,tier2SubmitStatus,errorMessage]);
+int get hashCode => Object.hashAll([runtimeType,currentStep,const DeepCollectionEquality().hash(_completedSteps),kycStatus,basicInfo,twoFactorAuth,documentVerification,firstName,lastName,age,gender,country,dob,const DeepCollectionEquality().hash(_otpDigits),docType,docNumber,tier2Data,selfieUrl,latitude,longitude,detectedCountry,isVpnSuspected,proofOfAddressDocType,proofOfAddressFrontUrl,proofOfAddressBackUrl,basicInfoStatus,twoFactorSetupStatus,twoFactorVerifyStatus,documentStatus,submitStatus,selfieStatus,locationStatus,proofOfAddressStatus,tier2SubmitStatus,errorMessage]);
 
 @override
 String toString() {
-  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, kycStatus: $kycStatus, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, country: $country, otpDigits: $otpDigits, docType: $docType, docNumber: $docNumber, tier2Data: $tier2Data, selfieUrl: $selfieUrl, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressUrl: $proofOfAddressUrl, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, selfieStatus: $selfieStatus, locationStatus: $locationStatus, proofOfAddressStatus: $proofOfAddressStatus, tier2SubmitStatus: $tier2SubmitStatus, errorMessage: $errorMessage)';
+  return 'KycState(currentStep: $currentStep, completedSteps: $completedSteps, kycStatus: $kycStatus, basicInfo: $basicInfo, twoFactorAuth: $twoFactorAuth, documentVerification: $documentVerification, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, country: $country, dob: $dob, otpDigits: $otpDigits, docType: $docType, docNumber: $docNumber, tier2Data: $tier2Data, selfieUrl: $selfieUrl, latitude: $latitude, longitude: $longitude, detectedCountry: $detectedCountry, isVpnSuspected: $isVpnSuspected, proofOfAddressDocType: $proofOfAddressDocType, proofOfAddressFrontUrl: $proofOfAddressFrontUrl, proofOfAddressBackUrl: $proofOfAddressBackUrl, basicInfoStatus: $basicInfoStatus, twoFactorSetupStatus: $twoFactorSetupStatus, twoFactorVerifyStatus: $twoFactorVerifyStatus, documentStatus: $documentStatus, submitStatus: $submitStatus, selfieStatus: $selfieStatus, locationStatus: $locationStatus, proofOfAddressStatus: $proofOfAddressStatus, tier2SubmitStatus: $tier2SubmitStatus, errorMessage: $errorMessage)';
 }
 
 
@@ -1931,7 +2009,7 @@ abstract mixin class _$KycStateCopyWith<$Res> implements $KycStateCopyWith<$Res>
   factory _$KycStateCopyWith(_KycState value, $Res Function(_KycState) _then) = __$KycStateCopyWithImpl;
 @override @useResult
 $Res call({
- KycSteps currentStep, List<KycSteps> completedSteps, KycStatus kycStatus, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, String firstName, String lastName, String age, String gender, String country, List<String> otpDigits, String docType, String docNumber, Tier2Model? tier2Data, String selfieUrl, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressUrl, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, KycStepStatus selfieStatus, KycStepStatus locationStatus, KycStepStatus proofOfAddressStatus, KycStepStatus tier2SubmitStatus, String errorMessage
+ KycSteps currentStep, List<KycSteps> completedSteps, KycStatus kycStatus, BasicInfoModel? basicInfo, TwoFactorAuthModel? twoFactorAuth, DocumentVerificationModel? documentVerification, FirstNameFormz firstName, LastNameFormz lastName, AgeFormz age, GenderFormz gender, CountryFormz country, String dob, List<OtpDigitFormz> otpDigits, String docType, DocumentNumberFormz docNumber, Tier2Model? tier2Data, String selfieUrl, double latitude, double longitude, String detectedCountry, bool isVpnSuspected, String proofOfAddressDocType, String proofOfAddressFrontUrl, String proofOfAddressBackUrl, KycStepStatus basicInfoStatus, KycStepStatus twoFactorSetupStatus, KycStepStatus twoFactorVerifyStatus, KycStepStatus documentStatus, KycStepStatus submitStatus, KycStepStatus selfieStatus, KycStepStatus locationStatus, KycStepStatus proofOfAddressStatus, KycStepStatus tier2SubmitStatus, String errorMessage
 });
 
 
@@ -1948,7 +2026,7 @@ class __$KycStateCopyWithImpl<$Res>
 
 /// Create a copy of KycState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currentStep = null,Object? completedSteps = null,Object? kycStatus = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? firstName = null,Object? lastName = null,Object? age = null,Object? gender = null,Object? country = null,Object? otpDigits = null,Object? docType = null,Object? docNumber = null,Object? tier2Data = freezed,Object? selfieUrl = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressUrl = null,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? selfieStatus = null,Object? locationStatus = null,Object? proofOfAddressStatus = null,Object? tier2SubmitStatus = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? currentStep = null,Object? completedSteps = null,Object? kycStatus = null,Object? basicInfo = freezed,Object? twoFactorAuth = freezed,Object? documentVerification = freezed,Object? firstName = null,Object? lastName = null,Object? age = null,Object? gender = null,Object? country = null,Object? dob = null,Object? otpDigits = null,Object? docType = null,Object? docNumber = null,Object? tier2Data = freezed,Object? selfieUrl = null,Object? latitude = null,Object? longitude = null,Object? detectedCountry = null,Object? isVpnSuspected = null,Object? proofOfAddressDocType = null,Object? proofOfAddressFrontUrl = null,Object? proofOfAddressBackUrl = null,Object? basicInfoStatus = null,Object? twoFactorSetupStatus = null,Object? twoFactorVerifyStatus = null,Object? documentStatus = null,Object? submitStatus = null,Object? selfieStatus = null,Object? locationStatus = null,Object? proofOfAddressStatus = null,Object? tier2SubmitStatus = null,Object? errorMessage = null,}) {
   return _then(_KycState(
 currentStep: null == currentStep ? _self.currentStep : currentStep // ignore: cast_nullable_to_non_nullable
 as KycSteps,completedSteps: null == completedSteps ? _self._completedSteps : completedSteps // ignore: cast_nullable_to_non_nullable
@@ -1957,21 +2035,23 @@ as KycStatus,basicInfo: freezed == basicInfo ? _self.basicInfo : basicInfo // ig
 as BasicInfoModel?,twoFactorAuth: freezed == twoFactorAuth ? _self.twoFactorAuth : twoFactorAuth // ignore: cast_nullable_to_non_nullable
 as TwoFactorAuthModel?,documentVerification: freezed == documentVerification ? _self.documentVerification : documentVerification // ignore: cast_nullable_to_non_nullable
 as DocumentVerificationModel?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as FirstNameFormz,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as LastNameFormz,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
+as AgeFormz,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as GenderFormz,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as CountryFormz,dob: null == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String,otpDigits: null == otpDigits ? _self._otpDigits : otpDigits // ignore: cast_nullable_to_non_nullable
-as List<String>,docType: null == docType ? _self.docType : docType // ignore: cast_nullable_to_non_nullable
+as List<OtpDigitFormz>,docType: null == docType ? _self.docType : docType // ignore: cast_nullable_to_non_nullable
 as String,docNumber: null == docNumber ? _self.docNumber : docNumber // ignore: cast_nullable_to_non_nullable
-as String,tier2Data: freezed == tier2Data ? _self.tier2Data : tier2Data // ignore: cast_nullable_to_non_nullable
+as DocumentNumberFormz,tier2Data: freezed == tier2Data ? _self.tier2Data : tier2Data // ignore: cast_nullable_to_non_nullable
 as Tier2Model?,selfieUrl: null == selfieUrl ? _self.selfieUrl : selfieUrl // ignore: cast_nullable_to_non_nullable
 as String,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
 as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
 as double,detectedCountry: null == detectedCountry ? _self.detectedCountry : detectedCountry // ignore: cast_nullable_to_non_nullable
 as String,isVpnSuspected: null == isVpnSuspected ? _self.isVpnSuspected : isVpnSuspected // ignore: cast_nullable_to_non_nullable
 as bool,proofOfAddressDocType: null == proofOfAddressDocType ? _self.proofOfAddressDocType : proofOfAddressDocType // ignore: cast_nullable_to_non_nullable
-as String,proofOfAddressUrl: null == proofOfAddressUrl ? _self.proofOfAddressUrl : proofOfAddressUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressFrontUrl: null == proofOfAddressFrontUrl ? _self.proofOfAddressFrontUrl : proofOfAddressFrontUrl // ignore: cast_nullable_to_non_nullable
+as String,proofOfAddressBackUrl: null == proofOfAddressBackUrl ? _self.proofOfAddressBackUrl : proofOfAddressBackUrl // ignore: cast_nullable_to_non_nullable
 as String,basicInfoStatus: null == basicInfoStatus ? _self.basicInfoStatus : basicInfoStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorSetupStatus: null == twoFactorSetupStatus ? _self.twoFactorSetupStatus : twoFactorSetupStatus // ignore: cast_nullable_to_non_nullable
 as KycStepStatus,twoFactorVerifyStatus: null == twoFactorVerifyStatus ? _self.twoFactorVerifyStatus : twoFactorVerifyStatus // ignore: cast_nullable_to_non_nullable

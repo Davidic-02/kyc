@@ -15,6 +15,7 @@ import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_proof_of_addres
 import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_selfie_screen.dart';
 import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_tier2_intro_screen.dart';
 import 'package:kyc/features/onboarding/presentation/screens/onboarding.dart';
+import 'package:kyc/features/kyc/presentation/screens/tier_2/kyc_proof_of_address.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/onboarding',

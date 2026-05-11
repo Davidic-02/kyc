@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kyc/core/utils/validators.dart';
 import 'package:kyc/features/kyc/data/list/kyc_list.dart';
 import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 import 'package:kyc/features/kyc/data/models/kyc_model.dart';
@@ -21,23 +23,65 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     on<_NavigateToStep>(_onNavigateToStep);
     on<_NextStep>(_onNextStep);
     on<_PreviousStep>(_onPreviousStep);
+    on<_DobChanged>(
+      (e, emit) => emit(state.copyWith(dob: e.value, errorMessage: '')),
+    );
 
     // ── Tier 1 field events ───────────────────────────────────────────────
-    on<_FirstNameChanged>(
-      (e, emit) => emit(state.copyWith(firstName: e.value, errorMessage: '')),
-    );
-    on<_LastNameChanged>(
-      (e, emit) => emit(state.copyWith(lastName: e.value, errorMessage: '')),
-    );
-    on<_AgeChanged>(
-      (e, emit) => emit(state.copyWith(age: e.value, errorMessage: '')),
-    );
-    on<_GenderChanged>(
-      (e, emit) => emit(state.copyWith(gender: e.value, errorMessage: '')),
-    );
-    on<_CountryChanged>(
-      (e, emit) => emit(state.copyWith(country: e.value, errorMessage: '')),
-    );
+    on<_FirstNameChanged>((event, emit) {
+      final firstName = FirstNameFormz.dirty(event.value);
+
+      emit(
+        state.copyWith(
+          firstName: firstName.isValid
+              ? firstName
+              : FirstNameFormz.pure(event.value),
+          errorMessage: '',
+        ),
+      );
+    });
+    on<_LastNameChanged>((event, emit) {
+      final lastName = LastNameFormz.dirty(event.value);
+
+      emit(
+        state.copyWith(
+          lastName: lastName.isValid
+              ? lastName
+              : LastNameFormz.pure(event.value),
+          errorMessage: '',
+        ),
+      );
+    });
+    on<_AgeChanged>((event, emit) {
+      final age = AgeFormz.dirty(event.value);
+
+      emit(
+        state.copyWith(
+          age: age.isValid ? age : AgeFormz.pure(event.value),
+          errorMessage: '',
+        ),
+      );
+    });
+    on<_GenderChanged>((event, emit) {
+      final gender = GenderFormz.dirty(event.value);
+
+      emit(
+        state.copyWith(
+          gender: gender.isValid ? gender : GenderFormz.pure(event.value),
+          errorMessage: '',
+        ),
+      );
+    });
+    on<_CountryChanged>((event, emit) {
+      final country = CountryFormz.dirty(event.value);
+
+      emit(
+        state.copyWith(
+          country: country.isValid ? country : CountryFormz.pure(event.value),
+          errorMessage: '',
+        ),
+      );
+    });
     on<_BasicInfoSaved>(_onBasicInfoSaved);
 
     on<_TwoFactorSetupCompleted>(_onTwoFactorSetupCompleted);
@@ -47,9 +91,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     on<_DocTypeChanged>(
       (e, emit) => emit(state.copyWith(docType: e.value, errorMessage: '')),
     );
-    on<_DocNumberChanged>(
-      (e, emit) => emit(state.copyWith(docNumber: e.value, errorMessage: '')),
-    );
+    on<_DocNumberChanged>((event, emit) {
+      final docNumber = DocumentNumberFormz.dirty(event.value);
+
+      emit(state.copyWith(docNumber: docNumber, errorMessage: ''));
+    });
     on<_DocumentSaved>(_onDocumentSaved);
     on<_Submitted>(_onSubmitted);
 
@@ -83,7 +129,11 @@ class KycBloc extends Bloc<KycEvent, KycState> {
 
   void _onOtpDigitChanged(_OtpDigitChanged event, Emitter<KycState> emit) {
     final updated = [...state.otpDigits];
-    updated[event.index] = event.digit;
+
+    final digit = OtpDigitFormz.dirty(event.digit);
+
+    updated[event.index] = digit;
+
     emit(state.copyWith(otpDigits: updated, errorMessage: ''));
   }
 
@@ -108,17 +158,17 @@ class KycBloc extends Bloc<KycEvent, KycState> {
             currentStep: progress.currentStep,
             kycStatus: kycStatus,
             // Pre-fill fields
-            firstName: progress.basicInfo?.firstName ?? '',
-            lastName: progress.basicInfo?.lastName ?? '',
-            age: progress.basicInfo?.age ?? '',
-            gender: progress.basicInfo?.gender ?? '',
-            country: progress.basicInfo?.country ?? '',
-            docType: progress.documentVerification?.documentType ?? 'NIN',
-            docNumber: progress.documentVerification?.documentNumber ?? '',
-            selfieUrl: progress.tier2?.selfieUrl ?? '',
+            firstName: FirstNameFormz.pure(progress.basicInfo?.firstName ?? ''),
+            lastName: LastNameFormz.pure(progress.basicInfo?.lastName ?? ''),
+            age: AgeFormz.pure(progress.basicInfo?.age ?? ''),
+            dob: progress.basicInfo?.dob ?? '',
+            gender: GenderFormz.pure(progress.basicInfo?.gender ?? ''),
+            country: CountryFormz.pure(progress.basicInfo?.country ?? ''),
             proofOfAddressDocType:
                 progress.tier2?.proofOfAddressDocType ?? 'Utility Bill',
-            proofOfAddressUrl: progress.tier2?.proofOfAddressUrl ?? '',
+            proofOfAddressFrontUrl:
+                progress.tier2?.proofOfAddressFrontUrl ?? '',
+            proofOfAddressBackUrl: progress.tier2?.proofOfAddressBackUrl ?? '',
           ),
         );
       }
@@ -185,11 +235,12 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     }
     emit(state.copyWith(basicInfoStatus: KycStepStatus.loading));
     final model = BasicInfoModel(
-      firstName: state.firstName.trim(),
-      lastName: state.lastName.trim(),
-      gender: state.gender,
-      age: state.age.trim(),
-      country: state.country,
+      firstName: state.firstName.value.trim(),
+      lastName: state.lastName.value.trim(),
+      gender: state.gender.value,
+      age: state.age.value.trim(),
+      dob: state.dob,
+      country: state.country.value,
     );
     try {
       await _repository.saveBasicInfo(_uid, model);
@@ -293,7 +344,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           completedSteps: completed,
           twoFactorVerifyStatus: KycStepStatus.success,
           currentStep: KycSteps.documents,
-          otpDigits: ['', '', '', '', '', ''],
+          otpDigits: List.generate(6, (_) => const OtpDigitFormz.pure()),
           errorMessage: '',
         ),
       );
@@ -319,7 +370,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     emit(state.copyWith(documentStatus: KycStepStatus.loading));
     final model = DocumentVerificationModel(
       documentType: state.docType,
-      documentNumber: state.docNumber.trim(),
+      documentNumber: state.docNumber.value.trim(),
       documentUrl: '',
     );
     try {
@@ -454,15 +505,17 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     try {
       await _repository.saveProofOfAddress(
         _uid,
-        event.documentUrl,
-        state.proofOfAddressDocType,
+        frontUrl: event.frontDocumentUrl,
+        backUrl: event.backDocumentUrl,
+        docType: state.proofOfAddressDocType,
       );
       final completed = [...state.completedSteps];
       if (!completed.contains(KycSteps.proofOfAddress))
         completed.add(KycSteps.proofOfAddress);
       emit(
         state.copyWith(
-          proofOfAddressUrl: event.documentUrl,
+          proofOfAddressFrontUrl: event.frontDocumentUrl,
+          proofOfAddressBackUrl: event.backDocumentUrl,
           completedSteps: completed,
           proofOfAddressStatus: KycStepStatus.success,
           currentStep: KycSteps.locationVerify,
@@ -499,7 +552,8 @@ class KycBloc extends Bloc<KycEvent, KycState> {
         detectedCountry: state.detectedCountry,
         isVpnSuspected: state.isVpnSuspected,
         proofOfAddressDocType: state.proofOfAddressDocType,
-        proofOfAddressUrl: state.proofOfAddressUrl,
+        proofOfAddressFrontUrl: state.proofOfAddressFrontUrl,
+        proofOfAddressBackUrl: state.proofOfAddressBackUrl,
         submittedAt: DateTime.now(),
       );
       await _repository.submitTier2(_uid, tier2);

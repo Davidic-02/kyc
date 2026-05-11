@@ -105,7 +105,7 @@ class KycStep3Screen extends HookWidget {
 
                         const SizedBox(height: 16),
 
-                        // 🔵 STEP TITLE
+                       
                         Text(
                           'Document Verification',
                           style: Theme.of(context).textTheme.titleMedium
@@ -132,15 +132,14 @@ class KycStep3Screen extends HookWidget {
 
                     const SizedBox(height: 32),
 
-                    // ── Document type chips ──────────────────────────────
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Select document type',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
-
+                        const SizedBox(height: 22),
                         const SizedBox(height: AppSizes.sm),
 
                         Column(
@@ -152,7 +151,7 @@ class KycStep3Screen extends HookWidget {
                                 KycEvent.docTypeChanged(type),
                               ),
                               child: Container(
-                                margin: const EdgeInsets.only(bottom: 20),
+                                margin: const EdgeInsets.only(bottom: 25),
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
                                   vertical: 20,

@@ -19,6 +19,7 @@ class KycEvent with _$KycEvent {
   // =========================
   const factory KycEvent.firstNameChanged(String value) = _FirstNameChanged;
   const factory KycEvent.lastNameChanged(String value) = _LastNameChanged;
+  const factory KycEvent.dobChanged(String value) = _DobChanged;
   const factory KycEvent.ageChanged(String value) = _AgeChanged;
   const factory KycEvent.genderChanged(String value) = _GenderChanged;
   const factory KycEvent.countryChanged(String value) = _CountryChanged;
@@ -87,8 +88,10 @@ class KycEvent with _$KycEvent {
   // =========================
   const factory KycEvent.proofOfAddressDocTypeChanged(String value) =
       _ProofOfAddressDocTypeChanged;
-  const factory KycEvent.proofOfAddressUploaded({required String documentUrl}) =
-      _ProofOfAddressUploaded;
+  const factory KycEvent.proofOfAddressUploaded({
+    required String frontDocumentUrl,
+    required String backDocumentUrl,
+  }) = _ProofOfAddressUploaded;
 
   // =========================
   // TIER 2 FINAL SUBMIT

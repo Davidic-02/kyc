@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kyc/core/constants/app_colors.dart';
 import 'package:kyc/core/constants/app_sizes.dart';
 import 'package:kyc/core/services/toast_services.dart';
+import 'package:kyc/core/utils/validators.dart';
 import 'package:kyc/core/widgets/custom_button.dart';
 import 'package:kyc/core/widgets/custom_textfield.dart';
 
@@ -13,17 +14,73 @@ import 'package:kyc/features/kyc/bloc/kyc/kyc_bloc.dart';
 import 'package:kyc/features/kyc/data/list/country_list.dart';
 import 'package:kyc/features/kyc/data/list/kyc_steps.dart';
 
-// ─── World Countries ────────────────────────────────────────────────────────
-
 class KycStep1Screen extends HookWidget {
   const KycStep1Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Focus nodes only — no TextControllers, no local value state
     final firstNameFocus = useFocusNode();
     final lastNameFocus = useFocusNode();
-    final ageFocus = useFocusNode();
+
+    // Local state for the selected date — derived age goes to bloc
+    final selectedDate = useState<DateTime?>(null);
+
+    // Calculate age from a date of birth
+    int _calculateAge(DateTime dob) {
+      final today = DateTime.now();
+      int age = today.year - dob.year;
+      if (today.month < dob.month ||
+          (today.month == dob.month && today.day < dob.day)) {
+        age--;
+      }
+      return age;
+    }
+
+    // Open the date picker and dispatch age to bloc
+    Future<void> _pickDate() async {
+      final now = DateTime.now();
+      final picked = await showDatePicker(
+        context: context,
+        // Default to showing ~25 years ago
+        initialDate:
+            selectedDate.value ?? DateTime(now.year - 25, now.month, now.day),
+        // Must be at least 18 years old
+        firstDate: DateTime(now.year - 100),
+        lastDate: DateTime(now.year - 18, now.month, now.day),
+        helpText: 'Select your date of birth',
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.dark(
+                primary: AppColors.primary,
+                onPrimary: Colors.white,
+                surface: AppColors.surface,
+                onSurface: AppColors.textPrimary,
+              ),
+              dialogTheme: const DialogThemeData(
+                backgroundColor: AppColors.background,
+              ),
+            ),
+            child: child!,
+          );
+        },
+      );
+
+      if (picked != null) {
+        selectedDate.value = picked;
+        final age = _calculateAge(picked);
+        // Send the calculated age string to the bloc — same field, no state changes needed
+        context.read<KycBloc>().add(KycEvent.ageChanged(age.toString()));
+        // Also send the DOB as a formatted string for storage
+        context.read<KycBloc>().add(
+          KycEvent.dobChanged(
+            '${picked.day.toString().padLeft(2, '0')}/'
+            '${picked.month.toString().padLeft(2, '0')}/'
+            '${picked.year}',
+          ),
+        );
+      }
+    }
 
     return BlocListener<KycBloc, KycState>(
       listenWhen: (prev, curr) =>
@@ -47,6 +104,10 @@ class KycStep1Screen extends HookWidget {
           child: BlocBuilder<KycBloc, KycState>(
             builder: (context, state) {
               final isBusy = state.basicInfoStatus == KycStepStatus.loading;
+              final hasDate = selectedDate.value != null;
+              final calculatedAge = hasDate
+                  ? _calculateAge(selectedDate.value!)
+                  : null;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
@@ -58,27 +119,11 @@ class KycStep1Screen extends HookWidget {
                   children: [
                     const SizedBox(height: 16),
 
-                    // ── Header ───────────────────────────────────────────
+                    // ── Header ──────────────────────────────────────────
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // 🔙 back button (left aligned)
-                        // Align(
-                        //   alignment: Alignment.centerLeft,
-                        //   child: GestureDetector(
-                        //     onTap: () => context.read<KycBloc>().add(
-                        //       const KycEvent.previousStep(),
-                        //     ),
-                        //     child: const Icon(
-                        //       Icons.arrow_back_ios,
-                        //       color: AppColors.textPrimary,
-                        //       size: 18,
-                        //     ),
-                        //   ),
-                        // ),
                         const SizedBox(height: 16),
-
-                        // 🟢 STOCKS (top branding)
                         Text(
                           'Stocks',
                           textAlign: TextAlign.center,
@@ -88,9 +133,7 @@ class KycStep1Screen extends HookWidget {
                                 color: AppColors.textPrimary,
                               ),
                         ),
-
                         const SizedBox(height: 4),
-
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -109,10 +152,7 @@ class KycStep1Screen extends HookWidget {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 20),
-
-                        // 🟣 KYC TITLE (BELOW STOCKS)
                         Text(
                           'KYC Verification',
                           textAlign: TextAlign.center,
@@ -122,9 +162,7 @@ class KycStep1Screen extends HookWidget {
                                 color: AppColors.textPrimary,
                               ),
                         ),
-
                         const SizedBox(height: 6),
-
                         Text(
                           'Step 1 of 4',
                           textAlign: TextAlign.center,
@@ -152,21 +190,18 @@ class KycStep1Screen extends HookWidget {
                     // ── First Name ───────────────────────────────────────
                     CustomTextFormField(
                       title: 'First Name',
-                      hintText: 'John',
+                      hintText: 'First Name',
                       focusNode: firstNameFocus,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
-                      // Bloc owns the value — pass it back on change
                       onChanged: (v) => context.read<KycBloc>().add(
                         KycEvent.firstNameChanged(v),
                       ),
                       onFieldSubmitted: (_) =>
                           FocusScope.of(context).requestFocus(lastNameFocus),
-                      errorText:
-                          state.firstName.isEmpty &&
-                              state.basicInfoStatus == KycStepStatus.failure
-                          ? 'Required'
-                          : null,
+                      errorText: state.firstName.isPure
+                          ? null
+                          : state.firstName.displayError?.message('First name'),
                     ),
 
                     const SizedBox(height: 16),
@@ -174,29 +209,107 @@ class KycStep1Screen extends HookWidget {
                     // ── Last Name ────────────────────────────────────────
                     CustomTextFormField(
                       title: 'Last Name',
-                      hintText: 'Doe',
+                      hintText: 'Last Name',
                       focusNode: lastNameFocus,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
                       onChanged: (v) => context.read<KycBloc>().add(
                         KycEvent.lastNameChanged(v),
                       ),
-                      onFieldSubmitted: (_) =>
-                          FocusScope.of(context).requestFocus(ageFocus),
+                      errorText: state.lastName.isPure
+                          ? null
+                          : state.lastName.displayError?.message('Last name'),
                     ),
 
                     const SizedBox(height: 16),
 
-                    // ── Age ──────────────────────────────────────────────
-                    CustomTextFormField(
-                      title: 'Age',
-                      hintText: '25',
-                      focusNode: ageFocus,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
-                      onChanged: (v) =>
-                          context.read<KycBloc>().add(KycEvent.ageChanged(v)),
+                    // ── Date of Birth + Age badge ────────────────────────
+                    Text(
+                      'Date of Birth',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
+                    const SizedBox(height: AppSizes.sm),
+
+                    GestureDetector(
+                      onTap: _pickDate,
+                      child: Container(
+                        padding: const EdgeInsets.all(AppSizes.md),
+                        decoration: BoxDecoration(
+                          color: AppColors.surface.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                          border: hasDate
+                              ? Border.all(
+                                  color: AppColors.primary.withOpacity(0.4),
+                                  width: 1,
+                                )
+                              : null,
+                        ),
+                        child: Row(
+                          children: [
+                            // Calendar icon
+                            const Icon(
+                              Icons.calendar_today_outlined,
+                              color: AppColors.primary,
+                              size: 18,
+                            ),
+                            const SizedBox(width: 12),
+
+                            // Selected date or placeholder
+                            Expanded(
+                              child: Text(
+                                hasDate
+                                    ? '${selectedDate.value!.day.toString().padLeft(2, '0')} / '
+                                          '${selectedDate.value!.month.toString().padLeft(2, '0')} / '
+                                          '${selectedDate.value!.year}'
+                                    : 'Select date of birth',
+                                style: TextStyle(
+                                  color: hasDate
+                                      ? AppColors.textPrimary
+                                      : AppColors.textSecondary,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+
+                            // ── Age badge — appears after date is picked ──
+                            if (hasDate && calculatedAge != null)
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  '$calculatedAge yrs',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    // Under-field hint
+                    if (!hasDate)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6, left: 4),
+                        child: Text(
+                          'You must be at least 18 years old',
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.textSecondary.withOpacity(0.6),
+                                fontSize: 11,
+                              ),
+                        ),
+                      ),
 
                     const SizedBox(height: 16),
 
@@ -204,7 +317,9 @@ class KycStep1Screen extends HookWidget {
                     _KycDropdown(
                       title: 'Gender',
                       hint: 'Select gender',
-                      value: state.gender.isEmpty ? null : state.gender,
+                      value: state.gender.value.isEmpty
+                          ? null
+                          : state.gender.value,
                       items: const ['Male', 'Female', 'Other'],
                       onChanged: (v) => context.read<KycBloc>().add(
                         KycEvent.genderChanged(v ?? ''),
@@ -217,7 +332,9 @@ class KycStep1Screen extends HookWidget {
                     _KycDropdown(
                       title: 'Country',
                       hint: 'Select country',
-                      value: state.country.isEmpty ? null : state.country,
+                      value: state.country.value.isEmpty
+                          ? null
+                          : state.country.value,
                       items: kAllCountries,
                       onChanged: (v) => context.read<KycBloc>().add(
                         KycEvent.countryChanged(v ?? ''),
@@ -226,7 +343,6 @@ class KycStep1Screen extends HookWidget {
 
                     const SizedBox(height: 40),
 
-                    // ── Error message ────────────────────────────────────
                     if (state.errorMessage.isNotEmpty) ...[
                       Text(
                         state.errorMessage,
@@ -236,6 +352,7 @@ class KycStep1Screen extends HookWidget {
                     ],
 
                     const SizedBox(height: 60),
+
                     // ── Continue button ──────────────────────────────────
                     Button(
                       isBusy ? 'Saving...' : 'Continue',
@@ -282,7 +399,6 @@ class _KycDropdown extends StatelessWidget {
       children: [
         Text(title, style: Theme.of(context).textTheme.bodySmall),
         const SizedBox(height: AppSizes.sm),
-
         GestureDetector(
           onTap: () async {
             final selected = await showModalBottomSheet<String>(
@@ -291,27 +407,19 @@ class _KycDropdown extends StatelessWidget {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               ),
-              builder: (_) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    final item = items[index];
-
-                    return ListTile(
-                      title: Text(item),
-                      onTap: () {
-                        Navigator.pop(context, item);
-                      },
-                    );
-                  },
-                );
-              },
+              builder: (_) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return ListTile(
+                    title: Text(item),
+                    onTap: () => Navigator.pop(context, item),
+                  );
+                },
+              ),
             );
-
-            if (selected != null) {
-              onChanged(selected);
-            }
+            if (selected != null) onChanged(selected);
           },
           child: Container(
             padding: const EdgeInsets.all(AppSizes.md),

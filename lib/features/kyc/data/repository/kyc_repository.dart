@@ -12,10 +12,11 @@ abstract class KycRepository {
     required bool isVpnSuspected,
   });
   Future<void> saveProofOfAddress(
-    String uid,
-    String documentUrl,
-    String docType,
-  );
+    String uid, {
+    required String frontUrl,
+    required String backUrl,
+    required String docType,
+  });
   Future<void> submitTier2(String uid, Tier2Model model);
 
   Future<void> saveTwoFactorAuth(String uid, TwoFactorAuthModel model);
@@ -152,16 +153,23 @@ class KycRepositoryImpl implements KycRepository {
   }
 
   @override
+  @override
   Future<void> saveProofOfAddress(
-    String uid,
-    String documentUrl,
-    String docType,
-  ) async {
+    String uid, {
+    required String frontUrl,
+    required String backUrl,
+    required String docType,
+  }) async {
     try {
       await _doc(uid).set({
-        'tier2.proofOfAddress.documentUrl': documentUrl,
-        'tier2.proofOfAddress.documentType': docType,
-        'tier2.proofOfAddress.uploadedAt': FieldValue.serverTimestamp(),
+        'tier2': {
+          'proofOfAddress': {
+            'documentType': docType,
+            'frontUrl': frontUrl,
+            'backUrl': backUrl,
+            'uploadedAt': FieldValue.serverTimestamp(),
+          },
+        },
       }, SetOptions(merge: true));
     } catch (e) {
       throw Exception('Failed to save proof of address: $e');
