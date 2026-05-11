@@ -138,7 +138,7 @@ class KycProofOfAddressScreen extends HookWidget {
                               vertical: 18,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.surface.withOpacity(0.5),
+                              color: AppColors.surface.withValues(alpha: 0.5),
                               borderRadius: BorderRadius.circular(
                                 AppSizes.radiusM,
                               ),
@@ -235,7 +235,7 @@ class KycProofOfAddressScreen extends HookWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.08),
+                        color: AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(AppSizes.radiusM),
                       ),
                       child: Row(
