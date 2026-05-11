@@ -381,12 +381,12 @@ class _UploadBox extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         height: 160,
         decoration: BoxDecoration(
-          color: AppColors.surface.withOpacity(0.5),
+          color: AppColors.surface.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(AppSizes.radiusM),
           border: Border.all(
             color: hasImage
                 ? AppColors.primary
-                : AppColors.textSecondary.withOpacity(0.3),
+                : AppColors.textSecondary.withValues(alpha: 0.3),
             width: 1.5,
           ),
         ),
@@ -409,7 +409,7 @@ class _UploadBox extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        color: AppColors.background.withOpacity(0.85),
+                        color: AppColors.background.withValues(alpha: 0.85),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -461,7 +461,7 @@ class _UploadBox extends StatelessWidget {
                   Text(
                     'Tap to upload',
                     style: TextStyle(
-                      color: AppColors.textSecondary.withOpacity(0.7),
+                      color: AppColors.textSecondary.withValues(alpha: 0.7),
                       fontSize: 11,
                     ),
                   ),
@@ -485,13 +485,13 @@ class _StatusChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(
         color: isDone
-            ? AppColors.primary.withOpacity(0.12)
-            : AppColors.surface.withOpacity(0.5),
+            ? AppColors.primary.withValues(alpha: 0.12)
+            : AppColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDone
               ? AppColors.primary
-              : AppColors.textSecondary.withOpacity(0.2),
+              : AppColors.textSecondary.withValues(alpha: 0.2),
         ),
       ),
       child: Row(
@@ -551,7 +551,7 @@ class KycTier2CompletionScreen extends HookWidget {
                       height: 88,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.primary.withOpacity(0.12),
+                        color: AppColors.primary.withValues(alpha: 0.12),
                       ),
                       child: const Icon(
                         Icons.hourglass_top_rounded,
@@ -609,7 +609,7 @@ class KycTier2CompletionScreen extends HookWidget {
                     Container(
                       padding: const EdgeInsets.all(AppSizes.md),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.08),
+                        color: AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(AppSizes.radiusM),
                       ),
                       child: Row(
@@ -676,7 +676,7 @@ class _ReviewRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.surface.withOpacity(0.5),
+        color: AppColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(AppSizes.radiusM),
       ),
       child: Row(
@@ -686,7 +686,7 @@ class _ReviewRow extends StatelessWidget {
             height: 36,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.primary.withOpacity(0.12),
+              color: AppColors.primary.withValues(alpha: 0.12),
             ),
             child: Icon(icon, color: AppColors.primary, size: 18),
           ),
@@ -703,7 +703,7 @@ class _ReviewRow extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.12),
+              color: AppColors.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(

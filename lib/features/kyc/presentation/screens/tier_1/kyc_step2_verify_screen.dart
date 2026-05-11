@@ -168,7 +168,9 @@ class KycStep2VerifyScreen extends HookWidget {
                             decoration: InputDecoration(
                               counterText: '',
                               filled: true,
-                              fillColor: AppColors.surface.withOpacity(0.5),
+                              fillColor: AppColors.surface.withValues(
+                                alpha: 0.5,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   AppSizes.radiusM,
