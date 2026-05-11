@@ -11,6 +11,7 @@ _BasicInfoModel _$BasicInfoModelFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       gender: json['gender'] as String,
+      dob: json['dob'] as String,
       age: json['age'] as String,
       country: json['country'] as String,
     );
@@ -20,6 +21,7 @@ Map<String, dynamic> _$BasicInfoModelToJson(_BasicInfoModel instance) =>
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'gender': instance.gender,
+      'dob': instance.dob,
       'age': instance.age,
       'country': instance.country,
     };
@@ -64,6 +66,47 @@ Map<String, dynamic> _$DocumentVerificationModelToJson(
   'isVerified': instance.isVerified,
 };
 
+_Tier2Model _$Tier2ModelFromJson(Map<String, dynamic> json) => _Tier2Model(
+  selfieUrl: json['selfieUrl'] as String,
+  selfieReviewed: json['selfieReviewed'] as bool? ?? false,
+  selfieApproved: json['selfieApproved'] as bool? ?? false,
+  latitude: (json['latitude'] as num).toDouble(),
+  longitude: (json['longitude'] as num).toDouble(),
+  detectedCountry: json['detectedCountry'] as String,
+  isVpnSuspected: json['isVpnSuspected'] as bool? ?? false,
+  proofOfAddressDocType: json['proofOfAddressDocType'] as String,
+  proofOfAddressFrontUrl: json['proofOfAddressFrontUrl'] as String,
+  proofOfAddressBackUrl: json['proofOfAddressBackUrl'] as String,
+  proofReviewed: json['proofReviewed'] as bool? ?? false,
+  proofApproved: json['proofApproved'] as bool? ?? false,
+  status: json['status'] as String? ?? 'pending_review',
+  submittedAt: json['submittedAt'] == null
+      ? null
+      : DateTime.parse(json['submittedAt'] as String),
+  reviewedAt: json['reviewedAt'] == null
+      ? null
+      : DateTime.parse(json['reviewedAt'] as String),
+);
+
+Map<String, dynamic> _$Tier2ModelToJson(_Tier2Model instance) =>
+    <String, dynamic>{
+      'selfieUrl': instance.selfieUrl,
+      'selfieReviewed': instance.selfieReviewed,
+      'selfieApproved': instance.selfieApproved,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'detectedCountry': instance.detectedCountry,
+      'isVpnSuspected': instance.isVpnSuspected,
+      'proofOfAddressDocType': instance.proofOfAddressDocType,
+      'proofOfAddressFrontUrl': instance.proofOfAddressFrontUrl,
+      'proofOfAddressBackUrl': instance.proofOfAddressBackUrl,
+      'proofReviewed': instance.proofReviewed,
+      'proofApproved': instance.proofApproved,
+      'status': instance.status,
+      'submittedAt': instance.submittedAt?.toIso8601String(),
+      'reviewedAt': instance.reviewedAt?.toIso8601String(),
+    };
+
 _KycProgressModel _$KycProgressModelFromJson(Map<String, dynamic> json) =>
     _KycProgressModel(
       uid: json['uid'] as String,
@@ -80,19 +123,25 @@ _KycProgressModel _$KycProgressModelFromJson(Map<String, dynamic> json) =>
           : DocumentVerificationModel.fromJson(
               json['documentVerification'] as Map<String, dynamic>,
             ),
-      currentStep: (json['currentStep'] as num?)?.toInt() ?? 0,
-      completedSteps:
-          (json['completedSteps'] as List<dynamic>?)
-              ?.map((e) => (e as num).toInt())
-              .toList() ??
-          const [],
+      tier2: json['tier2'] == null
+          ? null
+          : Tier2Model.fromJson(json['tier2'] as Map<String, dynamic>),
+      completedSteps: json['completedSteps'] == null
+          ? const []
+          : _stepsFromJson(json['completedSteps'] as List),
+      currentStep: json['currentStep'] == null
+          ? KycSteps.intro
+          : stepFromInt((json['currentStep'] as num).toInt()),
       status: json['status'] as String? ?? 'in_progress',
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
-      completedAt: json['completedAt'] == null
+      tier1CompletedAt: json['tier1CompletedAt'] == null
           ? null
-          : DateTime.parse(json['completedAt'] as String),
+          : DateTime.parse(json['tier1CompletedAt'] as String),
+      tier2SubmittedAt: json['tier2SubmittedAt'] == null
+          ? null
+          : DateTime.parse(json['tier2SubmittedAt'] as String),
     );
 
 Map<String, dynamic> _$KycProgressModelToJson(_KycProgressModel instance) =>
@@ -101,9 +150,11 @@ Map<String, dynamic> _$KycProgressModelToJson(_KycProgressModel instance) =>
       'basicInfo': instance.basicInfo,
       'twoFactorAuth': instance.twoFactorAuth,
       'documentVerification': instance.documentVerification,
-      'currentStep': instance.currentStep,
-      'completedSteps': instance.completedSteps,
+      'tier2': instance.tier2,
+      'completedSteps': _stepsToJson(instance.completedSteps),
+      'currentStep': stepToInt(instance.currentStep),
       'status': instance.status,
       'createdAt': instance.createdAt?.toIso8601String(),
-      'completedAt': instance.completedAt?.toIso8601String(),
+      'tier1CompletedAt': instance.tier1CompletedAt?.toIso8601String(),
+      'tier2SubmittedAt': instance.tier2SubmittedAt?.toIso8601String(),
     };

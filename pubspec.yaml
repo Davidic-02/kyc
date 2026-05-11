@@ -42,6 +42,38 @@ dependencies:
   flutter_hooks: ^0.21.3+1
   formz: ^0.8.0
   pinput: ^6.0.2
+  app_links: ^6.3.2
+  email_validator: ^3.0.0
+  qr_flutter: ^4.1.0
+  fluttertoast: ^8.2.14
+  toastification: ^2.3.0
+  lottie: ^3.1.2
+  # Selfie capture
+  camera: ^0.12.0+1
+
+  # Proof of address upload
+  image_picker: ^1.2.2
+
+  # GPS coordinates
+  geolocator: ^14.0.2
+  flutter_map: ^8.3.0
+  latlong2: ^0.9.1
+
+  # Reverse geocode lat/lng → country name
+  geocoding: ^4.0.0
+
+  # Runtime permissions
+  permission_handler: ^12.0.1
+
+# ── Future Tier 2 API integrations (not yet installed) ──────────────────────
+
+# Onfido liveness + identity verification
+# onfido_sdk: ^5.0.0
+
+# AWS facial comparison
+# aws_rekognition_api: ^2.0.0
+  
+  
 
   # 🎨 UI HELPERS
   flutter_svg: ^2.0.10+1
@@ -81,14 +113,15 @@ dev_dependencies:
 flutter:
 
   # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
+  # included with your application, so that yo u can use the icons in
   # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/animations/
+    - assets/images/
+   
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
